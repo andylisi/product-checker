@@ -1,13 +1,14 @@
 import Navbar from './Navbar';
 import Home from './Home';
 
+
 function App() {
   const title = 'Welcome to the Product Checker';
   const link = "https://www.reddit.com"
 
   return (
     <div className="App">
-      <Navbar />                      {/*same as <Navbar></Navbar>*/}
+      <Navbar />
       <div className="content">
         <Home />
       </div>

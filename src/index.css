@@ -1,6 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 
-/* base styles */
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 * {
   margin: 0;
   font-family: "Quicksand";
@@ -8,26 +13,31 @@
 }
 
 .navbar {
+  height: 600px;
   padding: 20px;
   display: flex;
-  align-items: center;
-  /*max-width: 600px;*/
+  max-width: 100px;
   margin: 0 auto;
-  border-bottom: 1px solid #f2f2f2;
+  border-bottom: 3px solid #f2f2f2;
+  background-color: #45078C;
+  margin-left: 0; 
+  margin-right: auto;
 }
 
 .navbar h1 {
-  color: #f1356d;
+  color: #ffffff;
+  align-items: center;
 }
 
 .navbar .links {
-  margin-left: auto;
+  margin-left: 0;
 }
 
 .navbar a {
   margin-left: 16px;
   text-decoration: none;
   padding: 6px;
+  color: #ffffff;
 }
 
 .navbar a:hover {
@@ -38,4 +48,23 @@
   max-width: 600px;
   margin: 40px auto;
   padding: 20px;
+}
+
+/* blog previews / list */
+.product-preview {
+  padding: 10px 16px;
+  margin: 20px 0;
+  border-bottom: 1px solid #fafafa;
+}
+.product-preview:hover {
+  box-shadow: 1px 3px 5px rgba(0,0,0,0.1);
+}
+.product-preview span {
+  font-size: 20px;
+  color: #aba5d1;
+  margin-bottom: 8px;
+}
+
+.product-preview span:hover {
+  color: #f1356d;
 }
