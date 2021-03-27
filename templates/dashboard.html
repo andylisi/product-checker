@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+	<h1>Dashboard</h1>
+	<table class="table">
+		<thead class="thead-light">
+			<tr>
+				<th>Model</th>
+				<th>Retailer</th>
+				<th>Stock</th>
+				<th>Date</th>
+			</tr>
+		</thead>
+		{% for product in products %}
+			<tr>
+				<td>{{product.model}}</td>
+				<td>{{product.retailer}}</td>
+				<td>{{product.stock}}</td>
+				<td>{{product.date}}</td>
+			</tr>
+		{% endfor %}
+	</table>
+{% endblock %}
