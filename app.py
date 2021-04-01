@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, flash, redirect
 from forms import RegistrationForm, LoginForm
 
 app = Flask(__name__)
@@ -22,8 +22,8 @@ products = [
 
 
 @app.route("/")
-@app.route("/home")
-def home():
+@app.route("/dashboard")
+def dashboard():
     return render_template("dashboard.html", products=products)
 
 
@@ -32,15 +32,26 @@ def settings():
     return render_template("settings.html")
 
 
-@app.route("/register")
+@app.route("/register", methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
+    if form.validate_on_submit():
+        #arg1 data, arg2 category
+        flash(f'Success - Welcome {form.username.data}!', 'success')
+        return redirect(url_for('home'))
     return render_template('register.html', title='Register', form=form)
 
 
-@app.route("/login")
+@app.route("/login", methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+    if form.validate_on_submit():
+        if form.username.data == 'admin' and form.password.data == 'admin':
+                    #arg1 data, arg2 category
+            flash('Login Success', 'success')
+            return redirect(url_for('home'))
+        else:
+            flash('Login Unsuccesful. Please check username and password', 'danger')
     return render_template('login.html', title='Login', form=form)
 
 

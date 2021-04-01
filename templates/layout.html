@@ -7,7 +7,6 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
 
     {% if title %}
@@ -22,12 +21,12 @@
 			<div class="container-fluid">
 				<a class="navbar-brand mr-4" href="/">Product Checker</a>
 				<div class="navbar-nav mr-auto">
-					<a class="nav-item nav-link" href="/">Dashboard</a>
-					<a class="nav-item nav-link" href="/settings">Settings</a>
+					<a class="nav-item nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
+					<a class="nav-item nav-link" href="{{ url_for('settings') }}">Settings</a>
 				</div>
 				<!-- Navbar Right Side -->
 				<div class="navbar-nav">
-					<a class="nav-item nav-link" href="/login">Logout</a>
+					<a class="nav-item nav-link" href="{{ url_for('login') }}">Logout</a>
 				</div>
 			</div>
 		</nav>
@@ -35,6 +34,15 @@
     <main role="main" class="container-fluid">
 		<div class="row">
 			<div class="col-lg-12">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
 				{% block content %}{% endblock %}
 			</div>
 		</div>
