@@ -12,8 +12,18 @@ h1 {
   font-size: x-large;
 }
 
+.btn-primary{
+  color:#fff;
+  background-color:#563d7c;
+  border-color:#563d7c}
+
+.btn-primary:hover{
+  color:#fff;
+  background-color:#7a57af;
+  border-color:#563d7c}
+
 .bg-steel {
-  background-color: #5f788a;
+  background-color: #563d7c;
 }
 
 .site-header .navbar-nav .nav-link {
