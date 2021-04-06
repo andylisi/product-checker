@@ -1,9 +1,16 @@
 from datetime import datetime
-from productchecker import db
+from productchecker import db, login_manager
+from flask_login import UserMixin
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
 
 # This class will create a table schema within the db.
 # Set datatypes, uqique, req/nullable and keys
-class User(db.Model):
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(30), unique=True, nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
@@ -11,9 +18,10 @@ class User(db.Model):
     password = db.Column(db.String(60), nullable=False)
     products = db.relationship('Product', backref='user', lazy=True)
 
-    #__repr__ is used to compute the “official” string representation of an object 
-    # and is typically used for debugging.
     def __repr__(self):
+        '''__repr__ is used to compute the “official” string representation of an object 
+        # and is typically used for debugging.
+        '''
         return f"User('{self.id}', '{self.username}', '{self.email}', '{self.image_file}')"
 
 class Product(db.Model):
