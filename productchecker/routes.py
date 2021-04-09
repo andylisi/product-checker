@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect, request
 from productchecker import app, db, bcrypt
-from productchecker.forms import RegistrationForm, LoginForm
+from productchecker.forms import RegistrationForm, LoginForm, UpdateAccountForm
 from productchecker.models import User, Product
 from flask_login import login_user, logout_user, current_user, login_required
 import logging, sys
@@ -30,17 +30,12 @@ def dashboard():
     return render_template("dashboard.html", products=products)
 
 
-@app.route("/account")
-@login_required
-def account():
-    return render_template('account.html')
-
-
 @app.route("/register", methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
         return redirect(url_for('dashboard'))
     form = RegistrationForm()
+    
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user = User(username=form.username.data, email=form.email.data, password=hashed_password)
@@ -57,6 +52,7 @@ def login():
     if current_user.is_authenticated:
         return redirect(url_for('dashboard'))
     form = LoginForm()
+
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         #If user exists and password hash matches hash stored in db, login success
@@ -65,6 +61,7 @@ def login():
             #remember keeps user logged in after browser close. Set remember=True
             login_user(user, remember=form.remember.data)
             logging.info('User ' + user.username + ' succesfully authenticated')
+
             #If a user was forced to auth from somewhere besides login page,
             # next will be populated with url_for(<whatever next page was supposed to be>)
             # ternary conditional
@@ -72,10 +69,35 @@ def login():
             return redirect(next_page) if next_page else redirect(url_for('dashboard'))
         else:
             flash('Login Unsuccesful. Please check username and password', 'danger')
+
     return render_template('login.html', title='Login', form=form)
 
 
 @app.route("/logout")
+@login_required
 def logout():
     logout_user()
     return redirect(url_for('login'))
+
+
+@app.route("/account", methods=['GET', 'POST'])
+@login_required
+def account():
+    form = UpdateAccountForm()
+    if form.validate_on_submit():
+        logging.info('User ' + current_user.username + ' changed password to ' + current_user.password)
+
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        if form.password.data != '':
+            current_user.password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+
+        db.session.commit()
+        flash('Account Updated', 'success')
+        return redirect(url_for('account'))
+
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+
+    return render_template('account.html', form=form)

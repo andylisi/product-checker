@@ -12,15 +12,23 @@ h1 {
   font-size: x-large;
 }
 
+.bg-primary{
+  color:#fff;
+  background-color:#563d7c;
+  border-color:#563d7c
+}
+
 .btn-primary{
   color:#fff;
   background-color:#563d7c;
-  border-color:#563d7c}
+  border-color:#563d7c
+}
 
 .btn-primary:hover{
   color:#fff;
-  background-color:#7a57af;
-  border-color:#563d7c}
+  background-color:#7c639c;
+  border-color:#563d7c
+}
 
 .bg-steel {
   background-color: #563d7c;
