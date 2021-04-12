@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container border rounded">
+	<div class="row bg-primary rounded" style="background-color: #563d7c!important;">
+		<div class="col-4">
+			<h2 class="text-light">Add Product</h2>
+		</div>
+	</div>
+	<div class="row mt-2">
+		<div class="col">
+			<form novalidate method="POST" action="">
+				{{ form.hidden_tag() }}     <!--CSRF Token-->
+                <div class="form-group">
+					{% if form.alias.errors %}
+						{{ form.alias(class="form-control is-invalid", placeholder="Give your product an alias") }}
+						<div class="invalid-feedback">
+							{% for error in form.alias.errors %}
+								<span>{{ error }}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.alias(class="form-control", placeholder="Give your product an alias") }}
+					{% endif %}
+				</div>
+                <div class="col-lg-4 col-md-6"></div>
+                    <div class="form-group">
+                        {% if form.url.errors %}
+                            {{ form.url(class="form-control is-invalid", placeholder="Enter URL") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.url.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.url(class="form-control", placeholder="Enter URL") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.submit(class="btn btn-primary") }}
+                    </div>
+                </div>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

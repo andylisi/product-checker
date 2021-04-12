@@ -3,9 +3,14 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 
+USE_MYSQL = False 
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '2rQ5uFcZHFB5iEvw4ZVYgSFYgozDUjA9'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+if USE_MYSQL:                                                                                                                                                                  
+     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://USERNAME:PASSWORD@localhost/DATABASENAME'                                                                                
+else:                                                                                                                                                                          
+     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)

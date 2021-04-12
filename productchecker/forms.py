@@ -1,13 +1,16 @@
 from flask_wtf import FlaskForm
 from flask_login import current_user
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
-from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, URL
+import re
 from productchecker.models import User
+
 
 password_min = 4
 password_max = 50
 username_min = 4
 username_max = 20
+product_url_max = 30
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[
@@ -112,3 +115,14 @@ class UpdateAccountForm(FlaskForm):
         if password.data != '' and len(password.data) < password_min or len(password.data) > password_max:
             raise ValidationError('Field must be between ' + str(password_min) + ' and ' +
                                     str(password_max) +' characters long')
+
+
+class ProductForm(FlaskForm):
+    alias = StringField('alias', validators=[DataRequired(),Length(max=product_url_max)])
+    url = StringField('url', validators=[URL()])
+    submit = SubmitField('Submit')
+
+    def validate_url(self, url):
+        regex = re.compile('^(https|http):\/\/www\.(bestbuy|amazon)\.com')
+        if not regex.match(url.data):
+            raise ValidationError('Retailer must be Bestbuy or Amazon')

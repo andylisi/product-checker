@@ -1,32 +1,27 @@
 from flask import render_template, url_for, flash, redirect, request
 from productchecker import app, db, bcrypt
-from productchecker.forms import RegistrationForm, LoginForm, UpdateAccountForm
-from productchecker.models import User, Product
+from productchecker.forms import RegistrationForm, LoginForm, UpdateAccountForm, ProductForm
+from productchecker.models import User, Product, ProductHistory
 from flask_login import login_user, logout_user, current_user, login_required
 import logging, sys
+from productchecker.get_product_info import checkProduct
+from sqlalchemy import func
 
 logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
-
-products = [
-    {
-        'model': 'Macbook',
-        'retailer': 'Best Buy',
-        'stock': 'yes',
-        'date': '2021-3-23'
-    },
-    {
-        'model': 'Vizio TV',
-        'retailer': 'Best Buy',
-        'stock': 'no',
-        'date': '2021-1-10'
-    }
-]
 
 
 @app.route("/")
 @app.route("/dashboard")
 @login_required
 def dashboard():
+    sql = "Select p.alias,p.brand,p.model,p.retailer,CASE ph.stock WHEN True THEN 'Yes' ELSE 'No' END,ph.price,MAX(ph.checked_ts)\
+            FROM product_history ph\
+            Join product p\
+            ON ph.product_id=p.id\
+            WHERE p.user_id = :cur_usr\
+            GROUP BY ph.product_id;"
+    #we can pass parameters into query like with cur_usr
+    products = db.session.execute(sql, {'cur_usr': current_user.id}).fetchall()
     return render_template("dashboard.html", products=products)
 
 
@@ -101,3 +96,21 @@ def account():
         form.email.data = current_user.email
 
     return render_template('account.html', form=form)
+
+@app.route("/add_product", methods=['GET', 'POST'])
+@login_required
+def add_product():
+    form = ProductForm()
+    if form.validate_on_submit():
+        new_product = Product()
+        new_product.get_attr(form)
+
+        new_product_history = ProductHistory()
+        new_product_history.check_url(new_product)
+
+        new_product.history.append(new_product_history)
+        db.session.add(new_product)
+        db.session.add(new_product_history)
+        db.session.commit()
+        return redirect(url_for('dashboard'))
+    return render_template('add_product.html', title='Add Product', form=form)

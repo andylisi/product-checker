@@ -4,18 +4,24 @@
 	<table class="table">
 		<thead class="thead-light">
 			<tr>
+				<th>Alias</th>
+				<th>Brand</th>
 				<th>Model</th>
 				<th>Retailer</th>
 				<th>Stock</th>
-				<th>Date</th>
+				<th>Price</th>
+				<th>Last Checked</th>
 			</tr>
 		</thead>
 		{% for product in products %}
 			<tr>
-				<td>{{product.model}}</td>
-				<td>{{product.retailer}}</td>
-				<td>{{product.stock}}</td>
-				<td>{{product.date}}</td>
+				<td>{{product[0]}}</td>
+				<td>{{product[1]}}</td>
+				<td>{{product[2]}}</td>
+				<td>{{product[3]}}</td>
+				<td>{{product[4]}}</td>
+				<td>{{product[5]}}</td>
+				<td>{{product[6]}}</td>
 			</tr>
 		{% endfor %}
 	</table>

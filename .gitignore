@@ -8,3 +8,6 @@ __pycache__/
 #virtualenv
 virtualenv/
 venv/
+
+#vsCode Specific
+.vscode/
