@@ -74,12 +74,11 @@ class Product(db.Model):
     def check_all(cls):
         #distinct_products = cls.query.with_entities(cls.product_id).distinct()
         distinct_products = cls.query.distinct(cls.id)
-        product_history = ProductHistory()
         for product in distinct_products:
+            product_history = ProductHistory()
             product_history.check_url(product)
             product.history.append(product_history)
-            db.session.add(product_history)
-            db.session.commit()
+        db.session.commit()
 
 
 class ProductHistory(db.Model):
@@ -98,6 +97,7 @@ class ProductHistory(db.Model):
     def check_url(self, product):
         page_html = self.get_page_html(product)
         soup = BeautifulSoup(page_html, 'html.parser')
+        self.product_id = product.id
         #Best Buy changes the button class depending if item is in stock or not.
         if soup.find("button", {"class": "btn btn-primary btn-lg btn-block btn-leading-ficon add-to-cart-button"}):
             self.stock = True
@@ -109,7 +109,7 @@ class ProductHistory(db.Model):
         string_price = price_div.span.text
         self.price = float(string_price[1:].replace(',',''))#remove leading $ and any comma's
 
-        self.date_checked = datetime.now()
+        self.checked_ts = datetime.now()
     
     def __repr__(self):
         return f"ProductHistory('{self.id}','{self.product_id}','{self.stock}','{self.price}','{self.checked_ts}')"
