@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, RadioField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, URL
 import re
 from productchecker.models import User
@@ -64,7 +64,9 @@ class UpdateAccountForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password')
     confirm_password = PasswordField('Confirm Password', validators=[EqualTo('password')])
-    submit = SubmitField('Submit')
+    discord_webhook = StringField('Webhook URL')
+    discord_active = RadioField(coerce=bool, choices=[(True,'On'),(False,'Off')])
+    submit = SubmitField('Submit Changes')
 
     def validate_username(self, username):
         '''Check to see if username already exists
@@ -115,7 +117,11 @@ class UpdateAccountForm(FlaskForm):
         if password.data != '' and len(password.data) < password_min or len(password.data) > password_max:
             raise ValidationError('Field must be between ' + str(password_min) + ' and ' +
                                     str(password_max) +' characters long')
-
+    
+    def validate_discord_webhook(self, discord_webhook):
+        regex = re.compile('^https:\/\/discord\.com\/api\/webhooks\/')
+        if not regex.match(discord_webhook.data):
+            raise ValidationError('Please ensure Discord Webhook URL is valid')
 
 class ProductForm(FlaskForm):
     alias = StringField('alias', validators=[DataRequired(),Length(max=product_url_max)])

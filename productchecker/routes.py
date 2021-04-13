@@ -9,11 +9,13 @@ from sqlalchemy import func
 
 logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 
+#threading.Thread(target=bb.checkPage, args=(url,)).start()
 
 @app.route("/")
 @app.route("/dashboard")
 @login_required
 def dashboard():
+    Product.check_all()
     sql = "Select p.alias,p.brand,p.model,p.retailer,CASE ph.stock WHEN True THEN 'Yes' ELSE 'No' END,ph.price,MAX(ph.checked_ts)\
             FROM product_history ph\
             Join product p\
@@ -84,8 +86,16 @@ def account():
 
         current_user.username = form.username.data
         current_user.email = form.email.data
+
         if form.password.data != '':
             current_user.password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+
+        current_user.discord_webhook = form.discord_webhook.data
+
+        if form.discord_active:
+            current_user.discord_active = 1
+        else:
+            current_user.discord_active = 0
 
         db.session.commit()
         flash('Account Updated', 'success')
@@ -94,7 +104,8 @@ def account():
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
-
+        form.discord_webhook.data = current_user.discord_webhook
+        form.discord_active.data = current_user.discord_active
     return render_template('account.html', form=form)
 
 @app.route("/add_product", methods=['GET', 'POST'])

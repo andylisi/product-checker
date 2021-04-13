@@ -18,8 +18,9 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(30), unique=True, nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
-    image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
     password = db.Column(db.String(60), nullable=False)
+    discord_webhook = db.Column(db.String(150), nullable=True)
+    discord_active = db.Column(db.Boolean, nullable=True, default=0)
     products = db.relationship('Product', backref='user', lazy=True)
 
     def __repr__(self):
@@ -68,6 +69,17 @@ class Product(db.Model):
         self.user = current_user
         self.check_url()
         print(self)
+    
+    @classmethod
+    def check_all(cls):
+        #distinct_products = cls.query.with_entities(cls.product_id).distinct()
+        distinct_products = cls.query.distinct(cls.id)
+        product_history = ProductHistory()
+        for product in distinct_products:
+            product_history.check_url(product)
+            product.history.append(product_history)
+            db.session.add(product_history)
+            db.session.commit()
 
 
 class ProductHistory(db.Model):
@@ -98,6 +110,6 @@ class ProductHistory(db.Model):
         self.price = float(string_price[1:].replace(',',''))#remove leading $ and any comma's
 
         self.date_checked = datetime.now()
-
+    
     def __repr__(self):
-        return f"ProductHistory('{self.id}','{self.product_id}')"
+        return f"ProductHistory('{self.id}','{self.product_id}','{self.stock}','{self.price}','{self.checked_ts}')"
