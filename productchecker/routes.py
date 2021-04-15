@@ -99,12 +99,7 @@ def account():
             current_user.password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
 
         current_user.discord_webhook = form.discord_webhook.data
-
-        if form.discord_active:
-            current_user.discord_active = 1
-        else:
-            current_user.discord_active = 0
-
+        current_user.discord_active = bool(form.discord_active.data)
         db.session.commit()
         flash('Account Updated', 'success')
         return redirect(url_for('account'))

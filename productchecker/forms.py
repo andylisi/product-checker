@@ -65,7 +65,7 @@ class UpdateAccountForm(FlaskForm):
     password = PasswordField('Password')
     confirm_password = PasswordField('Confirm Password', validators=[EqualTo('password')])
     discord_webhook = StringField('Webhook URL')
-    discord_active = RadioField(coerce=bool, choices=[(True,'On'),(False,'Off')])
+    discord_active = RadioField(coerce=int, choices=[(1,'On'),(0,'Off')])
     submit = SubmitField('Submit Changes')
 
     def validate_username(self, username):
