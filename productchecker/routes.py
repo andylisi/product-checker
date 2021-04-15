@@ -4,19 +4,27 @@ from productchecker.forms import RegistrationForm, LoginForm, UpdateAccountForm,
 from productchecker.models import User, Product, ProductHistory
 from flask_login import login_user, logout_user, current_user, login_required
 import logging, sys
-from productchecker.get_product_info import checkProduct
-from sqlalchemy import func
+from datetime import datetime
 
 logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 
 #threading.Thread(target=bb.checkPage, args=(url,)).start()
+
+@app.template_filter()
+def timeFormat(string_obj):
+    '''
+    Custom formater used by the dashboard template to remove microseconds from checked_ts
+    '''
+    datetime_obj = datetime.strptime(string_obj, '%Y-%m-%d %H:%M:%S.%f')
+    formated_datetime_obj = datetime_obj.replace(microsecond=0)
+    return formated_datetime_obj
 
 @app.route("/")
 @app.route("/dashboard")
 @login_required
 def dashboard():
     Product.check_all()
-    sql = "Select p.alias,p.brand,p.model,p.retailer,CASE ph.stock WHEN True THEN 'Yes' ELSE 'No' END,ph.price,MAX(ph.checked_ts)\
+    sql = "Select p.alias, p.brand, p.model, p.retailer, CASE ph.stock WHEN True THEN 'Yes' ELSE 'No' END As stock, ph.price, MAX(ph.checked_ts) As checked_ts\
             FROM product_history ph\
             Join product p\
             ON ph.product_id=p.id\

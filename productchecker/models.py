@@ -36,7 +36,7 @@ class Product(db.Model):
     model = db.Column(db.String(30), unique=False, nullable=False)
     retailer = db.Column(db.String(30), nullable=False)
     url = db.Column(db.String(150), unique=False, nullable=False)
-    date_added = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
+    date_added = db.Column(db.DateTime, nullable=False, default=datetime.now)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     history = db.relationship('ProductHistory', backref='product', lazy=True)
 
@@ -58,7 +58,6 @@ class Product(db.Model):
         self.model = soup.find("h1", {"class": "heading-5 v-fw-regular"}).text
         retailer_domain = urlparse(self.url).netloc.split(".")
         self.retailer = retailer_domain[1]
-        self.date_added = datetime.now()
 
         p_history = ProductHistory
         p_history
@@ -72,7 +71,6 @@ class Product(db.Model):
     
     @classmethod
     def check_all(cls):
-        #distinct_products = cls.query.with_entities(cls.product_id).distinct()
         distinct_products = cls.query.distinct(cls.id)
         for product in distinct_products:
             product_history = ProductHistory()
@@ -86,7 +84,7 @@ class ProductHistory(db.Model):
     product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)
     stock = db.Column(db.Boolean, nullable=False)
     price = db.Column(db.Float, nullable=True)
-    checked_ts = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
+    checked_ts = db.Column(db.DateTime, nullable=False, default=datetime.now)
 
     def get_page_html(self, product):
         headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36"}
@@ -109,7 +107,7 @@ class ProductHistory(db.Model):
         string_price = price_div.span.text
         self.price = float(string_price[1:].replace(',',''))#remove leading $ and any comma's
 
-        self.checked_ts = datetime.now()
+        #self.checked_ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     
     def __repr__(self):
         return f"ProductHistory('{self.id}','{self.product_id}','{self.stock}','{self.price}','{self.checked_ts}')"

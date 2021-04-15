@@ -15,13 +15,13 @@
 		</thead>
 		{% for product in products %}
 			<tr>
-				<td>{{product[0]}}</td>
-				<td>{{product[1]}}</td>
-				<td>{{product[2]}}</td>
-				<td>{{product[3]}}</td>
-				<td>{{product[4]}}</td>
-				<td>{{product[5]}}</td>
-				<td>{{product[6]}}</td>
+				<td>{{ product[0] }}</td>
+				<td>{{ product[1] }}</td>
+				<td>{{ product[2] }}</td>
+				<td>{{ product[3] }}</td>
+				<td>{{ product[4] }}</td>
+				<td>{{ "${:,.2f}".format(product[5]) }}</td>
+				<td>{{ product[6]|timeFormat }}</td>
 			</tr>
 		{% endfor %}
 	</table>
