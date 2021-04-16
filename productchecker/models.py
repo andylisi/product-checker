@@ -5,7 +5,7 @@ from productchecker import db, login_manager
 from flask_login import UserMixin, current_user
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
-
+from sqlalchemy import func, case, literal_column
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -28,6 +28,7 @@ class User(db.Model, UserMixin):
         # and is typically used for debugging.
         '''
         return f"User('{self.id}', '{self.username}', '{self.email}')"
+
 
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -77,6 +78,16 @@ class Product(db.Model):
             product_history.check_url(product)
             product.history.append(product_history)
         db.session.commit()
+
+    @classmethod
+    def get_user_products(cls, user):
+        products = db.session.query(Product.alias, Product.brand, Product.model, Product.retailer,\
+                                case((ProductHistory.stock==1,literal_column("'Yes'")),(ProductHistory.stock==0,literal_column("'No'"))).label('stock'),\
+                                ProductHistory.price, func.max(ProductHistory.checked_ts).label('checked_ts'))\
+        .filter(Product.user_id==user)\
+        .filter(Product.id==ProductHistory.product_id)\
+        .group_by(Product.id).all()
+        return products
 
 
 class ProductHistory(db.Model):

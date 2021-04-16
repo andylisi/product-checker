@@ -6,32 +6,16 @@ from flask_login import login_user, logout_user, current_user, login_required
 import logging, sys
 from datetime import datetime
 
+
 logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 
-#threading.Thread(target=bb.checkPage, args=(url,)).start()
-
-@app.template_filter()
-def timeFormat(string_obj):
-    '''
-    Custom formater used by the dashboard template to remove microseconds from checked_ts
-    '''
-    datetime_obj = datetime.strptime(string_obj, '%Y-%m-%d %H:%M:%S.%f')
-    formated_datetime_obj = datetime_obj.replace(microsecond=0)
-    return formated_datetime_obj
 
 @app.route("/")
 @app.route("/dashboard")
 @login_required
 def dashboard():
-    Product.check_all()
-    sql = "Select p.alias, p.brand, p.model, p.retailer, CASE ph.stock WHEN True THEN 'Yes' ELSE 'No' END As stock, ph.price, MAX(ph.checked_ts) As checked_ts\
-            FROM product_history ph\
-            Join product p\
-            ON ph.product_id=p.id\
-            WHERE p.user_id = :cur_usr\
-            GROUP BY ph.product_id;"
-    #we can pass parameters into query like with cur_usr
-    products = db.session.execute(sql, {'cur_usr': current_user.id}).fetchall()
+    #Product.check_all()
+    products = Product.get_user_products(current_user.id)
     return render_template("dashboard.html", products=products)
 
 
@@ -90,7 +74,6 @@ def logout():
 def account():
     form = UpdateAccountForm()
     if form.validate_on_submit():
-        logging.info('User ' + current_user.username + ' changed password to ' + current_user.password)
 
         current_user.username = form.username.data
         current_user.email = form.email.data
@@ -110,6 +93,7 @@ def account():
         form.discord_webhook.data = current_user.discord_webhook
         form.discord_active.data = current_user.discord_active
     return render_template('account.html', form=form)
+
 
 @app.route("/add_product", methods=['GET', 'POST'])
 @login_required
