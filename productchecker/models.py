@@ -39,7 +39,7 @@ class Product(db.Model):
     url = db.Column(db.String(150), unique=False, nullable=False)
     date_added = db.Column(db.DateTime, nullable=False, default=datetime.now)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    history = db.relationship('ProductHistory', backref='product', lazy=True)
+    history = db.relationship('ProductHistory', cascade="all,delete", backref='product', lazy=True)
 
     def __repr__(self):
         return f"Product('{self.id}','{self.alias}','{self.brand}', '{self.model}', '{self.date_added}')"
@@ -81,7 +81,7 @@ class Product(db.Model):
 
     @classmethod
     def get_user_products(cls, user):
-        products = db.session.query(Product.alias, Product.brand, Product.model, Product.retailer,\
+        products = db.session.query(Product.id, Product.alias, Product.brand, Product.model, Product.retailer,\
                                 case((ProductHistory.stock==1,literal_column("'Yes'")),(ProductHistory.stock==0,literal_column("'No'"))).label('stock'),\
                                 ProductHistory.price, func.max(ProductHistory.checked_ts).label('checked_ts'))\
         .filter(Product.user_id==user)\

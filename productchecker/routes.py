@@ -1,4 +1,4 @@
-from flask import render_template, url_for, flash, redirect, request
+from flask import render_template, url_for, flash, redirect, request, abort
 from productchecker import app, db, bcrypt
 from productchecker.forms import RegistrationForm, LoginForm, UpdateAccountForm, ProductForm
 from productchecker.models import User, Product, ProductHistory
@@ -16,6 +16,8 @@ logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 def dashboard():
     #Product.check_all()
     products = Product.get_user_products(current_user.id)
+    for product in products:
+        print(product.id)
     return render_template("dashboard.html", products=products)
 
 
@@ -112,3 +114,14 @@ def add_product():
         db.session.commit()
         return redirect(url_for('dashboard'))
     return render_template('add_product.html', title='Add Product', form=form)
+
+
+@app.route("/product/<int:product_id>/delete", methods=['POST'])
+@login_required
+def delete_product(product_id):
+    product = Product.query.get_or_404(product_id)
+    if product.user_id != current_user.id:
+        abort(403)
+    db.session.delete(product)
+    db.session.commit()
+    return redirect(url_for('dashboard'))
