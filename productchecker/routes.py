@@ -131,12 +131,18 @@ def graph(product_id):
     product_history = Product.get_history(product_id)
     alias = product_history[0][0]
     stock = []
+    values = []
     for row in product_history:
         if row[2] == 1:
             stock.append("green")
         elif row[2] == 0:
             stock.append("red")
-    values = [row[3] for row in product_history]
+        if row[3] == None:
+            values.append('null')
+        else:
+            values.append(row[3])
+
+    #values = [row[3] for row in product_history]
     labels = [row[4] for row in product_history]
     return render_template('graph.html', values=values, labels=labels, alias=alias, stock=stock)
 

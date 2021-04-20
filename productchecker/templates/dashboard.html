@@ -28,7 +28,7 @@
 					<td>{{ product.model }}</td>
 					<td>{{ product.retailer }}</td>
 					<td>{{ product.stock }}</td>
-					<td>{{ "${:,.2f}".format(product.price) }}</td>
+					<td>{{ "-" if product.price is none else "${:,.2f}".format(product.price) }}</td>
 					<td>{{ product.checked_ts.strftime("%m-%d-%Y %H:%M:%S") }}</td>
 					<td>
 						<a class="btn btn-primary btn-sm" href="{{ url_for('graph', product_id=product.id) }}">

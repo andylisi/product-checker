@@ -46,7 +46,14 @@ class Product(db.Model):
 
     #Spoofing the user agent request
     def get_page_html(self):
-        headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36"}
+        headers = {
+            "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36",
+            'Accept' : 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 
+            'Accept-Language' : 'en-US,en;q=0.5',
+            'Accept-Encoding' : 'gzip', 
+            'DNT' : '1', # Do Not Track Request Header 
+            'Connection' : 'close'
+            }
         page = requests.get(self.url, headers=headers)
         return page.content
 
@@ -55,13 +62,57 @@ class Product(db.Model):
         page_html = self.get_page_html()
         soup = BeautifulSoup(page_html, 'html.parser')
 
-        self.brand = soup.find("a", {"class": "btn btn-link v-medium btn-brand-link"}).text
-        self.model = soup.find("h1", {"class": "heading-5 v-fw-regular"}).text
         retailer_domain = urlparse(self.url).netloc.split(".")
         self.retailer = retailer_domain[1]
 
-        p_history = ProductHistory
-        p_history
+        if self.retailer == 'bestbuy':
+            self.brand = soup.find("a", {"class": "btn btn-link v-medium btn-brand-link"}).text
+            self.model = soup.find("h1", {"class": "heading-5 v-fw-regular"}).text
+        elif self.retailer == 'amazon':
+            #Amazon pages are not very standardized. Have to try several tags
+            try:
+                brand_tag = soup.find("div", {"id": "mbc"})
+                brand_tag = brand_tag.get('data-brand')
+            except:
+                pass
+
+                try:
+                    brand_tag = soup.find("a", {"class": "a-link-normal qa-byline-url"}).text
+                except:
+                    pass
+
+                    try:
+                        brand_tag = soup.find("a", {"id": "bylineInfo"}).text
+                    except:
+                        pass
+                        
+                        try:
+                            brand_tag = 'Unknown'
+                        except:
+                            pass
+            finally:
+                brand_text = brand_tag.strip('\n')
+                if brand_text.startswith('Brand: '):
+                    brand_text = brand_text.replace('Brand: ', '')
+                self.brand = brand_text
+
+            #model
+            try:
+                model_tag = soup.find("span", {"id": "productTitle"}).text
+            except:
+                pass
+
+                try:
+                    model_tag = soup.find("span", {"class": "a-size-large product-title-word-break"}).text
+                except:
+                    pass
+
+                    try:
+                        model_tag = soup.find("span", {"class": "a-size-large qa-title-text"}).text
+                    except:
+                        model_tag = 'Unknown'
+            finally:
+                self.model = model_tag.strip('\n')
 
     def get_attr(self, form):
         self.url = form.url.data
@@ -107,7 +158,14 @@ class ProductHistory(db.Model):
     checked_ts = db.Column(db.DateTime, nullable=False, default=datetime.now)
 
     def get_page_html(self, product):
-        headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36"}
+        headers = {
+            "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36",
+            'Accept' : 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 
+            'Accept-Language' : 'en-US,en;q=0.5',
+            'Accept-Encoding' : 'gzip', 
+            'DNT' : '1', # Do Not Track Request Header 
+            'Connection' : 'close'
+            }
         page = requests.get(product.url, headers=headers)
         return page.content
 
@@ -116,20 +174,45 @@ class ProductHistory(db.Model):
         page_html = self.get_page_html(product)
         soup = BeautifulSoup(page_html, 'html.parser')
         self.product_id = product.id
-        #Best Buy changes the button class depending if item is in stock or not.
-        if soup.find("button", {"class": "btn btn-primary btn-lg btn-block btn-leading-ficon add-to-cart-button"}):
-            self.stock = True
-        else:
-            self.stock = False
 
-        #price
-        price_div = soup.find('div', {'class' : 'priceView-hero-price priceView-customer-price'})
-        if price_div:
-            string_price = price_div.span.text
-            self.price = float(string_price[1:].replace(',',''))#remove leading $ and any comma's
-        #else - null
+        if product.retailer == 'bestbuy':
+            #Best Buy changes the button class depending if item is in stock or not.
+            if soup.find("button", {"class": "btn btn-primary btn-lg btn-block btn-leading-ficon add-to-cart-button"}):
+                self.stock = True
+            else:
+                self.stock = False
+
+            #price
+            price_div = soup.find('div', {'class' : 'priceView-hero-price priceView-customer-price'})
+            if price_div:
+                string_price = price_div.span.text
+                self.price = float(string_price[1:].replace(',',''))#remove leading $ and any comma's
+            else:
+                self.price = 'null'
         
-        #self.checked_ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        elif product.retailer == 'amazon':
+            if soup.find("div", {"id": "addToCart_feature_div"}):
+                self.stock = True
+            else:
+                self.stock = False
+
+            #price
+            try:
+                price_div = soup.find('span', {'id' : 'priceblock_ourprice'}).text
+            except:
+                pass
+                
+                try:
+                    price_div = None
+                except:
+                    pass
+
+            finally:
+                if price_div != None:
+                    self.price = float(price_div[1:].replace(',',''))#remove leading $ and any comma's
+                else:
+                    self.price = price_div
+
     
     def __repr__(self):
         return f"ProductHistory('{self.id}','{self.product_id}','{self.stock}','{self.price}','{self.checked_ts}')"
