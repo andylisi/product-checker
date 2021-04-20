@@ -14,7 +14,11 @@ logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 @app.route("/dashboard")
 @login_required
 def dashboard():
-    #Product.check_all()
+    '''
+    print('--Begin Product Check--')
+    Product.check_all()
+    print('--Product Complete--')
+    '''
     products = Product.get_user_products(current_user.id)
     return render_template("dashboard.html", products=products)
 
