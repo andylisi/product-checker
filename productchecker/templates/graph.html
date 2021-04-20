@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="d-flex justify-content-center">
+   <div class="col-lg-10">
+      <div class="row justify-content-center">
+         <h1>{{ alias }} Price and Availability</h1>
+      </div>
+      <div class="row justify-content-center mt-2">
+         <div id="redcircle" class="text-nowrap mr-1"></div>
+         <p>Out of Stock</p>
+         <div id="greencircle" class="text-nowrap ml-5 mr-1"></div>
+         <p>In Stock</p>
+      </div>
+      <div class="row">
+         <canvas id="myChart" width="600" height="300"></canvas>
+         <script>
+         var ctx = document.getElementById('myChart').getContext('2d');
+         var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+               labels: {{ labels | safe }},
+               datasets: [{
+                     label: 'Cost (Dollars)',
+                     data: {{ values | safe }},
+                     backgroundColor: '#563d7c',
+                     borderColor: '#563d7c',
+                     pointBackgroundColor: {{ stock | safe }},
+                     pointBorderColor: {{ stock | safe }},
+                     pointRadius: 4,
+                     pointHoverRadius: 6,
+                     borderWidth: 1
+               }]
+            },
+            options: {
+               responsive: true,
+               maintainAspectRatio: true,
+               legend: {
+                  display: true
+               },
+               scales: {
+                  y: {
+                        beginAtZero: true
+                  }
+               }
+            }
+         });
+         </script>
+      </div>
+   </div>
+</div>
+{% endblock content %}

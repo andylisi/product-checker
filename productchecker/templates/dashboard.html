@@ -1,53 +1,72 @@
 {% extends "layout.html" %}
 {% block content %}
-<h1>Dashboard</h1>
-<table class="table">
-	<thead class="thead-light">
-		<tr>
-			<th>Alias</th>
-			<th>Brand</th>
-			<th>Model</th>
-			<th>Retailer</th>
-			<th>Stock</th>
-			<th>Price</th>
-			<th>Last Checked</th>
-			<th>Delete</th>
-		</tr>
-	</thead>
-	{% for product in products %}
-	<tr>
-		<td>{{ product.alias }}</td>
-		<td>{{ product.brand }}</td>
-		<td>{{ product.model }}</td>
-		<td>{{ product.retailer }}</td>
-		<td>{{ product.stock }}</td>
-		<td>{{ "${:,.2f}".format(product.price) }}</td>
-		<td>{{ product.checked_ts.strftime("%Y-%m-%d %H:%M:%S") }}</td>
-		<td><button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#delete{{ product.id }}">X</button>
-			<!-- Modal -->
-			<div class="modal fade" id="delete{{ product.id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ product.id }}" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="deleteModalLabel{{ product.id }}">Delete Product?</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
+<div class="container-stretch border rounded">
+	<div class="row bg-primary rounded" style="background-color: #563d7c!important;">
+		<div class="col-4">
+			<h2 class="text-light">Dashboard</h2>
+		</div>
+	</div>
+		<div class ="row justify-content-center" ></div>
+			<table class="table table-hover">
+				<thead class="thead-light">
+					<tr>
+						<th>Alias</th>
+						<th>Brand</th>
+						<th>Model</th>
+						<th>Retailer</th>
+						<th>Stock</th>
+						<th>Price</th>
+						<th>Checked</th>
+						<th>History</th>
+						<th>Delete</th>
+					</tr>
+				</thead>
+				{% for product in products %}
+				<tr>
+					<td>{{ product.alias }}</td>
+					<td>{{ product.brand }}</td>
+					<td>{{ product.model }}</td>
+					<td>{{ product.retailer }}</td>
+					<td>{{ product.stock }}</td>
+					<td>{{ "${:,.2f}".format(product.price) }}</td>
+					<td>{{ product.checked_ts.strftime("%m-%d-%Y %H:%M:%S") }}</td>
+					<td>
+						<a class="btn btn-primary btn-sm" href="{{ url_for('graph', product_id=product.id) }}">
+							<img src="/static/eyes.svg" alt="Eyes" width="24" height="24"/>
+						</a>
+					</td>
+					<td>
+						<button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete{{ product.id }}">
+							<img src="/static/close.svg" alt="Eyes" width="24" height="24"/>
+						</button>
+						<!-- Modal -->
+						<div class="modal fade" id="delete{{ product.id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ product.id }}" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="deleteModalLabel{{ product.id }}">Delete Product?</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										Are you sure you want to stop tracking your {{ product.alias }}?
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+										<form action="{{ url_for('delete_product', product_id=product.id) }}" method="POST">
+											<input class="btn btn-primary" type="submit" value="Delete">
+										</form>
+									</div>
+								</div>
+							</div>
 						</div>
-						<div class="modal-body">
-							Are you sure you want to stop tracking your {{ product.alias }}?
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-							<form action="{{ url_for('delete_product', product_id=product.id) }}" method="POST">
-								<input class="btn btn-primary" type="submit" value="Delete">
-							</form>
-						</div>
-					</div>
-				</div>
+					</td>
+				</tr>
 			</div>
-		</td>
-	</tr>
+		</div>
+	</div>
+</div>
 {% endfor %}
 </table>
 {% endblock %}

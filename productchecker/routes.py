@@ -16,8 +16,6 @@ logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 def dashboard():
     #Product.check_all()
     products = Product.get_user_products(current_user.id)
-    for product in products:
-        print(product.id)
     return render_template("dashboard.html", products=products)
 
 
@@ -125,3 +123,20 @@ def delete_product(product_id):
     db.session.delete(product)
     db.session.commit()
     return redirect(url_for('dashboard'))
+
+
+@app.route("/product/<int:product_id>/graph", methods=['GET'])
+@login_required
+def graph(product_id):
+    product_history = Product.get_history(product_id)
+    alias = product_history[0][0]
+    stock = []
+    for row in product_history:
+        if row[2] == 1:
+            stock.append("green")
+        elif row[2] == 0:
+            stock.append("red")
+    values = [row[3] for row in product_history]
+    labels = [row[4] for row in product_history]
+    return render_template('graph.html', values=values, labels=labels, alias=alias, stock=stock)
+

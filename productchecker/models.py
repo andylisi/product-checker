@@ -89,6 +89,15 @@ class Product(db.Model):
         .group_by(Product.id).all()
         return products
 
+    @classmethod
+    def get_history(cls, product_id):
+        history = db.session.query(Product.alias, Product.id, ProductHistory.stock,func.min(ProductHistory.price).label('price'),func.strftime('%m-%d-%Y', ProductHistory.checked_ts).label('date'))\
+            .filter(Product.id==product_id)\
+            .filter(ProductHistory.product_id==product_id)\
+            .group_by('date')\
+            .all()
+        return history
+
 
 class ProductHistory(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -115,9 +124,11 @@ class ProductHistory(db.Model):
 
         #price
         price_div = soup.find('div', {'class' : 'priceView-hero-price priceView-customer-price'})
-        string_price = price_div.span.text
-        self.price = float(string_price[1:].replace(',',''))#remove leading $ and any comma's
-
+        if price_div:
+            string_price = price_div.span.text
+            self.price = float(string_price[1:].replace(',',''))#remove leading $ and any comma's
+        #else - null
+        
         #self.checked_ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     
     def __repr__(self):

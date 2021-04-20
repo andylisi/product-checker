@@ -34,6 +34,23 @@ h1 {
   background-color: #563d7c;
 }
 
+#redcircle {
+  width: 9px;
+  height: 9px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  border-radius: 25px;
+  background: red;
+}
+
+#greencircle {
+  width: 9px;
+  height: 9px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  border-radius: 25px;
+  background: green;
+}
 .site-header .navbar-nav .nav-link {
   color: #cbd5db;
 }
