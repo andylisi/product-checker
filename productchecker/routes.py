@@ -5,20 +5,25 @@ from productchecker.models import User, Product, ProductHistory
 from flask_login import login_user, logout_user, current_user, login_required
 import logging, sys
 from datetime import datetime
+import threading
 
+logging.basicConfig(filename='./tmp/PC.log', 
+                    level=logging.ERROR, 
+                    format='%(asctime)s %(levelname)s %(name)s %(message)s')
+logger=logging.getLogger(__name__)
+#logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
 
-logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
-
+'''
+This starts the product checking loop that runs as a seperate
+thread in the background keeping all product stats up to date.
+'''
+#threading.Thread(target=Product.product_check_loop).start()
 
 @app.route("/")
 @app.route("/dashboard")
 @login_required
 def dashboard():
-    '''
-    print('--Begin Product Check--')
-    Product.check_all()
-    print('--Product Complete--')
-    '''
+    #Product.check_all()
     products = Product.get_user_products(current_user.id)
     return render_template("dashboard.html", products=products)
 
@@ -53,7 +58,6 @@ def login():
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             #remember keeps user logged in after browser close. Set remember=True
             login_user(user, remember=form.remember.data)
-            logging.info('User ' + user.username + ' succesfully authenticated')
 
             #If a user was forced to auth from somewhere besides login page,
             # next will be populated with url_for(<whatever next page was supposed to be>)

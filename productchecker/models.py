@@ -1,11 +1,18 @@
-import requests
-import re
+import requests, re, time, logging
 from datetime import datetime
 from productchecker import db, login_manager
 from flask_login import UserMixin, current_user
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 from sqlalchemy import func, case, literal_column
+
+
+logging.basicConfig(filename='./tmp/PC.log', 
+                    level=logging.ERROR, 
+                    format='%(asctime)s %(levelname)s %(name)s %(message)s')
+logger=logging.getLogger(__name__)
+#logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -71,44 +78,35 @@ class Product(db.Model):
             try:
                 brand_tag = soup.find("div", {"id": "mbc"})
                 brand_tag = brand_tag.get('data-brand')
-            except:
-                pass
-
+            except AttributeError:
                 try:
                     brand_tag = soup.find("a", {"class": "a-link-normal qa-byline-url"}).text
-                except:
-                    pass
-
+                except AttributeError:
                     try:
                         brand_tag = soup.find("a", {"id": "bylineInfo"}).text
-                    except:
-                        pass
-                        
-                        try:
-                            brand_tag = 'Unknown'
-                        except:
-                            pass
+                    except AttributeError as e:
+                        brand_tag = 'Unavailable'
+                        logger.error(e)
             finally:
                 brand_text = brand_tag.strip('\n')
                 if brand_text.startswith('Brand: '):
                     brand_text = brand_text.replace('Brand: ', '')
+                elif brand_text.startswith('Visit the '):
+                    brand_text = brand_text.replace('Visit the ', '')
                 self.brand = brand_text
 
-            #model
+            #Try known model tags, if no tags found mark as Unavailable
             try:
                 model_tag = soup.find("span", {"id": "productTitle"}).text
-            except:
-                pass
-
+            except AttributeError:
                 try:
                     model_tag = soup.find("span", {"class": "a-size-large product-title-word-break"}).text
-                except:
-                    pass
-
+                except AttributeError:
                     try:
                         model_tag = soup.find("span", {"class": "a-size-large qa-title-text"}).text
-                    except:
-                        model_tag = 'Unknown'
+                    except AttributeError as e:
+                        model_tag = 'Unavailable'
+                        logger.error(e)
             finally:
                 self.model = model_tag.strip('\n')
 
@@ -126,7 +124,7 @@ class Product(db.Model):
             product_history = ProductHistory()
             product_history.check_url(product)
             product.history.append(product_history)
-        db.session.commit()
+            db.session.commit()
 
     @classmethod
     def get_user_products(cls, user):
@@ -146,6 +144,19 @@ class Product(db.Model):
             .group_by('date')\
             .all()
         return history
+
+    @classmethod
+    def product_check_loop(cls):
+        user_seconds = 60
+        while(1):
+            start = datetime.now()
+            print(f"--Begin Product Check - {start}--")
+            cls.check_all()
+            end = datetime.now()
+            print(f"--Product Check Complete - {end}--")
+            loop_time = int((end-start).total_seconds())
+            #TODO check if less than zero
+            time.sleep(user_seconds-(loop_time))
 
 
 class ProductHistory(db.Model):
@@ -173,42 +184,42 @@ class ProductHistory(db.Model):
 
         if product.retailer == 'bestbuy':
             #Best Buy changes the button class depending if item is in stock or not.
-            if soup.find("button", {"class": "btn btn-primary btn-lg btn-block btn-leading-ficon add-to-cart-button"}):
+            try:
+                soup.find("button", {"class": "btn btn-primary btn-lg btn-block btn-leading-ficon add-to-cart-button"})
                 self.stock = True
-            else:
+            except AttributeError as e:
                 self.stock = False
+                logger.error(e)
 
             #price
-            price_div = soup.find('div', {'class' : 'priceView-hero-price priceView-customer-price'})
-            if price_div:
+            try: 
+                price_div = soup.find('div', {'class' : 'priceView-hero-price priceView-customer-price'})
                 string_price = price_div.span.text
                 self.price = float(string_price[1:].replace(',',''))#remove leading $ and any comma's
-            else:
+            except AttributeError as e:
                 self.price = 'null'
+                logger.error(e)
         
         elif product.retailer == 'amazon':
-            if soup.find('div', {'id': 'addToCart_feature_div'}):
+            #stock
+            try:
+                soup.find('div', {'id': 'addToCart_feature_div'})
                 self.stock = True
-            else:
+            except AttributeError as e:
                 self.stock = False
+                logger.error(e)
 
             #price
             try:
-                price_div = soup.find('span', {'id' : 'priceblock_ourprice'}).text
-            except:
-                pass
-                
+                price_div = soup.find('span', {'id' : 'priceblock_ourprice'}).text.strip('\n')
+                self.price = float(price_div[1:].replace(',',''))#remove leading $ and any comma's
+            except AttributeError:
                 try:
-                    price_div = None
-                except:
-                    pass
-
-            finally:
-                if price_div != None:
+                    price_div = soup.find('span', {'id' : 'price_inside_buybox'}).text.strip('\n')
                     self.price = float(price_div[1:].replace(',',''))#remove leading $ and any comma's
-                else:
-                    self.price = price_div
-
-    
+                except AttributeError as e:
+                    self.price = None
+                    logger.error(e)
+            
     def __repr__(self):
         return f"ProductHistory('{self.id}','{self.product_id}','{self.stock}','{self.price}','{self.checked_ts}')"
