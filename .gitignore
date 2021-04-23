@@ -11,3 +11,6 @@ venv/
 
 #vsCode Specific
 .vscode/
+
+#error logs
+tmp/*

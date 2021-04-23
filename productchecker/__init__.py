@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
+import threading
 
 USE_MYSQL = False 
 
@@ -17,5 +18,11 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'login'  #function name of login route for redirect
 login_manager.login_message_category = 'danger'
 
+
 #needed down here to avoid circular import
 from productchecker import routes
+from productchecker.models import Product
+#This starts the product checking loop that runs as a seperate
+#thread in the background keeping all product stats up to date.
+#Needs User context before it can begin.
+threading.Thread(target=Product.product_check_loop).start()

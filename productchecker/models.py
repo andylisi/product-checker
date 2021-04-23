@@ -1,6 +1,7 @@
 import requests, re, time, logging
 from datetime import datetime
 from productchecker import db, login_manager
+from productchecker.notifications import sendNotification
 from flask_login import UserMixin, current_user
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
@@ -9,9 +10,8 @@ from sqlalchemy import func, case, literal_column
 
 logging.basicConfig(filename='./tmp/PC.log', 
                     level=logging.ERROR, 
-                    format='%(asctime)s %(levelname)s %(name)s %(message)s')
+                    format='%(asctime)s %(threadName)s %(levelname)s %(name)s %(message)s')
 logger=logging.getLogger(__name__)
-#logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
 
 
 @login_manager.user_loader
@@ -121,9 +121,18 @@ class Product(db.Model):
     def check_all(cls):
         distinct_products = cls.query.distinct(cls.id)
         for product in distinct_products:
-            product_history = ProductHistory()
-            product_history.check_url(product)
-            product.history.append(product_history)
+            #Capture prev stock status before adding new
+            previous_stock = Product.previous_stock(product.id)
+            #Check new history and append to Product's history.
+            new_history = ProductHistory()
+            new_history.check_url(product)
+            product.history.append(new_history)
+
+            #If user notifcations on, previously wasnt in stock and now is in stock, send notification.
+            if  product.user.discord_active and\
+                not previous_stock and\
+                new_history.stock:
+                    sendNotification(current_user.discord_webhook, product)
             db.session.commit()
 
     @classmethod
@@ -146,6 +155,15 @@ class Product(db.Model):
         return history
 
     @classmethod
+    def previous_stock(cls, product_id):
+        previous_history = db.session.query(ProductHistory.stock, func.max(ProductHistory.checked_ts).label('checked_ts'))\
+            .filter(Product.id==product_id)\
+            .filter(ProductHistory.product_id==product_id)\
+            .group_by(Product.id)\
+            .all()
+        return bool(previous_history[0].stock)
+
+    @classmethod
     def product_check_loop(cls):
         user_seconds = 60
         while(1):
@@ -155,9 +173,12 @@ class Product(db.Model):
             end = datetime.now()
             print(f"--Product Check Complete - {end}--")
             loop_time = int((end-start).total_seconds())
-            #TODO check if less than zero
-            time.sleep(user_seconds-(loop_time))
-
+            #Run loop every <user_seconds>. If loop takes longer,
+            #ignore sleep and just run as fast as possible.
+            try:
+                time.sleep(user_seconds-(loop_time))
+            except ValueError as e: 
+                logger.error(e)
 
 class ProductHistory(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -184,12 +205,10 @@ class ProductHistory(db.Model):
 
         if product.retailer == 'bestbuy':
             #Best Buy changes the button class depending if item is in stock or not.
-            try:
-                soup.find("button", {"class": "btn btn-primary btn-lg btn-block btn-leading-ficon add-to-cart-button"})
+            if soup.find("button", {"class": "btn btn-primary btn-lg btn-block btn-leading-ficon add-to-cart-button"}) != None:
                 self.stock = True
-            except AttributeError as e:
+            else:
                 self.stock = False
-                logger.error(e)
 
             #price
             try: 
@@ -220,6 +239,6 @@ class ProductHistory(db.Model):
                 except AttributeError as e:
                     self.price = None
                     logger.error(e)
-            
+
     def __repr__(self):
         return f"ProductHistory('{self.id}','{self.product_id}','{self.stock}','{self.price}','{self.checked_ts}')"
