@@ -23,7 +23,7 @@
 				</thead>
 				{% for product in products %}
 				<tr>
-					<td>{{ product.alias }}</td>
+					<td><a href="{{ product.url }}" target = "_blank">{{ product.alias }}</a></td>
 					<td>{{ product.brand }}</td>
 					<td>{{ product.model }}</td>
 					<td>{{ product.retailer }}</td>

@@ -137,7 +137,7 @@ class Product(db.Model):
 
     @classmethod
     def get_user_products(cls, user):
-        products = db.session.query(Product.id, Product.alias, Product.brand, Product.model, Product.retailer,\
+        products = db.session.query(Product.id, Product.alias, Product.brand, Product.model, Product.retailer, Product.url,\
                                 case((ProductHistory.stock==1,literal_column("'Yes'")),(ProductHistory.stock==0,literal_column("'No'"))).label('stock'),\
                                 ProductHistory.price, func.max(ProductHistory.checked_ts).label('checked_ts'))\
         .filter(Product.user_id==user)\
