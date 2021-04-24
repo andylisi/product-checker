@@ -139,6 +139,7 @@ def graph(product_id):
             stock.append("green")
         elif row[2] == 0:
             stock.append("red")
+
         if row[3] == None:
             values.append('null')
         else:
