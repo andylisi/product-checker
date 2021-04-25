@@ -1,51 +1,77 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="d-flex justify-content-center">
-   <div class="col-lg-10">
-      <div class="row justify-content-center">
-         <h1>{{ alias }} Price and Availability</h1>
-      </div>
-      <div class="row justify-content-center mt-2">
-         <div id="redcircle" class="text-nowrap mr-1"></div>
-         <p>Out of Stock</p>
-         <div id="greencircle" class="text-nowrap ml-5 mr-1"></div>
-         <p>In Stock</p>
-      </div>
-      <div class="row">
-         <canvas id="myChart" width="600" height="300"></canvas>
-         <script>
-         var ctx = document.getElementById('myChart').getContext('2d');
-         var myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-               labels: {{ labels | safe }},
-               datasets: [{
-                     label: 'Price (Dollars)',
-                     data: {{ values | safe }},
-                     backgroundColor: '#563d7c',
-                     borderColor: '#563d7c',
-                     pointBackgroundColor: {{ stock | safe }},
-                     pointBorderColor: {{ stock | safe }},
-                     pointRadius: 4,
-                     pointHoverRadius: 6,
-                     borderWidth: 1
-               }]
+<div class="container-stretch justify-content-center ml-3 mr-3">
+   <div class="row bg-primary rounded" style="background-color: #563d7c!important;">
+		<div class="col-8 mr-auto">
+			<h2 class="text-light">{{ alias }} Price and Availability</h2>
+		</div>
+      <div>
+			<button type="button" class="btn btn-sm mt-1" style="background-color:transparent" data-toggle="modal"
+				data-target="#dashboardHelp">
+				<img src="/static/help.svg" alt="help" width="24" height="24" />
+			</button>
+			<!-- Help Modal -->
+			<div class="modal fade" id="dashboardHelp" tabindex="-1" aria-labelledby="dashboardHelpLabel"
+				aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="dashboardHelpLabel"><strong>Dashboard Help</strong></h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<p>The Graph shows the products price over time. Each data point represents the lowest price of the product that was found that day.</br>
+							<span style="font-size:.75rem"> *Missing data points mean that a price was not available for that day. Some retailers remove the price 
+                        of an out of stock product.</span>
+                     </p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+   </div>
+   <div class="row justify-content-center mt-3">
+      <div id="redcircle" class="text-nowrap mr-1"></div>
+      <p>Out of Stock</p>
+      <div id="greencircle" class="text-nowrap ml-5 mr-1"></div>
+      <p>In Stock</p>
+   </div>
+   <div class="row">
+      <canvas id="myChart" width="600" height="300"></canvas>
+      <script>
+      var ctx = document.getElementById('myChart').getContext('2d');
+      var myChart = new Chart(ctx, {
+         type: 'line',
+         data: {
+            labels: {{ labels | safe }},
+            datasets: [{
+                  label: 'Price (Dollars)',
+                  data: {{ values | safe }},
+                  backgroundColor: '#563d7c',
+                  borderColor: '#563d7c',
+                  pointBackgroundColor: {{ stock | safe }},
+                  pointBorderColor: {{ stock | safe }},
+                  pointRadius: 4,
+                  pointHoverRadius: 6,
+                  borderWidth: 1
+            }]
+         },
+         options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            legend: {
+               display: true
             },
-            options: {
-               responsive: true,
-               maintainAspectRatio: true,
-               legend: {
-                  display: true
-               },
-               scales: {
-                  y: {
-                        beginAtZero: true
-                  }
+            scales: {
+               y: {
+                     beginAtZero: true
                }
             }
-         });
-         </script>
-      </div>
+         }
+      });
+      </script>
    </div>
 </div>
 {% endblock content %}

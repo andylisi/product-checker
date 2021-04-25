@@ -11,6 +11,9 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   font-size: x-large;
 }
+p {
+  color:#333
+}
 
 .bg-primary{
   color:#fff;

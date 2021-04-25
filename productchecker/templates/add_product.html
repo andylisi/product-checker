@@ -2,8 +2,36 @@
 {% block content %}
 <div class="container border rounded">
 	<div class="row bg-primary rounded" style="background-color: #563d7c!important;">
-		<div class="col-4">
+		<div class="col-4 mr-auto">
 			<h2 class="text-light">Add Product</h2>
+		</div>
+		<div>
+			<button type="button" class="btn btn-sm mt-1" style="background-color:transparent" data-toggle="modal"
+				data-target="#addProductHelp">
+				<img src="/static/help.svg" alt="help" width="24" height="24" />
+			</button>
+			<!-- Help Modal -->
+			<div class="modal fade" id="addProductHelp" tabindex="-1" aria-labelledby="addProductHelpLabel"
+				aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="addProductHelpLabel"><strong>Account Help</strong></h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<p>Add a product that you would like to track. Product will become available to view on your Dashboard.</p>
+							<p><b>Product Alias</b> - Give an easy to remember name to your product.</p>
+							<p><b>Product URL</b> - The URL of the product that you would like to track.</br>
+								<span style="font-size:.75rem"> In another tab visit the website of the product you would like to track and 
+									copy the URL from the browser. Paste that full URL in this field.</span>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="row mt-2">
@@ -11,6 +39,7 @@
 			<form novalidate method="POST" action="">
 				{{ form.hidden_tag() }}     <!--CSRF Token-->
                 <div class="form-group">
+					<label>Product Alias</label>
 					{% if form.alias.errors %}
 						{{ form.alias(class="form-control is-invalid", placeholder="Give your product an alias") }}
 						<div class="invalid-feedback">
@@ -24,6 +53,7 @@
 				</div>
                 <div class="col-lg-4 col-md-6"></div>
                     <div class="form-group">
+						<label>Product URL</label>
                         {% if form.url.errors %}
                             {{ form.url(class="form-control is-invalid", placeholder="Enter URL") }}
                             <div class="invalid-feedback">

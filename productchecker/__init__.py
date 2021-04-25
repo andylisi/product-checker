@@ -8,6 +8,7 @@ USE_MYSQL = False
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '2rQ5uFcZHFB5iEvw4ZVYgSFYgozDUjA9'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 if USE_MYSQL:                                                                                                                                                                  
      app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://USERNAME:PASSWORD@localhost/DATABASENAME'                                                                                
 else:                                                                                                                                                                          
@@ -25,4 +26,7 @@ from productchecker.models import Product
 #This starts the product checking loop that runs as a seperate
 #thread in the background keeping all product stats up to date.
 #Needs User context before it can begin.
-threading.Thread(target=Product.product_check_loop).start()
+
+thread = threading.Thread(target=Product.product_check_loop)
+thread.daemon = True
+thread.start()

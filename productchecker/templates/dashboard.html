@@ -1,72 +1,106 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="container-stretch border rounded">
+<div class="container-stretch border rounded ml-3 mr-3">
 	<div class="row bg-primary rounded" style="background-color: #563d7c!important;">
-		<div class="col-4">
+		<div class="col-4 mr-auto">
 			<h2 class="text-light">Dashboard</h2>
 		</div>
-	</div>
-		<div class ="row justify-content-center" ></div>
-			<table class="table table-hover">
-				<thead class="thead-light">
-					<tr>
-						<th>Alias</th>
-						<th>Brand</th>
-						<th>Model</th>
-						<th>Retailer</th>
-						<th>Stock</th>
-						<th>Price</th>
-						<th>Checked</th>
-						<th>History</th>
-						<th>Delete</th>
-					</tr>
-				</thead>
-				{% for product in products %}
-				<tr>
-					<td><a href="{{ product.url }}" target = "_blank">{{ product.alias }}</a></td>
-					<td>{{ product.brand }}</td>
-					<td>{{ product.model }}</td>
-					<td>{{ product.retailer }}</td>
-					<td>{{ product.stock }}</td>
-					<td>{{ "-" if product.price is none else "${:,.2f}".format(product.price) }}</td>
-					<td>{{ product.checked_ts.strftime("%m-%d-%Y %H:%M:%S") }}</td>
-					<td>
-						<a class="btn btn-primary btn-sm" href="{{ url_for('graph', product_id=product.id) }}">
-							<img src="/static/eyes.svg" alt="Eyes" width="24" height="24"/>
-						</a>
-					</td>
-					<td>
-						<button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete{{ product.id }}">
-							<img src="/static/close.svg" alt="Eyes" width="24" height="24"/>
-						</button>
-						<!-- Modal -->
-						<div class="modal fade" id="delete{{ product.id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ product.id }}" aria-hidden="true">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title" id="deleteModalLabel{{ product.id }}">Delete Product?</h5>
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
-									<div class="modal-body">
-										Are you sure you want to stop tracking your {{ product.alias }}?
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-										<form action="{{ url_for('delete_product', product_id=product.id) }}" method="POST">
-											<input class="btn btn-primary" type="submit" value="Delete">
-										</form>
-									</div>
-								</div>
-							</div>
+		<div>
+			<button type="button" class="btn btn-sm mt-1" style="background-color:transparent" data-toggle="modal"
+				data-target="#dashboardHelp">
+				<img src="/static/help.svg" alt="help" width="24" height="24" />
+			</button>
+			<!-- Help Modal -->
+			<div class="modal fade" id="dashboardHelp" tabindex="-1" aria-labelledby="dashboardHelpLabel"
+				aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="dashboardHelpLabel"><strong>Dashboard Help</strong></h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
 						</div>
-					</td>
-				</tr>
+						<div class="modal-body">
+							<p>The Dashboard view shows you all products you are currently tracking with their most up to date information.</p>
+							<p><b>Alias</b> - The name you gave the product when you added it. Click on the Alias to visit the product URL.</p>
+							<p><b>Brand</b> - The Brand according to the retailer website.</br>
+							<p><b>Model</b> - The Model according to the retailer website.</br>
+							<p><b>Retailer</b> - The Retailer according to the URL that you provided.</br>
+							<p><b>Stock</b> - Stock status according to last check.</br>
+							<p><b>Price</b> - Price according to last check.</br>
+							<p><b>Checked</b> - The last time this product was checked.</br>
+							<p><b>History</b> - Click the button to view product price and stock history.</br>
+							<p><b>Delete</b> - Delete from Dashboard and stop tracking product.</br>
+							</p>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
+	<div class="row justify-content-center"></div>
+	<table class="table table-hover">
+		<thead class="thead-light">
+			<tr>
+				<th>Alias</th>
+				<th>Brand</th>
+				<th>Model</th>
+				<th>Retailer</th>
+				<th>Stock</th>
+				<th>Price</th>
+				<th>Checked</th>
+				<th>History</th>
+				<th>Delete</th>
+			</tr>
+		</thead>
+		{% for product in products %}
+		<tr>
+			<td><a href="{{ product.url }}" target="_blank">{{ product.alias }}</a></td>
+			<td>{{ product.brand }}</td>
+			<td>{{ product.model }}</td>
+			<td>{{ product.retailer }}</td>
+			<td>{{ product.stock }}</td>
+			<td>{{ "-" if product.price is none else "${:,.2f}".format(product.price) }}</td>
+			<td>{{ product.checked_ts.strftime("%m-%d-%Y %H:%M:%S") }}</td>
+			<td>
+				<a class="btn btn-primary btn-sm" href="{{ url_for('graph', product_id=product.id) }}">
+					<img src="/static/eyes.svg" alt="Eyes" width="24" height="24" />
+				</a>
+			</td>
+			<td>
+				<button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+					data-target="#delete{{ product.id }}">
+					<img src="/static/close.svg" alt="Eyes" width="24" height="24" />
+				</button>
+				<!-- Delete Modal -->
+				<div class="modal fade" id="delete{{ product.id }}" tabindex="-1"
+					aria-labelledby="deleteModalLabel{{ product.id }}" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="deleteModalLabel{{ product.id }}">Delete Product?</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								Are you sure you want to stop tracking your {{ product.alias }}?
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								<form action="{{ url_for('delete_product', product_id=product.id) }}" method="POST">
+									<input class="btn btn-primary" type="submit" value="Delete">
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
 </div>
-{% endfor %}
-</table>
+</div>
+</div>
 {% endblock %}

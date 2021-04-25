@@ -2,8 +2,34 @@
 {% block content %}
 <div class="container border rounded">
 	<div class="row bg-primary rounded" style="background-color: #563d7c!important;">
-		<div class="col-4">
+		<div class="col-4 mr-auto">
 			<h2 class="text-light">Account</h2>
+		</div>
+		<div>
+			<button type="button" class="btn btn-sm mt-1" style="background-color:transparent" data-toggle="modal"
+				data-target="#accountHelp">
+				<img src="/static/help.svg" alt="help" width="24" height="24" />
+			</button>
+			<!-- Help Modal -->
+			<div class="modal fade" id="accountHelp" tabindex="-1" aria-labelledby="accountHelpLabel"
+				aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="accountHelpLabel"><strong>Account Help</strong></h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<p>Update Account related information including username, email, and password.</p>
+							<p><b>Username</b> - Update your username.</p>
+							<p><b>Email Address</b> - Update your email address.</p>
+							<p><b>Change Password</b> - Update your password.</p>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="row mt-2">
@@ -67,8 +93,86 @@
 					{% endif %}
 				</div>
 				<div class="row bg-primary rounded" style="background-color: #563d7c!important;">
-					<div class="col-4">
+					<div class="col-4 mr-auto">
+						<h2 class="text-light">Preferences</h2>
+					</div>
+					<div>
+						<button type="button" class="btn btn-sm mt-1" style="background-color:transparent" data-toggle="modal"
+							data-target="#preferencesHelp">
+							<img src="/static/help.svg" alt="help" width="24" height="24" />
+						</button>
+						<!-- Help Modal -->
+						<div class="modal fade" id="preferencesHelp" tabindex="-1" aria-labelledby="preferencesHelpLabel"
+							aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="preferencesHelpLabel"><strong>Preferences Help</strong></h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<p>Set the frequency at which your products will be checked and receive up to date stock and price information.</p>
+										<p><b>Product Check Frequency</b> - Set the time in seconds for how often you want your products checked.</br>
+											 <i>Min: 10 seconds, Max: 86400 seconds (1 day).</i></br>
+											<span style="font-size:.75rem"> *Note: Currently if you set the frequency to a high value, you will not be able to update 
+												the value again until that time has passed due to thread sleeping. Restart the application for a workaround.</span>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row mt-2">
+					<div class="col">
+						<div class="form-group">
+							<label>Product Check Frequency</label>
+							{% if form.check_freq.errors %}
+							{{ form.check_freq(class="form-control is-invalid", placeholder="Time(Seconds)") }}
+							<div class="invalid-feedback">
+								{% for error in form.check_freq.errors %}
+								<span>{{ error }}</span>
+								{% endfor %}
+							</div>
+							{% else %}
+							{{ form.check_freq(class="form-control", placeholder="Time(Seconds)") }}
+							{% endif %}
+						</div>
+					</div>
+				</div>
+				<div class="row bg-primary rounded" style="background-color: #563d7c!important;">
+					<div class="col-4 mr-auto">
 						<h2 class="text-light">Notifications</h2>
+					</div>
+					<div>
+						<button type="button" class="btn btn-sm mt-1" style="background-color:transparent" data-toggle="modal"
+							data-target="#notificationsHelp">
+							<img src="/static/help.svg" alt="help" width="24" height="24" />
+						</button>
+						<!-- Help Modal -->
+						<div class="modal fade" id="notificationsHelp" tabindex="-1" aria-labelledby="notificationsHelpLabel"
+							aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="notificationsHelpLabel"><strong>Notifications Help</strong></h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<p>Recieve Product Notifications when a product becomes in stock. Triggers when the previous state was not in stock but now the product is in Stock.</p>
+										<p><b>Discord</b> - Use Discord to receive In Stock notifications. </br>
+											<span style="font-size:.75rem"> For help on how to configure the discord chatroom and accompanying webhook please visit:
+											<a href="https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks" target="_blank">Making a Webhook</a>. Once you have the Webhook URL, paste it into this field.</span>
+										</p>
+										<p><b>Discord Alerts</b> - Turn Discord alerts on or off.</p>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="row mt-2">
