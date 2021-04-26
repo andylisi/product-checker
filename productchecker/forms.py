@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_login import current_user
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, RadioField, IntegerField
-from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, URL, NumberRange
+from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, URL, NumberRange, Optional
 import re
 from productchecker.models import User
 
@@ -14,6 +14,7 @@ product_alias_max = 30
 product_url_max = 150
 freq_min = 10
 freq_max = 86400
+
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[
@@ -124,9 +125,16 @@ class UpdateAccountForm(FlaskForm):
                                     str(password_max) +' characters long')
     
     def validate_discord_webhook(self, discord_webhook):
-        regex = re.compile('^https:\/\/discord\.com\/api\/webhooks\/')
-        if not regex.match(discord_webhook.data):
-            raise ValidationError('Please ensure Discord Webhook URL is valid')
+        if not discord_webhook.data=='':
+            regex = re.compile('^https:\/\/discord\.com\/api\/webhooks\/')
+            if not regex.match(discord_webhook.data):
+                raise ValidationError('Please ensure Discord Webhook URL is valid')
+
+    def validate_discord_active(self, discord_webhook):
+        '''If no data in webhook URL field, make sure radiobutton is turned off.
+        '''
+        if self.discord_active.data==1 and self.discord_webhook.data == '':
+                self.discord_active.data=0
 
 class ProductForm(FlaskForm):
     alias = StringField('alias', validators=[DataRequired(),Length(max=product_alias_max)])

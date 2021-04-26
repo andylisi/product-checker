@@ -200,7 +200,7 @@ class Product(db.Model):
             if  product.user.discord_active and\
                 not previous_stock and\
                 new_history.stock:
-                    sendNotification(current_user.discord_webhook, product)
+                    sendNotification(product, new_history)
             db.session.commit()
 
     @classmethod
