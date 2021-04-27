@@ -108,7 +108,12 @@ class Product(db.Model):
             'Accept-Encoding' : 'gzip', 
             'DNT' : '1' # Do Not Track Request Header 
             }
-        page = requests.get(self.url, headers=headers)
+        try:
+            page = requests.get(self.url, headers=headers)
+        except Exception as e:
+            page=''
+            logger.error(e)
+            return page
         return page.content
 
     def check_url(self):
@@ -193,7 +198,11 @@ class Product(db.Model):
             previous_stock = Product.previous_stock(product.id)
             #Check new history and append to Product's history.
             new_history = ProductHistory()
-            new_history.check_url(product)
+            try:
+                new_history.check_url(product)
+            except Exception as e:
+                logger.error(e)
+                return
             product.history.append(new_history)
 
             #If user notifcations on, previously wasnt in stock and now is in stock, send notification.
@@ -269,7 +278,7 @@ class Product(db.Model):
             #ignore sleep and just run as fast as possible.
             try:
                 print(f"--Thread {threading.get_ident()}: Sleep for {check_freq-(loop_time)} seconds")
-                time.sleep(check_freq-(loop_time))
+                time.sleep(max(0,(check_freq-(loop_time))))
             except ValueError as e: 
                 logger.error(e)
 

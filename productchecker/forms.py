@@ -138,7 +138,7 @@ class UpdateAccountForm(FlaskForm):
 
 class ProductForm(FlaskForm):
     alias = StringField('alias', validators=[DataRequired(),Length(max=product_alias_max)])
-    url = StringField('url', validators=[URL(), Length(max=product_alias_max)])
+    url = StringField('url', validators=[URL(), Length(max=product_url_max)])
     submit = SubmitField('Submit')
 
     def validate_url(self, url):
