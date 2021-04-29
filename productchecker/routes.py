@@ -24,7 +24,6 @@ def dashboard():
 
     User's products are passed through to the template, flask 
     will then render the appropriate html.
-
     """
     products = Product.get_user_products(current_user.id)
     return render_template("dashboard.html", products=products)
@@ -180,7 +179,7 @@ def delete_product(product_id):
     in subsequent product checks.
 
     Args:
-        product_id: Product ID that will be deleted
+        product_id: Product ID that will be deleted.
     Returns:
         dashboard: Dashboard page.
     """
@@ -203,7 +202,7 @@ def graph(product_id):
     not by setting red or green.
 
     Args:
-        product_id: Product ID that graph will be generated for
+        product_id: Product ID that graph will be generated for.
     Returns:
         graph: Graph page for product.
     """
@@ -227,6 +226,11 @@ def graph(product_id):
 
 
 def send_reset_email(user):
+    """Sends password reset email message to user that includes the token.
+
+    Args:
+        user: User object
+    """
     token = user.get_reset_token()
     msg = Message('Password Reset Request', 
                     sender='noreply@productchecker.com', 
@@ -241,12 +245,23 @@ If you did not make this request then please ignore this email.
 
 @app.route("/reset_password", methods=['GET', 'POST'])
 def reset_request():
+    """User initiated password reset.
+
+    If user is currently authenticated, they will be redirected to Dashboard.
+    If user is not authenticated,form is valid, and email exists send email.
+
+    Returns:
+        dashboard: Dashboard page.
+        login: Login page.
+        reset_request: Reset password page.
+    """
     if current_user.is_authenticated:
         return redirect(url_for('dashboard'))
     form = RequestResetForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
-        send_reset_email(user)
+        if user is not None:
+            send_reset_email(user)
         flash('If an account with this email address exists, a password reset message will be sent shortly.', 'info')
         return redirect(url_for('login'))
     return render_template('reset_request.html', title='Reset Password', form=form)
@@ -254,6 +269,19 @@ def reset_request():
 
 @app.route("/reset_password/<token>", methods=['GET', 'POST'])
 def reset_token(token):
+    """Accepts token from password reset emails.
+
+    If token is valid and active, allow user to reset password.
+    After password update, redirect to login page.
+
+    Args:
+        token: A token object.
+    
+    Returns:
+        dashboard: Dashboard page.
+        reset_request: Reset password page.
+        login: Login page.
+    """
     if current_user.is_authenticated:
         return redirect(url_for('dashboard'))
     user = User.verify_reset_token(token)

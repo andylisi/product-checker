@@ -17,6 +17,15 @@ freq_max = 86400
 
 
 class RegistrationForm(FlaskForm):
+    """Registration form for initial account creation.
+
+    Attributes:
+        username: Username field.
+        email: User email field.
+        password: User password field.
+        confirm_password: Confirm user password field.
+        submit: Submit button.
+    """
     username = StringField('Username', validators=[
                            DataRequired(), Length(min=username_min, max=username_max)])
     email = StringField('Email', validators=[DataRequired(), Email()])
@@ -27,30 +36,28 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField('Sign Up')
 
     def validate_username(self, username):
-        '''Check to see if username already exists
+        '''Check to see if username already exists.
 
         Args:
-            self: Registration form
-            username: user input for username field
-        Returns:
-            bool: True for username unavailable, False for available
+            self: Registration form.
+            username: User input for username field.
         Raises:
-            ValueError: Username not available
+            ValueError: Username not available.
         '''
         user = User.query.filter_by(username=username.data).first()
         if user:
             raise ValidationError('Username unavailable.')
 
     def validate_email(self, email):
-        '''Check to see if email already exists
+        '''Check to see if email already exists.
 
         Args:
-            self: Registration form
-            username: user input for email field
+            self: Registration form.
+            username: User input for email field.
         Returns:
-            bool: True for email unavailable, email for available
+            bool: True for email unavailable, email for available.
         Raises:
-            ValueError: Email not available
+            ValueError: Email not available.
         '''
         user = User.query.filter_by(email=email.data).first()
         if user:
@@ -58,6 +65,14 @@ class RegistrationForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
+    """Login form for existing accounts to authenticate.
+
+    Attributes:
+        username: Username field.
+        password: Password field.
+        remember: Remember me checkbox for broswer cookie.
+        submit: Submit button.
+    """
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     remember = BooleanField('Remember Me')
@@ -65,6 +80,18 @@ class LoginForm(FlaskForm):
 
 
 class UpdateAccountForm(FlaskForm):
+    """Update account form for credentials, preferences, and notifications.
+
+    Attributes:
+        username: Username field.
+        email: User email field.
+        password: User password field.
+        confirm_password: Confirm user password field.
+        check_freq: Frequency field for Product.check_all().
+        discord_webhook: Discord webhook url field for discord notifications.
+        discord_active: Radio button for turning on/off discord notifications.
+        submit: Submit button.
+    """
     username = StringField('Username', validators=[
                            DataRequired(), Length(min=username_min, max=username_max)])
     email = StringField('Email', validators=[DataRequired(), Email()])
@@ -77,15 +104,13 @@ class UpdateAccountForm(FlaskForm):
     submit = SubmitField('Submit Changes')
 
     def validate_username(self, username):
-        '''Check to see if username already exists
+        '''Check to see if username already exists.
 
         Args:
-            self: Registration form
-            username: user input for username field
-        Returns:
-            bool: True for username unavailable, False for available
+            self: Registration form.
+            username: User input for username field.
         Raises:
-            ValueError: Username not available
+            ValueError: Username not available.
         '''
         if username.data != current_user.username:
             user = User.query.filter_by(username=username.data).first()
@@ -93,15 +118,13 @@ class UpdateAccountForm(FlaskForm):
                 raise ValidationError('Username unavailable.')
 
     def validate_email(self, email):
-        '''Check to see if email already exists
+        '''Check to see if email already exists.
 
         Args:
-            self: Registration form
-            username: user input for email field
-        Returns:
-            bool: True for email unavailable, email for available
+            self: Registration form.
+            username: User input for email field.
         Raises:
-            ValueError: Email not available
+            ValueError: Email not available.
         '''
         if email.data != current_user.email:
             user = User.query.filter_by(email=email.data).first()
@@ -113,12 +136,10 @@ class UpdateAccountForm(FlaskForm):
             then check length requirements.
 
         Args:
-            self: Registration form
-            username: user input for email field
-        Returns:
-            bool: True for email unavailable, email for available
+            self: Registration form.
+            username: User input for email field.
         Raises:
-            ValueError: Email not available
+            ValueError: Email not available.
         '''
         #if field is populated and not between pw min and max requirements.
         #if it is not populated, a condition in route dictates it will not update
@@ -127,35 +148,75 @@ class UpdateAccountForm(FlaskForm):
                                     str(password_max) +' characters long')
     
     def validate_discord_webhook(self, discord_webhook):
+        '''Check to see if URL is valid Discord webhook.
+
+        Args:
+            self: Registration form.
+            discord_webhook: Discord webhook URL.
+        Raises:
+            ValueError: Discord webhook URL is not valid.
+        '''
         if not discord_webhook.data=='':
             regex = re.compile('^https:\/\/discord\.com\/api\/webhooks\/')
             if not regex.match(discord_webhook.data):
                 raise ValidationError('Please ensure Discord Webhook URL is valid')
 
     def validate_discord_active(self, discord_webhook):
-        '''If no data in webhook URL field, make sure radiobutton is turned off.
+        '''If no data in webhook URL field, turn off radiobutton.
+
+         Args:
+            self: Registration form.
+            discord_webhook: Discord webhook URL.
         '''
         if self.discord_active.data==1 and self.discord_webhook.data == '':
                 self.discord_active.data=0
 
 
 class ProductForm(FlaskForm):
+    """A form for user to add a new product to user's account to start tracking.
+
+    Attributes:
+        alias: Product alias. User's choice.
+        url: URL where product can be found for purchase.
+        submit: Submit button.
+    """
     alias = StringField('alias', validators=[DataRequired(),Length(max=product_alias_max)])
     url = StringField('url', validators=[URL(), Length(max=product_url_max)])
     submit = SubmitField('Submit')
 
     def validate_url(self, url):
+        '''Validate url to see if it is supported retailer.
+
+        Args:
+            self: Product form.
+            url: URL of product.
+        Raises:
+            ValueError: Retailer not supported.
+        '''
         regex = re.compile('^(https|http):\/\/www\.(bestbuy|amazon)\.com')
         if not regex.match(url.data):
             raise ValidationError('Retailer must be Bestbuy or Amazon')
 
 
 class RequestResetForm(FlaskForm):
+    """A form for user to request a password reset in the event they have forgotten theirs.
+
+    Attributes:
+        email: User's email address associated with account.
+        submit: Submit button.
+    """
     email = StringField('Email', validators=[DataRequired(), Email()])
     submit = SubmitField('Request Password Reset')
 
 
 class ResetPasswordForm(FlaskForm):
+    """A form for user to reset password once they have received password reset email and token.
+
+    Attributes:
+        password: User new password field.
+        confirm_password: Confirm user new password field.
+        submit: Submit button.
+    """
     password = PasswordField('Password', validators=[
                              DataRequired(), Length(min=password_min, max=password_max)])
     confirm_password = PasswordField('Confirm Password', validators=[

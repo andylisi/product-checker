@@ -17,16 +17,16 @@ logger=logging.getLogger(__name__)
 
 @login_manager.user_loader
 def load_user(user_id):
-    """Used by Flask login manager to store currently authenticated user information
+    """Used by Flask login manager to store currently authenticated user information.
 
     Fills out remainging attributes of current_user to be stored in memory so that
     db queries are not required everytime a user attr is needed.
     
     Args:
-        user_id: ID of current user
+        user_id: ID of current user.
     
     Returns:
-        All user attributes
+        All user attributes.
     """
     return User.query.get(int(user_id))
 
@@ -109,7 +109,7 @@ class Product(db.Model):
         return f"Product('{self.id}','{self.alias}','{self.brand}', '{self.model}', '{self.date_added}')"
 
     def get_page_html(self):
-        """Get product page HTML to be parsed by Beautiful Soup
+        """Get product page HTML to be parsed by Beautiful Soup.
 
         Headers are necessary to combat anti-bot measures taken by retailers.
 
@@ -131,7 +131,7 @@ class Product(db.Model):
         return page.content
 
     def check_url(self):
-        """Check the page of a product to update ProductHistory
+        """Check the page of a product to update ProductHistory.
 
         Depending on the retailer, differenct HTML elements will be checked.
         Bestbuy seems to have standard HTML element ID's and classes while 
@@ -185,7 +185,7 @@ class Product(db.Model):
                 self.model = model_tag.strip('\n')
 
     def get_attr(self, form):
-        """Assigns attributes passed by form
+        """Assigns attributes passed by form.
 
         When a user adds a new product, will asssign attributes according
         to user input and then check the URL to assign remaining attributes.
@@ -317,7 +317,7 @@ class ProductHistory(db.Model):
     checked_ts = db.Column(db.DateTime, nullable=False, default=datetime.now)
 
     def get_page_html(self, product):
-        """Get product page HTML to be parsed by Beautiful Soup
+        """Get product page HTML to be parsed by Beautiful Soup.
 
         Headers are necessary to combat anti-bot measures taken by retailers.
 
@@ -337,7 +337,7 @@ class ProductHistory(db.Model):
         return page.content
 
     def check_url(self, product):
-        """Check the page of a product to update ProductHistory
+        """Check the page of a product to update ProductHistory.
 
         Depending on the retailer, differenct HTML elements will be checked.
         Bestbuy seems to have standard HTML element ID's and classes while 
@@ -405,7 +405,7 @@ class AppAttr(db.Model, UserMixin):
     this classs was necessary so additional threads can read values from db. May be used further in the future.
 
     Attributes:
-        id: 1 row to store all Application Atttributes
+        id: 1 row to store all Application Atttributes.
         product_check_freq: Sets the time that the product checking thread will sleep between checks.
     """
     id = db.Column(db.Integer, primary_key=True)
@@ -413,7 +413,7 @@ class AppAttr(db.Model, UserMixin):
 
     @classmethod
     def update_check_freq(cls, check_freq):
-        """Updates the product check frequency 
+        """Updates the product check frequency.
 
         When a user updates their check frequency, it is also written to the 
         AppAttr.product_check_freq attribute.
@@ -427,7 +427,7 @@ class AppAttr(db.Model, UserMixin):
 
     @classmethod
     def get_check_freq(cls):
-        """Returns the product check frequency 
+        """Returns the product check frequency.
         """
         app_attrs = cls.query.first()
         return app_attrs.product_check_freq
