@@ -11,7 +11,7 @@ password_max = 50
 username_min = 4
 username_max = 20
 product_alias_max = 30
-product_url_max = 150
+product_url_max = 250
 freq_min = 10
 freq_max = 86400
 

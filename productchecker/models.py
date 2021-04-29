@@ -86,7 +86,7 @@ class Product(db.Model):
     brand = db.Column(db.String(30), nullable=False)
     model = db.Column(db.String(30), unique=False, nullable=False)
     retailer = db.Column(db.String(30), nullable=False)
-    url = db.Column(db.String(150), unique=False, nullable=False)
+    url = db.Column(db.String(250), unique=False, nullable=False)
     date_added = db.Column(db.DateTime, nullable=False, default=datetime.now)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     history = db.relationship('ProductHistory', cascade="all,delete", backref='product', lazy=True)
@@ -368,11 +368,15 @@ class ProductHistory(db.Model):
                 self.price = float(price_div[1:].replace(',',''))#remove leading $ and any comma's
             except AttributeError:
                 try:
-                    price_div = soup.find('span', {'id' : 'price_inside_buybox'}).text.strip('\n')
+                    price_div = soup.find('span', {'id' : 'priceblock_dealprice'}).text.strip('\n')
                     self.price = float(price_div[1:].replace(',',''))#remove leading $ and any comma's
-                except AttributeError as e:
-                    self.price = None
-                    logger.error(e)
+                except AttributeError:
+                    try:
+                        price_div = soup.find('span', {'id' : 'price_inside_buybox'}).text.strip('\n')
+                        self.price = float(price_div[1:].replace(',',''))#remove leading $ and any comma's
+                    except AttributeError as e:
+                        self.price = None
+                        logger.error(e)
 
     def __repr__(self):
         return f"ProductHistory('{self.id}','{self.product_id}','{self.stock}','{self.price}','{self.checked_ts}')"
