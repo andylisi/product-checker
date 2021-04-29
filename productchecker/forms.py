@@ -26,6 +26,7 @@ class RegistrationForm(FlaskForm):
         confirm_password: Confirm user password field.
         submit: Submit button.
     """
+
     username = StringField('Username', validators=[
                            DataRequired(), Length(min=username_min, max=username_max)])
     email = StringField('Email', validators=[DataRequired(), Email()])
@@ -36,7 +37,7 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField('Sign Up')
 
     def validate_username(self, username):
-        '''Check to see if username already exists.
+        '''Checks to see if username already exists.
 
         Args:
             self: Registration form.
@@ -44,12 +45,13 @@ class RegistrationForm(FlaskForm):
         Raises:
             ValueError: Username not available.
         '''
+
         user = User.query.filter_by(username=username.data).first()
         if user:
             raise ValidationError('Username unavailable.')
 
     def validate_email(self, email):
-        '''Check to see if email already exists.
+        '''Checks to see if email already exists.
 
         Args:
             self: Registration form.
@@ -59,6 +61,7 @@ class RegistrationForm(FlaskForm):
         Raises:
             ValueError: Email not available.
         '''
+
         user = User.query.filter_by(email=email.data).first()
         if user:
             raise ValidationError('Email already in use.')
@@ -73,6 +76,7 @@ class LoginForm(FlaskForm):
         remember: Remember me checkbox for broswer cookie.
         submit: Submit button.
     """
+
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     remember = BooleanField('Remember Me')
@@ -92,6 +96,7 @@ class UpdateAccountForm(FlaskForm):
         discord_active: Radio button for turning on/off discord notifications.
         submit: Submit button.
     """
+
     username = StringField('Username', validators=[
                            DataRequired(), Length(min=username_min, max=username_max)])
     email = StringField('Email', validators=[DataRequired(), Email()])
@@ -104,7 +109,7 @@ class UpdateAccountForm(FlaskForm):
     submit = SubmitField('Submit Changes')
 
     def validate_username(self, username):
-        '''Check to see if username already exists.
+        '''Checks to see if username already exists.
 
         Args:
             self: Registration form.
@@ -112,13 +117,14 @@ class UpdateAccountForm(FlaskForm):
         Raises:
             ValueError: Username not available.
         '''
+
         if username.data != current_user.username:
             user = User.query.filter_by(username=username.data).first()
             if user:
                 raise ValidationError('Username unavailable.')
 
     def validate_email(self, email):
-        '''Check to see if email already exists.
+        '''Checks to see if email already exists.
 
         Args:
             self: Registration form.
@@ -126,13 +132,14 @@ class UpdateAccountForm(FlaskForm):
         Raises:
             ValueError: Email not available.
         '''
+
         if email.data != current_user.email:
             user = User.query.filter_by(email=email.data).first()
             if user:
                 raise ValidationError('Email already in use.')
 
     def validate_password(self, password):
-        '''Check to see if password field is populated. If it is,
+        '''Checks to see if password field is populated. If it is,
             then check length requirements.
 
         Args:
@@ -141,6 +148,7 @@ class UpdateAccountForm(FlaskForm):
         Raises:
             ValueError: Email not available.
         '''
+
         #if field is populated and not between pw min and max requirements.
         #if it is not populated, a condition in route dictates it will not update
         if password.data != '' and len(password.data) < password_min or len(password.data) > password_max:
@@ -148,7 +156,7 @@ class UpdateAccountForm(FlaskForm):
                                     str(password_max) +' characters long')
     
     def validate_discord_webhook(self, discord_webhook):
-        '''Check to see if URL is valid Discord webhook.
+        '''Checks to see if URL is valid Discord webhook.
 
         Args:
             self: Registration form.
@@ -156,18 +164,20 @@ class UpdateAccountForm(FlaskForm):
         Raises:
             ValueError: Discord webhook URL is not valid.
         '''
+
         if not discord_webhook.data=='':
             regex = re.compile('^https:\/\/discord\.com\/api\/webhooks\/')
             if not regex.match(discord_webhook.data):
                 raise ValidationError('Please ensure Discord Webhook URL is valid')
 
     def validate_discord_active(self, discord_webhook):
-        '''If no data in webhook URL field, turn off radiobutton.
+        '''Turns off radiobutton if no data in webhook URL field.
 
          Args:
             self: Registration form.
             discord_webhook: Discord webhook URL.
         '''
+
         if self.discord_active.data==1 and self.discord_webhook.data == '':
                 self.discord_active.data=0
 
@@ -180,12 +190,13 @@ class ProductForm(FlaskForm):
         url: URL where product can be found for purchase.
         submit: Submit button.
     """
+
     alias = StringField('alias', validators=[DataRequired(),Length(max=product_alias_max)])
     url = StringField('url', validators=[URL(), Length(max=product_url_max)])
     submit = SubmitField('Submit')
 
     def validate_url(self, url):
-        '''Validate url to see if it is supported retailer.
+        '''Validates url to see if it is supported retailer.
 
         Args:
             self: Product form.
@@ -193,6 +204,7 @@ class ProductForm(FlaskForm):
         Raises:
             ValueError: Retailer not supported.
         '''
+
         regex = re.compile('^(https|http):\/\/www\.(bestbuy|amazon)\.com')
         if not regex.match(url.data):
             raise ValidationError('Retailer must be Bestbuy or Amazon')
@@ -205,6 +217,7 @@ class RequestResetForm(FlaskForm):
         email: User's email address associated with account.
         submit: Submit button.
     """
+
     email = StringField('Email', validators=[DataRequired(), Email()])
     submit = SubmitField('Request Password Reset')
 
@@ -217,6 +230,7 @@ class ResetPasswordForm(FlaskForm):
         confirm_password: Confirm user new password field.
         submit: Submit button.
     """
+
     password = PasswordField('Password', validators=[
                              DataRequired(), Length(min=password_min, max=password_max)])
     confirm_password = PasswordField('Confirm Password', validators=[

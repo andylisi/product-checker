@@ -28,6 +28,7 @@ def load_user(user_id):
     Returns:
         All user attributes.
     """
+
     return User.query.get(int(user_id))
 
 
@@ -48,6 +49,7 @@ class User(db.Model, UserMixin):
         check_freq: Product checking frequency in seconds.
         products: Not materialzed in db. Defines table relationship.
     """
+
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(30), unique=True, nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
@@ -59,11 +61,31 @@ class User(db.Model, UserMixin):
     products = db.relationship('Product', backref='user', lazy=True)
 
     def get_reset_token(self, expires_sec=1800):
+        """Generates a token for user password reset.
+
+        When a user requests a password reset, this will generate
+        a token that can then be sent to their email on file.
+
+        Args:
+            expires_sec: Seconds token will expire.
+        Returns:
+            Token.
+        """
+
         s = Serializer(app.config['SECRET_KEY'], expires_sec)
         return s.dumps({'user_id': self.id}).decode('utf-8')
 
     @staticmethod
     def verify_reset_token(token):
+        """Verifies token passed in by user is valid.
+
+        Args:
+            token: A token object
+        Returns:
+            User id of the user who passed in the token if valid,
+            otherwise returns None.
+        """
+
         s = Serializer(app.config['SECRET_KEY'])
         try:
             user_id = s.loads(token)['user_id']
@@ -95,6 +117,7 @@ class Product(db.Model):
         user_id: User that added product. *FK*
         history: Not materialzed in db. Defines table relationship.
     """
+
     id = db.Column(db.Integer, primary_key=True)
     alias = db.Column(db.String(30), unique=False, nullable=False)
     brand = db.Column(db.String(30), nullable=False)
@@ -109,13 +132,14 @@ class Product(db.Model):
         return f"Product('{self.id}','{self.alias}','{self.brand}', '{self.model}', '{self.date_added}')"
 
     def get_page_html(self):
-        """Get product page HTML to be parsed by Beautiful Soup.
+        """Gets product page HTML to be parsed by Beautiful Soup.
 
         Headers are necessary to combat anti-bot measures taken by retailers.
 
         Returns:
             HTML content of the page.
         """
+
         headers = {
             "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36",
             'Accept-Language' : 'en-US,en;q=0.5',
@@ -131,13 +155,14 @@ class Product(db.Model):
         return page.content
 
     def check_url(self):
-        """Check the page of a product to update ProductHistory.
+        """Checks the page of a product to update ProductHistory.
 
         Depending on the retailer, differenct HTML elements will be checked.
         Bestbuy seems to have standard HTML element ID's and classes while 
         Amazon seems to have a variety. Due to this several try/excepts are
         needed to check for different elements.
         """
+
         page_html = self.get_page_html()
         soup = BeautifulSoup(page_html, 'html.parser')
 
@@ -193,6 +218,7 @@ class Product(db.Model):
         Args:
             form: wtform with data submitted by user.
         """
+
         self.url = form.url.data
         self.alias = form.alias.data
         self.user = current_user
@@ -206,6 +232,7 @@ class Product(db.Model):
         attempt to update all products history. If product was not previously
         in stock but now is, it will notify user if notifications are turned on.
         """
+
         distinct_products = cls.query.distinct(cls.id)
         for product in distinct_products:
             #Capture prev stock status before adding new
@@ -233,6 +260,7 @@ class Product(db.Model):
         Args:
             user: A user object.
         """
+
         products = db.session.query(Product.id, Product.alias, Product.brand, Product.model, Product.retailer, Product.url,\
                                 case((ProductHistory.stock==1,literal_column("'Yes'")),(ProductHistory.stock==0,literal_column("'No'"))).label('stock'),\
                                 ProductHistory.price, func.max(ProductHistory.checked_ts).label('checked_ts'))\
@@ -248,6 +276,7 @@ class Product(db.Model):
         Args:
             product_id: ID of a product.
         """
+
         history = db.session.query(Product.alias, Product.id, ProductHistory.stock,func.min(ProductHistory.price).label('price'),func.strftime('%m-%d-%Y', ProductHistory.checked_ts).label('date'))\
             .filter(Product.id==product_id)\
             .filter(ProductHistory.product_id==product_id)\
@@ -262,6 +291,7 @@ class Product(db.Model):
         Args:
             product_id: ID of a product.
         """
+
         previous_history = db.session.query(ProductHistory.stock, func.max(ProductHistory.checked_ts).label('checked_ts'))\
             .filter(Product.id==product_id)\
             .filter(ProductHistory.product_id==product_id)\
@@ -278,6 +308,7 @@ class Product(db.Model):
         This time is dictated by the last user to update their Product Check Frequency
         within Account page.
         """
+
         while(1):
             check_freq = AppAttr.get_check_freq()
 
@@ -310,6 +341,7 @@ class ProductHistory(db.Model):
         price: Price at the time it was checked.
         checked_ts: Timestamp when product was checked.
     """
+
     id = db.Column(db.Integer, primary_key=True)
     product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)
     stock = db.Column(db.Boolean, nullable=False)
@@ -317,7 +349,7 @@ class ProductHistory(db.Model):
     checked_ts = db.Column(db.DateTime, nullable=False, default=datetime.now)
 
     def get_page_html(self, product):
-        """Get product page HTML to be parsed by Beautiful Soup.
+        """Gets product page HTML to be parsed by Beautiful Soup.
 
         Headers are necessary to combat anti-bot measures taken by retailers.
 
@@ -327,6 +359,7 @@ class ProductHistory(db.Model):
         Returns:
             HTML content of the page.
         """
+
         headers = {
             "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36",
             'Accept-Language' : 'en-US,en;q=0.5',
@@ -347,6 +380,7 @@ class ProductHistory(db.Model):
         Args:
             product: A product object.
         """
+
         page_html = self.get_page_html(product)
         soup = BeautifulSoup(page_html, 'html.parser')
         self.product_id = product.id
@@ -408,6 +442,7 @@ class AppAttr(db.Model, UserMixin):
         id: 1 row to store all Application Atttributes.
         product_check_freq: Sets the time that the product checking thread will sleep between checks.
     """
+
     id = db.Column(db.Integer, primary_key=True)
     product_check_freq = db.Column(db.Integer, nullable=False, default=60)
 
@@ -421,6 +456,7 @@ class AppAttr(db.Model, UserMixin):
         Args:
             check_freq: product check frequency in seconds.
         """
+
         app_attrs = cls.query.first()
         app_attrs.product_check_freq = check_freq
         db.session.commit()
@@ -429,6 +465,7 @@ class AppAttr(db.Model, UserMixin):
     def get_check_freq(cls):
         """Returns the product check frequency.
         """
+
         app_attrs = cls.query.first()
         return app_attrs.product_check_freq
 

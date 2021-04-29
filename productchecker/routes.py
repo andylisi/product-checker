@@ -25,6 +25,7 @@ def dashboard():
     User's products are passed through to the template, flask 
     will then render the appropriate html.
     """
+    
     products = Product.get_user_products(current_user.id)
     return render_template("dashboard.html", products=products)
 
@@ -42,6 +43,7 @@ def register():
             dashboard with any products they have added. If user is new, they will be
             shown a new dashboard with welcome message.
     """
+
     if current_user.is_authenticated:
         return redirect(url_for('dashboard'))
     form = RegistrationForm()
@@ -73,6 +75,7 @@ def login():
             a different page when their session ended, they will be redirected to 
             the page they were trying to visit.
     """
+
     if current_user.is_authenticated:
         return redirect(url_for('dashboard'))
     form = LoginForm()
@@ -103,6 +106,7 @@ def logout():
     Returns:
         login: The page where users login to site.
     """
+
     logout_user()
     return redirect(url_for('login'))
 
@@ -118,6 +122,7 @@ def account():
     Returns:
         account: Account page.
     """
+
     form = UpdateAccountForm()
     if form.validate_on_submit():
 
@@ -153,6 +158,7 @@ def add_product():
 
     Upon success redirects to dashboard.
     """
+
     form = ProductForm()
     if form.validate_on_submit():
         new_product = Product()
@@ -183,6 +189,7 @@ def delete_product(product_id):
     Returns:
         dashboard: Dashboard page.
     """
+
     product = Product.query.get_or_404(product_id)
     if product.user_id != current_user.id:
         abort(403)
@@ -206,6 +213,7 @@ def graph(product_id):
     Returns:
         graph: Graph page for product.
     """
+
     product_history = Product.get_history(product_id)
     alias = product_history[0][0]
     stock = []
@@ -231,6 +239,7 @@ def send_reset_email(user):
     Args:
         user: User object
     """
+
     token = user.get_reset_token()
     msg = Message('Password Reset Request', 
                     sender='noreply@productchecker.com', 
@@ -255,6 +264,7 @@ def reset_request():
         login: Login page.
         reset_request: Reset password page.
     """
+    
     if current_user.is_authenticated:
         return redirect(url_for('dashboard'))
     form = RequestResetForm()
@@ -282,6 +292,7 @@ def reset_token(token):
         reset_request: Reset password page.
         login: Login page.
     """
+
     if current_user.is_authenticated:
         return redirect(url_for('dashboard'))
     user = User.verify_reset_token(token)
