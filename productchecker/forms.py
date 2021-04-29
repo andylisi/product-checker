@@ -6,7 +6,7 @@ import re
 from productchecker.models import User
 
 
-password_min = 8
+password_min = 4
 password_max = 50
 username_min = 4
 username_max = 20
@@ -56,11 +56,13 @@ class RegistrationForm(FlaskForm):
         if user:
             raise ValidationError('Email already in use.')
 
+
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     remember = BooleanField('Remember Me')
     submit = SubmitField('Login')
+
 
 class UpdateAccountForm(FlaskForm):
     username = StringField('Username', validators=[
@@ -136,6 +138,7 @@ class UpdateAccountForm(FlaskForm):
         if self.discord_active.data==1 and self.discord_webhook.data == '':
                 self.discord_active.data=0
 
+
 class ProductForm(FlaskForm):
     alias = StringField('alias', validators=[DataRequired(),Length(max=product_alias_max)])
     url = StringField('url', validators=[URL(), Length(max=product_url_max)])
@@ -145,3 +148,16 @@ class ProductForm(FlaskForm):
         regex = re.compile('^(https|http):\/\/www\.(bestbuy|amazon)\.com')
         if not regex.match(url.data):
             raise ValidationError('Retailer must be Bestbuy or Amazon')
+
+
+class RequestResetForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    submit = SubmitField('Request Password Reset')
+
+
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField('Password', validators=[
+                             DataRequired(), Length(min=password_min, max=password_max)])
+    confirm_password = PasswordField('Confirm Password', validators=[
+                                     DataRequired(), Length(min=password_min, max=password_max), EqualTo('password')])
+    submit = SubmitField('Reset Password')

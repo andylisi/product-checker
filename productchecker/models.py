@@ -1,8 +1,9 @@
 import requests, re, time, logging, threading
 from datetime import datetime
-from productchecker import db, login_manager
+from productchecker import db, login_manager, app
 from productchecker.notifications import sendNotification
 from flask_login import UserMixin, current_user
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 from sqlalchemy import func, case, literal_column
@@ -56,6 +57,19 @@ class User(db.Model, UserMixin):
     help_active = db.Column(db.Boolean, nullable=False, default=1)
     check_freq = db.Column(db.Integer, nullable=False, default=60)
     products = db.relationship('Product', backref='user', lazy=True)
+
+    def get_reset_token(self, expires_sec=1800):
+        s = Serializer(app.config['SECRET_KEY'], expires_sec)
+        return s.dumps({'user_id': self.id}).decode('utf-8')
+
+    @staticmethod
+    def verify_reset_token(token):
+        s = Serializer(app.config['SECRET_KEY'])
+        try:
+            user_id = s.loads(token)['user_id']
+        except:
+            return None
+        return User.query.get(user_id)
 
     def __repr__(self):
         '''__repr__ is used to compute the “official” string representation of an object 

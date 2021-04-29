@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container mt-5 text-center">
+    <div class ="row justify-content-center" >
+		<div class = "col-md-5 col-lg-4">
+            <div class="content-section">
+                <form novalidate method="POST" action="">
+                    {{ form.hidden_tag() }}     <!--CSRF Token-->
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">Reset Password</legend>
+                        <!--Password-->
+                        <div class="form-group">
+                            {% if form.password.errors %}
+                                {{ form.password(class="form-control is-invalid", placeholder="Password") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.password.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.password(class="form-control", placeholder="Password") }}
+                            {% endif %}
+                        </div>
+                        <!--Confirm Password-->
+                        <div class="form-group">
+                            {% if form.confirm_password.errors %}
+                                {{ form.confirm_password(class="form-control is-invalid", placeholder="Confirm Password") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.confirm_password.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.confirm_password(class="form-control", placeholder="Confirm Password") }}
+                            {% endif %}
+                        </div>
+                    </fieldset>
+                    <div class="form-group">
+                        {{ form.submit(class="btn btn-primary btn-block") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
