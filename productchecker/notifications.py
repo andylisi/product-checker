@@ -1,3 +1,5 @@
+"""Contains any notification related functions."""
+
 from discord_webhook import DiscordWebhook, DiscordEmbed
 
 def sendNotification(product, new_history):

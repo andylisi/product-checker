@@ -1,0 +1,1333 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>productchecker.forms API documentation</title>
+<meta name="description" content="All forms, fields and submissions that a user will utilize …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>productchecker.forms</code></h1>
+</header>
+<section id="section-intro">
+<p>All forms, fields and submissions that a user will utilize.</p>
+<p>Flask Forms use wtforms for all form handling, validation, and
+submission. Each form is represented by a class and optional validation
+methods. Expected field types, labels and validators are all
+configured here. The Form will be generated in routes, passed to
+the html page, and upon submission, passed back to routes for
+downstream operations. </p>
+<p>Wtforms provide many out of the box validators but custom validators
+can also be created as class methods.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;All forms, fields and submissions that a user will utilize.
+
+Flask Forms use wtforms for all form handling, validation, and
+submission. Each form is represented by a class and optional validation 
+methods. Expected field types, labels and validators are all
+configured here. The Form will be generated in routes, passed to
+the html page, and upon submission, passed back to routes for 
+downstream operations. 
+
+Wtforms provide many out of the box validators but custom validators
+can also be created as class methods.
+&#34;&#34;&#34;
+
+from flask_wtf import FlaskForm
+from flask_login import current_user
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, RadioField, IntegerField
+from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, URL, NumberRange, Optional
+import re
+from productchecker.models import User
+
+
+password_min = 4
+password_max = 50
+username_min = 4
+username_max = 20
+product_alias_max = 30
+product_url_max = 250
+freq_min = 10
+freq_max = 86400
+
+
+class RegistrationForm(FlaskForm):
+    &#34;&#34;&#34;Registration form for initial account creation.
+
+    Attributes:
+        username: Username field.
+        email: User email field.
+        password: User password field.
+        confirm_password: Confirm user password field.
+        submit: Submit button.
+    &#34;&#34;&#34;
+
+    username = StringField(&#39;Username&#39;, validators=[
+                           DataRequired(), Length(min=username_min, max=username_max)])
+    email = StringField(&#39;Email&#39;, validators=[DataRequired(), Email()])
+    password = PasswordField(&#39;Password&#39;, validators=[
+                             DataRequired(), Length(min=password_min, max=password_max)])
+    confirm_password = PasswordField(&#39;Confirm Password&#39;, validators=[
+                                     DataRequired(), Length(min=password_min, max=password_max), EqualTo(&#39;password&#39;)])
+    submit = SubmitField(&#39;Sign Up&#39;)
+
+    def validate_username(self, username):
+        &#39;&#39;&#39;Checks to see if username already exists.
+
+        Args:
+            self: Registration form.
+            username: User input for username field.
+        Raises:
+            ValueError: Username not available.
+        &#39;&#39;&#39;
+
+        user = User.query.filter_by(username=username.data).first()
+        if user:
+            raise ValidationError(&#39;Username unavailable.&#39;)
+
+    def validate_email(self, email):
+        &#39;&#39;&#39;Checks to see if email already exists.
+
+        Args:
+            self: Registration form.
+            username: User input for email field.
+        Returns:
+            bool: True for email unavailable, email for available.
+        Raises:
+            ValueError: Email not available.
+        &#39;&#39;&#39;
+
+        user = User.query.filter_by(email=email.data).first()
+        if user:
+            raise ValidationError(&#39;Email already in use.&#39;)
+
+
+class LoginForm(FlaskForm):
+    &#34;&#34;&#34;Login form for existing accounts to authenticate.
+
+    Attributes:
+        username: Username field.
+        password: Password field.
+        remember: Remember me checkbox for broswer cookie.
+        submit: Submit button.
+    &#34;&#34;&#34;
+
+    username = StringField(&#39;Username&#39;, validators=[DataRequired()])
+    password = PasswordField(&#39;Password&#39;, validators=[DataRequired()])
+    remember = BooleanField(&#39;Remember Me&#39;)
+    submit = SubmitField(&#39;Login&#39;)
+
+
+class UpdateAccountForm(FlaskForm):
+    &#34;&#34;&#34;Update account form for credentials, preferences, and notifications.
+
+    Attributes:
+        username: Username field.
+        email: User email field.
+        password: User password field.
+        confirm_password: Confirm user password field.
+        check_freq: Frequency field for Product.check_all().
+        discord_webhook: Discord webhook url field for discord notifications.
+        discord_active: Radio button for turning on/off discord notifications.
+        submit: Submit button.
+    &#34;&#34;&#34;
+
+    username = StringField(&#39;Username&#39;, validators=[
+                           DataRequired(), Length(min=username_min, max=username_max)])
+    email = StringField(&#39;Email&#39;, validators=[DataRequired(), Email()])
+    password = PasswordField(&#39;Password&#39;)
+    confirm_password = PasswordField(&#39;Confirm Password&#39;, validators=[EqualTo(&#39;password&#39;)])
+    check_freq = IntegerField(&#39;Check Frequency&#39;, validators=[
+                           DataRequired(), NumberRange(min=freq_min, max=freq_max)])
+    discord_webhook = StringField(&#39;Webhook URL&#39;)
+    discord_active = RadioField(coerce=int, choices=[(1,&#39;On&#39;),(0,&#39;Off&#39;)])
+    submit = SubmitField(&#39;Submit Changes&#39;)
+
+    def validate_username(self, username):
+        &#39;&#39;&#39;Checks to see if username already exists.
+
+        Args:
+            self: Registration form.
+            username: User input for username field.
+        Raises:
+            ValueError: Username not available.
+        &#39;&#39;&#39;
+
+        if username.data != current_user.username:
+            user = User.query.filter_by(username=username.data).first()
+            if user:
+                raise ValidationError(&#39;Username unavailable.&#39;)
+
+    def validate_email(self, email):
+        &#39;&#39;&#39;Checks to see if email already exists.
+
+        Args:
+            self: Registration form.
+            username: User input for email field.
+        Raises:
+            ValueError: Email not available.
+        &#39;&#39;&#39;
+
+        if email.data != current_user.email:
+            user = User.query.filter_by(email=email.data).first()
+            if user:
+                raise ValidationError(&#39;Email already in use.&#39;)
+
+    def validate_password(self, password):
+        &#39;&#39;&#39;Checks to see if password field is populated. If it is,
+            then check length requirements.
+
+        Args:
+            self: Registration form.
+            username: User input for email field.
+        Raises:
+            ValueError: Email not available.
+        &#39;&#39;&#39;
+
+        #if field is populated and not between pw min and max requirements.
+        #if it is not populated, a condition in route dictates it will not update
+        if password.data != &#39;&#39; and len(password.data) &lt; password_min or len(password.data) &gt; password_max:
+            raise ValidationError(&#39;Field must be between &#39; + str(password_min) + &#39; and &#39; +
+                                    str(password_max) +&#39; characters long&#39;)
+    
+    def validate_discord_webhook(self, discord_webhook):
+        &#39;&#39;&#39;Checks to see if URL is valid Discord webhook.
+
+        Args:
+            self: Registration form.
+            discord_webhook: Discord webhook URL.
+        Raises:
+            ValueError: Discord webhook URL is not valid.
+        &#39;&#39;&#39;
+
+        if not discord_webhook.data==&#39;&#39;:
+            regex = re.compile(&#39;^https:\/\/discord\.com\/api\/webhooks\/&#39;)
+            if not regex.match(discord_webhook.data):
+                raise ValidationError(&#39;Please ensure Discord Webhook URL is valid&#39;)
+
+    def validate_discord_active(self, discord_webhook):
+        &#39;&#39;&#39;Turns off radiobutton if no data in webhook URL field.
+
+         Args:
+            self: Registration form.
+            discord_webhook: Discord webhook URL.
+        &#39;&#39;&#39;
+
+        if self.discord_active.data==1 and self.discord_webhook.data == &#39;&#39;:
+                self.discord_active.data=0
+
+
+class ProductForm(FlaskForm):
+    &#34;&#34;&#34;A form for user to add a new product to user&#39;s account to start tracking.
+
+    Attributes:
+        alias: Product alias. User&#39;s choice.
+        url: URL where product can be found for purchase.
+        submit: Submit button.
+    &#34;&#34;&#34;
+
+    alias = StringField(&#39;alias&#39;, validators=[DataRequired(),Length(max=product_alias_max)])
+    url = StringField(&#39;url&#39;, validators=[URL(), Length(max=product_url_max)])
+    submit = SubmitField(&#39;Submit&#39;)
+
+    def validate_url(self, url):
+        &#39;&#39;&#39;Validates url to see if it is supported retailer.
+
+        Args:
+            self: Product form.
+            url: URL of product.
+        Raises:
+            ValueError: Retailer not supported.
+        &#39;&#39;&#39;
+
+        regex = re.compile(&#39;^(https|http):\/\/www\.(bestbuy|amazon)\.com&#39;)
+        if not regex.match(url.data):
+            raise ValidationError(&#39;Retailer must be Bestbuy or Amazon&#39;)
+
+
+class RequestResetForm(FlaskForm):
+    &#34;&#34;&#34;A form for user to request a password reset in the event they have forgotten theirs.
+
+    Attributes:
+        email: User&#39;s email address associated with account.
+        submit: Submit button.
+    &#34;&#34;&#34;
+
+    email = StringField(&#39;Email&#39;, validators=[DataRequired(), Email()])
+    submit = SubmitField(&#39;Request Password Reset&#39;)
+
+
+class ResetPasswordForm(FlaskForm):
+    &#34;&#34;&#34;A form for user to reset password once they have received password reset email and token.
+
+    Attributes:
+        password: User new password field.
+        confirm_password: Confirm user new password field.
+        submit: Submit button.
+    &#34;&#34;&#34;
+
+    password = PasswordField(&#39;Password&#39;, validators=[
+                             DataRequired(), Length(min=password_min, max=password_max)])
+    confirm_password = PasswordField(&#39;Confirm Password&#39;, validators=[
+                                     DataRequired(), Length(min=password_min, max=password_max), EqualTo(&#39;password&#39;)])
+    submit = SubmitField(&#39;Reset Password&#39;)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="productchecker.forms.LoginForm"><code class="flex name class">
+<span>class <span class="ident">LoginForm</span></span>
+<span>(</span><span>formdata=&lt;object object&gt;, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Login form for existing accounts to authenticate.</p>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>username</code></strong></dt>
+<dd>Username field.</dd>
+<dt><strong><code>password</code></strong></dt>
+<dd>Password field.</dd>
+<dt><strong><code>remember</code></strong></dt>
+<dd>Remember me checkbox for broswer cookie.</dd>
+<dt><strong><code>submit</code></strong></dt>
+<dd>Submit button.</dd>
+</dl>
+<p>:param formdata:
+Used to pass data coming from the enduser, usually <code>request.POST</code> or
+equivalent. formdata should be some sort of request-data wrapper which
+can get multiple parameters from the form input, and values are unicode
+strings, e.g. a Werkzeug/Django/WebOb MultiDict
+:param obj:
+If <code>formdata</code> is empty or not provided, this object is checked for
+attributes matching form field names, which will be used for field
+values.
+:param prefix:
+If provided, all fields will have their name prefixed with the
+value.
+:param data:
+Accept a dictionary of data. This is only used if <code>formdata</code> and
+<code>obj</code> are not present.
+:param meta:
+If provided, this is a dictionary of values to override attributes
+on this form's meta instance.
+:param <code>**kwargs</code>:
+If <code>formdata</code> is empty or not provided and <code>obj</code> does not contain
+an attribute named the same as a field, form will assign the value
+of a matching keyword argument to the field, if one exists.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class LoginForm(FlaskForm):
+    &#34;&#34;&#34;Login form for existing accounts to authenticate.
+
+    Attributes:
+        username: Username field.
+        password: Password field.
+        remember: Remember me checkbox for broswer cookie.
+        submit: Submit button.
+    &#34;&#34;&#34;
+
+    username = StringField(&#39;Username&#39;, validators=[DataRequired()])
+    password = PasswordField(&#39;Password&#39;, validators=[DataRequired()])
+    remember = BooleanField(&#39;Remember Me&#39;)
+    submit = SubmitField(&#39;Login&#39;)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>flask_wtf.form.FlaskForm</li>
+<li>wtforms.form.Form</li>
+<li>wtforms.compat.NewBase</li>
+<li>wtforms.form.BaseForm</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="productchecker.forms.LoginForm.password"><code class="name">var <span class="ident">password</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="productchecker.forms.LoginForm.remember"><code class="name">var <span class="ident">remember</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="productchecker.forms.LoginForm.submit"><code class="name">var <span class="ident">submit</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="productchecker.forms.LoginForm.username"><code class="name">var <span class="ident">username</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="productchecker.forms.ProductForm"><code class="flex name class">
+<span>class <span class="ident">ProductForm</span></span>
+<span>(</span><span>formdata=&lt;object object&gt;, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A form for user to add a new product to user's account to start tracking.</p>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>alias</code></strong></dt>
+<dd>Product alias. User's choice.</dd>
+<dt><strong><code>url</code></strong></dt>
+<dd>URL where product can be found for purchase.</dd>
+<dt><strong><code>submit</code></strong></dt>
+<dd>Submit button.</dd>
+</dl>
+<p>:param formdata:
+Used to pass data coming from the enduser, usually <code>request.POST</code> or
+equivalent. formdata should be some sort of request-data wrapper which
+can get multiple parameters from the form input, and values are unicode
+strings, e.g. a Werkzeug/Django/WebOb MultiDict
+:param obj:
+If <code>formdata</code> is empty or not provided, this object is checked for
+attributes matching form field names, which will be used for field
+values.
+:param prefix:
+If provided, all fields will have their name prefixed with the
+value.
+:param data:
+Accept a dictionary of data. This is only used if <code>formdata</code> and
+<code>obj</code> are not present.
+:param meta:
+If provided, this is a dictionary of values to override attributes
+on this form's meta instance.
+:param <code>**kwargs</code>:
+If <code>formdata</code> is empty or not provided and <code>obj</code> does not contain
+an attribute named the same as a field, form will assign the value
+of a matching keyword argument to the field, if one exists.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ProductForm(FlaskForm):
+    &#34;&#34;&#34;A form for user to add a new product to user&#39;s account to start tracking.
+
+    Attributes:
+        alias: Product alias. User&#39;s choice.
+        url: URL where product can be found for purchase.
+        submit: Submit button.
+    &#34;&#34;&#34;
+
+    alias = StringField(&#39;alias&#39;, validators=[DataRequired(),Length(max=product_alias_max)])
+    url = StringField(&#39;url&#39;, validators=[URL(), Length(max=product_url_max)])
+    submit = SubmitField(&#39;Submit&#39;)
+
+    def validate_url(self, url):
+        &#39;&#39;&#39;Validates url to see if it is supported retailer.
+
+        Args:
+            self: Product form.
+            url: URL of product.
+        Raises:
+            ValueError: Retailer not supported.
+        &#39;&#39;&#39;
+
+        regex = re.compile(&#39;^(https|http):\/\/www\.(bestbuy|amazon)\.com&#39;)
+        if not regex.match(url.data):
+            raise ValidationError(&#39;Retailer must be Bestbuy or Amazon&#39;)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>flask_wtf.form.FlaskForm</li>
+<li>wtforms.form.Form</li>
+<li>wtforms.compat.NewBase</li>
+<li>wtforms.form.BaseForm</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="productchecker.forms.ProductForm.alias"><code class="name">var <span class="ident">alias</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="productchecker.forms.ProductForm.submit"><code class="name">var <span class="ident">submit</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="productchecker.forms.ProductForm.url"><code class="name">var <span class="ident">url</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="productchecker.forms.ProductForm.validate_url"><code class="name flex">
+<span>def <span class="ident">validate_url</span></span>(<span>self, url)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Validates url to see if it is supported retailer.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>self</code></strong></dt>
+<dd>Product form.</dd>
+<dt><strong><code>url</code></strong></dt>
+<dd>URL of product.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>Retailer not supported.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def validate_url(self, url):
+    &#39;&#39;&#39;Validates url to see if it is supported retailer.
+
+    Args:
+        self: Product form.
+        url: URL of product.
+    Raises:
+        ValueError: Retailer not supported.
+    &#39;&#39;&#39;
+
+    regex = re.compile(&#39;^(https|http):\/\/www\.(bestbuy|amazon)\.com&#39;)
+    if not regex.match(url.data):
+        raise ValidationError(&#39;Retailer must be Bestbuy or Amazon&#39;)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="productchecker.forms.RegistrationForm"><code class="flex name class">
+<span>class <span class="ident">RegistrationForm</span></span>
+<span>(</span><span>formdata=&lt;object object&gt;, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Registration form for initial account creation.</p>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>username</code></strong></dt>
+<dd>Username field.</dd>
+<dt><strong><code>email</code></strong></dt>
+<dd>User email field.</dd>
+<dt><strong><code>password</code></strong></dt>
+<dd>User password field.</dd>
+<dt><strong><code>confirm_password</code></strong></dt>
+<dd>Confirm user password field.</dd>
+<dt><strong><code>submit</code></strong></dt>
+<dd>Submit button.</dd>
+</dl>
+<p>:param formdata:
+Used to pass data coming from the enduser, usually <code>request.POST</code> or
+equivalent. formdata should be some sort of request-data wrapper which
+can get multiple parameters from the form input, and values are unicode
+strings, e.g. a Werkzeug/Django/WebOb MultiDict
+:param obj:
+If <code>formdata</code> is empty or not provided, this object is checked for
+attributes matching form field names, which will be used for field
+values.
+:param prefix:
+If provided, all fields will have their name prefixed with the
+value.
+:param data:
+Accept a dictionary of data. This is only used if <code>formdata</code> and
+<code>obj</code> are not present.
+:param meta:
+If provided, this is a dictionary of values to override attributes
+on this form's meta instance.
+:param <code>**kwargs</code>:
+If <code>formdata</code> is empty or not provided and <code>obj</code> does not contain
+an attribute named the same as a field, form will assign the value
+of a matching keyword argument to the field, if one exists.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class RegistrationForm(FlaskForm):
+    &#34;&#34;&#34;Registration form for initial account creation.
+
+    Attributes:
+        username: Username field.
+        email: User email field.
+        password: User password field.
+        confirm_password: Confirm user password field.
+        submit: Submit button.
+    &#34;&#34;&#34;
+
+    username = StringField(&#39;Username&#39;, validators=[
+                           DataRequired(), Length(min=username_min, max=username_max)])
+    email = StringField(&#39;Email&#39;, validators=[DataRequired(), Email()])
+    password = PasswordField(&#39;Password&#39;, validators=[
+                             DataRequired(), Length(min=password_min, max=password_max)])
+    confirm_password = PasswordField(&#39;Confirm Password&#39;, validators=[
+                                     DataRequired(), Length(min=password_min, max=password_max), EqualTo(&#39;password&#39;)])
+    submit = SubmitField(&#39;Sign Up&#39;)
+
+    def validate_username(self, username):
+        &#39;&#39;&#39;Checks to see if username already exists.
+
+        Args:
+            self: Registration form.
+            username: User input for username field.
+        Raises:
+            ValueError: Username not available.
+        &#39;&#39;&#39;
+
+        user = User.query.filter_by(username=username.data).first()
+        if user:
+            raise ValidationError(&#39;Username unavailable.&#39;)
+
+    def validate_email(self, email):
+        &#39;&#39;&#39;Checks to see if email already exists.
+
+        Args:
+            self: Registration form.
+            username: User input for email field.
+        Returns:
+            bool: True for email unavailable, email for available.
+        Raises:
+            ValueError: Email not available.
+        &#39;&#39;&#39;
+
+        user = User.query.filter_by(email=email.data).first()
+        if user:
+            raise ValidationError(&#39;Email already in use.&#39;)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>flask_wtf.form.FlaskForm</li>
+<li>wtforms.form.Form</li>
+<li>wtforms.compat.NewBase</li>
+<li>wtforms.form.BaseForm</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="productchecker.forms.RegistrationForm.confirm_password"><code class="name">var <span class="ident">confirm_password</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="productchecker.forms.RegistrationForm.email"><code class="name">var <span class="ident">email</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="productchecker.forms.RegistrationForm.password"><code class="name">var <span class="ident">password</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="productchecker.forms.RegistrationForm.submit"><code class="name">var <span class="ident">submit</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="productchecker.forms.RegistrationForm.username"><code class="name">var <span class="ident">username</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="productchecker.forms.RegistrationForm.validate_email"><code class="name flex">
+<span>def <span class="ident">validate_email</span></span>(<span>self, email)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Checks to see if email already exists.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>self</code></strong></dt>
+<dd>Registration form.</dd>
+<dt><strong><code>username</code></strong></dt>
+<dd>User input for email field.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>bool</code></dt>
+<dd>True for email unavailable, email for available.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>Email not available.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def validate_email(self, email):
+    &#39;&#39;&#39;Checks to see if email already exists.
+
+    Args:
+        self: Registration form.
+        username: User input for email field.
+    Returns:
+        bool: True for email unavailable, email for available.
+    Raises:
+        ValueError: Email not available.
+    &#39;&#39;&#39;
+
+    user = User.query.filter_by(email=email.data).first()
+    if user:
+        raise ValidationError(&#39;Email already in use.&#39;)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.forms.RegistrationForm.validate_username"><code class="name flex">
+<span>def <span class="ident">validate_username</span></span>(<span>self, username)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Checks to see if username already exists.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>self</code></strong></dt>
+<dd>Registration form.</dd>
+<dt><strong><code>username</code></strong></dt>
+<dd>User input for username field.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>Username not available.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def validate_username(self, username):
+    &#39;&#39;&#39;Checks to see if username already exists.
+
+    Args:
+        self: Registration form.
+        username: User input for username field.
+    Raises:
+        ValueError: Username not available.
+    &#39;&#39;&#39;
+
+    user = User.query.filter_by(username=username.data).first()
+    if user:
+        raise ValidationError(&#39;Username unavailable.&#39;)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="productchecker.forms.RequestResetForm"><code class="flex name class">
+<span>class <span class="ident">RequestResetForm</span></span>
+<span>(</span><span>formdata=&lt;object object&gt;, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A form for user to request a password reset in the event they have forgotten theirs.</p>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>email</code></strong></dt>
+<dd>User's email address associated with account.</dd>
+<dt><strong><code>submit</code></strong></dt>
+<dd>Submit button.</dd>
+</dl>
+<p>:param formdata:
+Used to pass data coming from the enduser, usually <code>request.POST</code> or
+equivalent. formdata should be some sort of request-data wrapper which
+can get multiple parameters from the form input, and values are unicode
+strings, e.g. a Werkzeug/Django/WebOb MultiDict
+:param obj:
+If <code>formdata</code> is empty or not provided, this object is checked for
+attributes matching form field names, which will be used for field
+values.
+:param prefix:
+If provided, all fields will have their name prefixed with the
+value.
+:param data:
+Accept a dictionary of data. This is only used if <code>formdata</code> and
+<code>obj</code> are not present.
+:param meta:
+If provided, this is a dictionary of values to override attributes
+on this form's meta instance.
+:param <code>**kwargs</code>:
+If <code>formdata</code> is empty or not provided and <code>obj</code> does not contain
+an attribute named the same as a field, form will assign the value
+of a matching keyword argument to the field, if one exists.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class RequestResetForm(FlaskForm):
+    &#34;&#34;&#34;A form for user to request a password reset in the event they have forgotten theirs.
+
+    Attributes:
+        email: User&#39;s email address associated with account.
+        submit: Submit button.
+    &#34;&#34;&#34;
+
+    email = StringField(&#39;Email&#39;, validators=[DataRequired(), Email()])
+    submit = SubmitField(&#39;Request Password Reset&#39;)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>flask_wtf.form.FlaskForm</li>
+<li>wtforms.form.Form</li>
+<li>wtforms.compat.NewBase</li>
+<li>wtforms.form.BaseForm</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="productchecker.forms.RequestResetForm.email"><code class="name">var <span class="ident">email</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="productchecker.forms.RequestResetForm.submit"><code class="name">var <span class="ident">submit</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="productchecker.forms.ResetPasswordForm"><code class="flex name class">
+<span>class <span class="ident">ResetPasswordForm</span></span>
+<span>(</span><span>formdata=&lt;object object&gt;, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A form for user to reset password once they have received password reset email and token.</p>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>password</code></strong></dt>
+<dd>User new password field.</dd>
+<dt><strong><code>confirm_password</code></strong></dt>
+<dd>Confirm user new password field.</dd>
+<dt><strong><code>submit</code></strong></dt>
+<dd>Submit button.</dd>
+</dl>
+<p>:param formdata:
+Used to pass data coming from the enduser, usually <code>request.POST</code> or
+equivalent. formdata should be some sort of request-data wrapper which
+can get multiple parameters from the form input, and values are unicode
+strings, e.g. a Werkzeug/Django/WebOb MultiDict
+:param obj:
+If <code>formdata</code> is empty or not provided, this object is checked for
+attributes matching form field names, which will be used for field
+values.
+:param prefix:
+If provided, all fields will have their name prefixed with the
+value.
+:param data:
+Accept a dictionary of data. This is only used if <code>formdata</code> and
+<code>obj</code> are not present.
+:param meta:
+If provided, this is a dictionary of values to override attributes
+on this form's meta instance.
+:param <code>**kwargs</code>:
+If <code>formdata</code> is empty or not provided and <code>obj</code> does not contain
+an attribute named the same as a field, form will assign the value
+of a matching keyword argument to the field, if one exists.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ResetPasswordForm(FlaskForm):
+    &#34;&#34;&#34;A form for user to reset password once they have received password reset email and token.
+
+    Attributes:
+        password: User new password field.
+        confirm_password: Confirm user new password field.
+        submit: Submit button.
+    &#34;&#34;&#34;
+
+    password = PasswordField(&#39;Password&#39;, validators=[
+                             DataRequired(), Length(min=password_min, max=password_max)])
+    confirm_password = PasswordField(&#39;Confirm Password&#39;, validators=[
+                                     DataRequired(), Length(min=password_min, max=password_max), EqualTo(&#39;password&#39;)])
+    submit = SubmitField(&#39;Reset Password&#39;)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>flask_wtf.form.FlaskForm</li>
+<li>wtforms.form.Form</li>
+<li>wtforms.compat.NewBase</li>
+<li>wtforms.form.BaseForm</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="productchecker.forms.ResetPasswordForm.confirm_password"><code class="name">var <span class="ident">confirm_password</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="productchecker.forms.ResetPasswordForm.password"><code class="name">var <span class="ident">password</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="productchecker.forms.ResetPasswordForm.submit"><code class="name">var <span class="ident">submit</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="productchecker.forms.UpdateAccountForm"><code class="flex name class">
+<span>class <span class="ident">UpdateAccountForm</span></span>
+<span>(</span><span>formdata=&lt;object object&gt;, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Update account form for credentials, preferences, and notifications.</p>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>username</code></strong></dt>
+<dd>Username field.</dd>
+<dt><strong><code>email</code></strong></dt>
+<dd>User email field.</dd>
+<dt><strong><code>password</code></strong></dt>
+<dd>User password field.</dd>
+<dt><strong><code>confirm_password</code></strong></dt>
+<dd>Confirm user password field.</dd>
+<dt><strong><code>check_freq</code></strong></dt>
+<dd>Frequency field for Product.check_all().</dd>
+<dt><strong><code>discord_webhook</code></strong></dt>
+<dd>Discord webhook url field for discord notifications.</dd>
+<dt><strong><code>discord_active</code></strong></dt>
+<dd>Radio button for turning on/off discord notifications.</dd>
+<dt><strong><code>submit</code></strong></dt>
+<dd>Submit button.</dd>
+</dl>
+<p>:param formdata:
+Used to pass data coming from the enduser, usually <code>request.POST</code> or
+equivalent. formdata should be some sort of request-data wrapper which
+can get multiple parameters from the form input, and values are unicode
+strings, e.g. a Werkzeug/Django/WebOb MultiDict
+:param obj:
+If <code>formdata</code> is empty or not provided, this object is checked for
+attributes matching form field names, which will be used for field
+values.
+:param prefix:
+If provided, all fields will have their name prefixed with the
+value.
+:param data:
+Accept a dictionary of data. This is only used if <code>formdata</code> and
+<code>obj</code> are not present.
+:param meta:
+If provided, this is a dictionary of values to override attributes
+on this form's meta instance.
+:param <code>**kwargs</code>:
+If <code>formdata</code> is empty or not provided and <code>obj</code> does not contain
+an attribute named the same as a field, form will assign the value
+of a matching keyword argument to the field, if one exists.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class UpdateAccountForm(FlaskForm):
+    &#34;&#34;&#34;Update account form for credentials, preferences, and notifications.
+
+    Attributes:
+        username: Username field.
+        email: User email field.
+        password: User password field.
+        confirm_password: Confirm user password field.
+        check_freq: Frequency field for Product.check_all().
+        discord_webhook: Discord webhook url field for discord notifications.
+        discord_active: Radio button for turning on/off discord notifications.
+        submit: Submit button.
+    &#34;&#34;&#34;
+
+    username = StringField(&#39;Username&#39;, validators=[
+                           DataRequired(), Length(min=username_min, max=username_max)])
+    email = StringField(&#39;Email&#39;, validators=[DataRequired(), Email()])
+    password = PasswordField(&#39;Password&#39;)
+    confirm_password = PasswordField(&#39;Confirm Password&#39;, validators=[EqualTo(&#39;password&#39;)])
+    check_freq = IntegerField(&#39;Check Frequency&#39;, validators=[
+                           DataRequired(), NumberRange(min=freq_min, max=freq_max)])
+    discord_webhook = StringField(&#39;Webhook URL&#39;)
+    discord_active = RadioField(coerce=int, choices=[(1,&#39;On&#39;),(0,&#39;Off&#39;)])
+    submit = SubmitField(&#39;Submit Changes&#39;)
+
+    def validate_username(self, username):
+        &#39;&#39;&#39;Checks to see if username already exists.
+
+        Args:
+            self: Registration form.
+            username: User input for username field.
+        Raises:
+            ValueError: Username not available.
+        &#39;&#39;&#39;
+
+        if username.data != current_user.username:
+            user = User.query.filter_by(username=username.data).first()
+            if user:
+                raise ValidationError(&#39;Username unavailable.&#39;)
+
+    def validate_email(self, email):
+        &#39;&#39;&#39;Checks to see if email already exists.
+
+        Args:
+            self: Registration form.
+            username: User input for email field.
+        Raises:
+            ValueError: Email not available.
+        &#39;&#39;&#39;
+
+        if email.data != current_user.email:
+            user = User.query.filter_by(email=email.data).first()
+            if user:
+                raise ValidationError(&#39;Email already in use.&#39;)
+
+    def validate_password(self, password):
+        &#39;&#39;&#39;Checks to see if password field is populated. If it is,
+            then check length requirements.
+
+        Args:
+            self: Registration form.
+            username: User input for email field.
+        Raises:
+            ValueError: Email not available.
+        &#39;&#39;&#39;
+
+        #if field is populated and not between pw min and max requirements.
+        #if it is not populated, a condition in route dictates it will not update
+        if password.data != &#39;&#39; and len(password.data) &lt; password_min or len(password.data) &gt; password_max:
+            raise ValidationError(&#39;Field must be between &#39; + str(password_min) + &#39; and &#39; +
+                                    str(password_max) +&#39; characters long&#39;)
+    
+    def validate_discord_webhook(self, discord_webhook):
+        &#39;&#39;&#39;Checks to see if URL is valid Discord webhook.
+
+        Args:
+            self: Registration form.
+            discord_webhook: Discord webhook URL.
+        Raises:
+            ValueError: Discord webhook URL is not valid.
+        &#39;&#39;&#39;
+
+        if not discord_webhook.data==&#39;&#39;:
+            regex = re.compile(&#39;^https:\/\/discord\.com\/api\/webhooks\/&#39;)
+            if not regex.match(discord_webhook.data):
+                raise ValidationError(&#39;Please ensure Discord Webhook URL is valid&#39;)
+
+    def validate_discord_active(self, discord_webhook):
+        &#39;&#39;&#39;Turns off radiobutton if no data in webhook URL field.
+
+         Args:
+            self: Registration form.
+            discord_webhook: Discord webhook URL.
+        &#39;&#39;&#39;
+
+        if self.discord_active.data==1 and self.discord_webhook.data == &#39;&#39;:
+                self.discord_active.data=0</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>flask_wtf.form.FlaskForm</li>
+<li>wtforms.form.Form</li>
+<li>wtforms.compat.NewBase</li>
+<li>wtforms.form.BaseForm</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="productchecker.forms.UpdateAccountForm.check_freq"><code class="name">var <span class="ident">check_freq</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="productchecker.forms.UpdateAccountForm.confirm_password"><code class="name">var <span class="ident">confirm_password</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="productchecker.forms.UpdateAccountForm.discord_active"><code class="name">var <span class="ident">discord_active</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="productchecker.forms.UpdateAccountForm.discord_webhook"><code class="name">var <span class="ident">discord_webhook</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="productchecker.forms.UpdateAccountForm.email"><code class="name">var <span class="ident">email</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="productchecker.forms.UpdateAccountForm.password"><code class="name">var <span class="ident">password</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="productchecker.forms.UpdateAccountForm.submit"><code class="name">var <span class="ident">submit</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="productchecker.forms.UpdateAccountForm.username"><code class="name">var <span class="ident">username</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="productchecker.forms.UpdateAccountForm.validate_discord_active"><code class="name flex">
+<span>def <span class="ident">validate_discord_active</span></span>(<span>self, discord_webhook)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Turns off radiobutton if no data in webhook URL field.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>self</code></strong></dt>
+<dd>Registration form.</dd>
+<dt><strong><code>discord_webhook</code></strong></dt>
+<dd>Discord webhook URL.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def validate_discord_active(self, discord_webhook):
+    &#39;&#39;&#39;Turns off radiobutton if no data in webhook URL field.
+
+     Args:
+        self: Registration form.
+        discord_webhook: Discord webhook URL.
+    &#39;&#39;&#39;
+
+    if self.discord_active.data==1 and self.discord_webhook.data == &#39;&#39;:
+            self.discord_active.data=0</code></pre>
+</details>
+</dd>
+<dt id="productchecker.forms.UpdateAccountForm.validate_discord_webhook"><code class="name flex">
+<span>def <span class="ident">validate_discord_webhook</span></span>(<span>self, discord_webhook)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Checks to see if URL is valid Discord webhook.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>self</code></strong></dt>
+<dd>Registration form.</dd>
+<dt><strong><code>discord_webhook</code></strong></dt>
+<dd>Discord webhook URL.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>Discord webhook URL is not valid.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def validate_discord_webhook(self, discord_webhook):
+    &#39;&#39;&#39;Checks to see if URL is valid Discord webhook.
+
+    Args:
+        self: Registration form.
+        discord_webhook: Discord webhook URL.
+    Raises:
+        ValueError: Discord webhook URL is not valid.
+    &#39;&#39;&#39;
+
+    if not discord_webhook.data==&#39;&#39;:
+        regex = re.compile(&#39;^https:\/\/discord\.com\/api\/webhooks\/&#39;)
+        if not regex.match(discord_webhook.data):
+            raise ValidationError(&#39;Please ensure Discord Webhook URL is valid&#39;)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.forms.UpdateAccountForm.validate_email"><code class="name flex">
+<span>def <span class="ident">validate_email</span></span>(<span>self, email)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Checks to see if email already exists.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>self</code></strong></dt>
+<dd>Registration form.</dd>
+<dt><strong><code>username</code></strong></dt>
+<dd>User input for email field.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>Email not available.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def validate_email(self, email):
+    &#39;&#39;&#39;Checks to see if email already exists.
+
+    Args:
+        self: Registration form.
+        username: User input for email field.
+    Raises:
+        ValueError: Email not available.
+    &#39;&#39;&#39;
+
+    if email.data != current_user.email:
+        user = User.query.filter_by(email=email.data).first()
+        if user:
+            raise ValidationError(&#39;Email already in use.&#39;)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.forms.UpdateAccountForm.validate_password"><code class="name flex">
+<span>def <span class="ident">validate_password</span></span>(<span>self, password)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Checks to see if password field is populated. If it is,
+then check length requirements.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>self</code></strong></dt>
+<dd>Registration form.</dd>
+<dt><strong><code>username</code></strong></dt>
+<dd>User input for email field.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>Email not available.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def validate_password(self, password):
+    &#39;&#39;&#39;Checks to see if password field is populated. If it is,
+        then check length requirements.
+
+    Args:
+        self: Registration form.
+        username: User input for email field.
+    Raises:
+        ValueError: Email not available.
+    &#39;&#39;&#39;
+
+    #if field is populated and not between pw min and max requirements.
+    #if it is not populated, a condition in route dictates it will not update
+    if password.data != &#39;&#39; and len(password.data) &lt; password_min or len(password.data) &gt; password_max:
+        raise ValidationError(&#39;Field must be between &#39; + str(password_min) + &#39; and &#39; +
+                                str(password_max) +&#39; characters long&#39;)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.forms.UpdateAccountForm.validate_username"><code class="name flex">
+<span>def <span class="ident">validate_username</span></span>(<span>self, username)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Checks to see if username already exists.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>self</code></strong></dt>
+<dd>Registration form.</dd>
+<dt><strong><code>username</code></strong></dt>
+<dd>User input for username field.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>Username not available.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def validate_username(self, username):
+    &#39;&#39;&#39;Checks to see if username already exists.
+
+    Args:
+        self: Registration form.
+        username: User input for username field.
+    Raises:
+        ValueError: Username not available.
+    &#39;&#39;&#39;
+
+    if username.data != current_user.username:
+        user = User.query.filter_by(username=username.data).first()
+        if user:
+            raise ValidationError(&#39;Username unavailable.&#39;)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="productchecker" href="index.html">productchecker</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="productchecker.forms.LoginForm" href="#productchecker.forms.LoginForm">LoginForm</a></code></h4>
+<ul class="">
+<li><code><a title="productchecker.forms.LoginForm.password" href="#productchecker.forms.LoginForm.password">password</a></code></li>
+<li><code><a title="productchecker.forms.LoginForm.remember" href="#productchecker.forms.LoginForm.remember">remember</a></code></li>
+<li><code><a title="productchecker.forms.LoginForm.submit" href="#productchecker.forms.LoginForm.submit">submit</a></code></li>
+<li><code><a title="productchecker.forms.LoginForm.username" href="#productchecker.forms.LoginForm.username">username</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="productchecker.forms.ProductForm" href="#productchecker.forms.ProductForm">ProductForm</a></code></h4>
+<ul class="">
+<li><code><a title="productchecker.forms.ProductForm.alias" href="#productchecker.forms.ProductForm.alias">alias</a></code></li>
+<li><code><a title="productchecker.forms.ProductForm.submit" href="#productchecker.forms.ProductForm.submit">submit</a></code></li>
+<li><code><a title="productchecker.forms.ProductForm.url" href="#productchecker.forms.ProductForm.url">url</a></code></li>
+<li><code><a title="productchecker.forms.ProductForm.validate_url" href="#productchecker.forms.ProductForm.validate_url">validate_url</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="productchecker.forms.RegistrationForm" href="#productchecker.forms.RegistrationForm">RegistrationForm</a></code></h4>
+<ul class="two-column">
+<li><code><a title="productchecker.forms.RegistrationForm.confirm_password" href="#productchecker.forms.RegistrationForm.confirm_password">confirm_password</a></code></li>
+<li><code><a title="productchecker.forms.RegistrationForm.email" href="#productchecker.forms.RegistrationForm.email">email</a></code></li>
+<li><code><a title="productchecker.forms.RegistrationForm.password" href="#productchecker.forms.RegistrationForm.password">password</a></code></li>
+<li><code><a title="productchecker.forms.RegistrationForm.submit" href="#productchecker.forms.RegistrationForm.submit">submit</a></code></li>
+<li><code><a title="productchecker.forms.RegistrationForm.username" href="#productchecker.forms.RegistrationForm.username">username</a></code></li>
+<li><code><a title="productchecker.forms.RegistrationForm.validate_email" href="#productchecker.forms.RegistrationForm.validate_email">validate_email</a></code></li>
+<li><code><a title="productchecker.forms.RegistrationForm.validate_username" href="#productchecker.forms.RegistrationForm.validate_username">validate_username</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="productchecker.forms.RequestResetForm" href="#productchecker.forms.RequestResetForm">RequestResetForm</a></code></h4>
+<ul class="">
+<li><code><a title="productchecker.forms.RequestResetForm.email" href="#productchecker.forms.RequestResetForm.email">email</a></code></li>
+<li><code><a title="productchecker.forms.RequestResetForm.submit" href="#productchecker.forms.RequestResetForm.submit">submit</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="productchecker.forms.ResetPasswordForm" href="#productchecker.forms.ResetPasswordForm">ResetPasswordForm</a></code></h4>
+<ul class="">
+<li><code><a title="productchecker.forms.ResetPasswordForm.confirm_password" href="#productchecker.forms.ResetPasswordForm.confirm_password">confirm_password</a></code></li>
+<li><code><a title="productchecker.forms.ResetPasswordForm.password" href="#productchecker.forms.ResetPasswordForm.password">password</a></code></li>
+<li><code><a title="productchecker.forms.ResetPasswordForm.submit" href="#productchecker.forms.ResetPasswordForm.submit">submit</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="productchecker.forms.UpdateAccountForm" href="#productchecker.forms.UpdateAccountForm">UpdateAccountForm</a></code></h4>
+<ul class="">
+<li><code><a title="productchecker.forms.UpdateAccountForm.check_freq" href="#productchecker.forms.UpdateAccountForm.check_freq">check_freq</a></code></li>
+<li><code><a title="productchecker.forms.UpdateAccountForm.confirm_password" href="#productchecker.forms.UpdateAccountForm.confirm_password">confirm_password</a></code></li>
+<li><code><a title="productchecker.forms.UpdateAccountForm.discord_active" href="#productchecker.forms.UpdateAccountForm.discord_active">discord_active</a></code></li>
+<li><code><a title="productchecker.forms.UpdateAccountForm.discord_webhook" href="#productchecker.forms.UpdateAccountForm.discord_webhook">discord_webhook</a></code></li>
+<li><code><a title="productchecker.forms.UpdateAccountForm.email" href="#productchecker.forms.UpdateAccountForm.email">email</a></code></li>
+<li><code><a title="productchecker.forms.UpdateAccountForm.password" href="#productchecker.forms.UpdateAccountForm.password">password</a></code></li>
+<li><code><a title="productchecker.forms.UpdateAccountForm.submit" href="#productchecker.forms.UpdateAccountForm.submit">submit</a></code></li>
+<li><code><a title="productchecker.forms.UpdateAccountForm.username" href="#productchecker.forms.UpdateAccountForm.username">username</a></code></li>
+<li><code><a title="productchecker.forms.UpdateAccountForm.validate_discord_active" href="#productchecker.forms.UpdateAccountForm.validate_discord_active">validate_discord_active</a></code></li>
+<li><code><a title="productchecker.forms.UpdateAccountForm.validate_discord_webhook" href="#productchecker.forms.UpdateAccountForm.validate_discord_webhook">validate_discord_webhook</a></code></li>
+<li><code><a title="productchecker.forms.UpdateAccountForm.validate_email" href="#productchecker.forms.UpdateAccountForm.validate_email">validate_email</a></code></li>
+<li><code><a title="productchecker.forms.UpdateAccountForm.validate_password" href="#productchecker.forms.UpdateAccountForm.validate_password">validate_password</a></code></li>
+<li><code><a title="productchecker.forms.UpdateAccountForm.validate_username" href="#productchecker.forms.UpdateAccountForm.validate_username">validate_username</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>

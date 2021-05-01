@@ -1,0 +1,895 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>productchecker.routes API documentation</title>
+<meta name="description" content="Defines all html routes and routing logic …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>productchecker.routes</code></h1>
+</header>
+<section id="section-intro">
+<p>Defines all html routes and routing logic.</p>
+<p>The routes module is a Flask construct and is primarily responsible for routing
+between different pages. The routes look like functions with an @app.route decorator
+specifying the path as an arg. They may also include decorators such as @login_required
+which will redirect to the login page in the instance where a user is not authetnicated.</p>
+<p>Routes that are intended to route to an html page must return the html page via the
+render_template function. render_template accepts the html page and any additional args
+that you wish to pass to the html template to utilize in Jinja 2 templates within the
+html page.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;Defines all html routes and routing logic.
+
+The routes module is a Flask construct and is primarily responsible for routing 
+between different pages. The routes look like functions with an @app.route decorator
+specifying the path as an arg. They may also include decorators such as @login_required
+which will redirect to the login page in the instance where a user is not authetnicated.
+
+Routes that are intended to route to an html page must return the html page via the
+render_template function. render_template accepts the html page and any additional args
+that you wish to pass to the html template to utilize in Jinja 2 templates within the 
+html page.
+&#34;&#34;&#34;
+
+from flask import render_template, url_for, flash, redirect, request, abort
+from productchecker import app, db, bcrypt, mail
+from productchecker.forms import (RegistrationForm, LoginForm, UpdateAccountForm, ProductForm, 
+                                    RequestResetForm, ResetPasswordForm)
+from productchecker.models import User, Product, ProductHistory, AppAttr
+from flask_login import login_user, logout_user, current_user, login_required
+from flask_mail import Message
+import logging, sys
+from datetime import datetime
+import threading
+
+
+logger=logging.getLogger(__name__)
+
+
+@app.route(&#34;/&#34;)
+@app.route(&#34;/dashboard&#34;)
+@login_required
+def dashboard():
+    &#34;&#34;&#34;Returns the dashboard for for the authenticated user.
+
+    User&#39;s products are passed through to the template, flask 
+    will then render the appropriate html.
+    &#34;&#34;&#34;
+    
+    products = Product.get_user_products(current_user.id)
+    return render_template(&#34;dashboard.html&#34;, products=products)
+
+
+@app.route(&#34;/register&#34;, methods=[&#39;GET&#39;, &#39;POST&#39;])
+def register():
+    &#34;&#34;&#34;The page where users register for an account.
+
+    User&#39;s will be required to provide a username, email, password,
+    and confirmation of password.
+
+    Returns:
+        register: The page where registration for new users takes place.
+        dashboard: If user is already authenticated, they will be redirected to their 
+            dashboard with any products they have added. If user is new, they will be
+            shown a new dashboard with welcome message.
+    &#34;&#34;&#34;
+
+    if current_user.is_authenticated:
+        return redirect(url_for(&#39;dashboard&#39;))
+    form = RegistrationForm()
+    
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode(&#39;utf-8&#39;)
+        user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+        db.session.add(user)
+        db.session.commit()
+        login_user(user)
+        #arg1 data, arg2 category
+        flash(f&#39;Account creation success - Welcome {form.username.data}!&#39;, &#39;success&#39;)
+        flash(f&#39;Add a product to get started. Click on the &#34;?&#34; for help.&#39;, &#39;info&#39;)
+        return redirect(url_for(&#39;add_product&#39;))
+    return render_template(&#39;register.html&#39;, title=&#39;Register&#39;, form=form)
+
+
+@app.route(&#34;/login&#34;, methods=[&#39;GET&#39;, &#39;POST&#39;])
+def login():
+    &#34;&#34;&#34;The page where users login once they have an account.
+
+    User&#39;s will be required to provide a username and correct password. Optionally 
+    may choose &#34;remember me&#34; which will cache user auth status.
+
+    Returns:
+        login: The page where users login to site.
+        dashboard: If user is already authenticated, they will be redirected to their 
+            dashboard with any products they have added. If user was trying to visit
+            a different page when their session ended, they will be redirected to 
+            the page they were trying to visit.
+    &#34;&#34;&#34;
+
+    if current_user.is_authenticated:
+        return redirect(url_for(&#39;dashboard&#39;))
+    form = LoginForm()
+
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        #If user exists and password hash matches hash stored in db, login success
+        #bcrypt.check_password_hash(hashed val, plain text val)
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            #remember keeps user logged in after browser close. Set remember=True
+            login_user(user, remember=form.remember.data)
+            #If a user was forced to auth from somewhere besides login page,
+            # next will be populated with url_for(&lt;whatever next page was supposed to be&gt;)
+            # ternary conditional
+            next_page = request.args.get(&#39;next&#39;)
+            return redirect(next_page) if next_page else redirect(url_for(&#39;dashboard&#39;))
+        else:
+            flash(&#39;Login Unsuccesful. Please check username and password&#39;, &#39;danger&#39;)
+
+    return render_template(&#39;login.html&#39;, title=&#39;Login&#39;, form=form)
+
+
+@app.route(&#34;/logout&#34;)
+@login_required
+def logout():
+    &#34;&#34;&#34;Ends user session and redirects to login page.
+
+    Returns:
+        login: The page where users login to site.
+    &#34;&#34;&#34;
+
+    logout_user()
+    return redirect(url_for(&#39;login&#39;))
+
+
+@app.route(&#34;/account&#34;, methods=[&#39;GET&#39;, &#39;POST&#39;])
+@login_required
+def account():
+    &#34;&#34;&#34;The page where users can udpate account information, preferences, and notifications.
+
+    Note: Currently Product Check Frequency will right to Application Attribute and effectively
+    whoever updates check freq last, will dictate how frequently checks are performed.
+
+    Returns:
+        account: Account page.
+    &#34;&#34;&#34;
+
+    form = UpdateAccountForm()
+    if form.validate_on_submit():
+
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+
+        if form.password.data != &#39;&#39;:
+            current_user.password = bcrypt.generate_password_hash(form.password.data).decode(&#39;utf-8&#39;)
+
+        current_user.discord_webhook = form.discord_webhook.data
+        current_user.discord_active = bool(form.discord_active.data)
+        # Set for user profile and application attribute so check_all thread can read value.
+        # Cannot share data between threads so this allows other threads to read from db.
+        current_user.check_freq = form.check_freq.data
+        AppAttr.update_check_freq(form.check_freq.data)
+        db.session.commit()
+        flash(&#39;Account Updated&#39;, &#39;success&#39;)
+        return redirect(url_for(&#39;account&#39;))
+
+    elif request.method == &#39;GET&#39;:
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+        form.discord_webhook.data = current_user.discord_webhook
+        form.discord_active.data = current_user.discord_active
+        form.check_freq.data = current_user.check_freq
+    return render_template(&#39;account.html&#39;, form=form)
+
+
+@app.route(&#34;/add_product&#34;, methods=[&#39;GET&#39;, &#39;POST&#39;])
+@login_required
+def add_product():
+    &#34;&#34;&#34;Returns page where users add new products they wish to track. 
+
+    Upon success redirects to dashboard.
+    &#34;&#34;&#34;
+
+    form = ProductForm()
+    if form.validate_on_submit():
+        new_product = Product()
+        new_product.get_attr(form)
+
+        new_product_history = ProductHistory()
+        new_product_history.check_url(new_product)
+
+        new_product.history.append(new_product_history)
+        db.session.add(new_product)
+        db.session.add(new_product_history)
+        db.session.commit()
+        return redirect(url_for(&#39;dashboard&#39;))
+
+    return render_template(&#39;add_product.html&#39;, title=&#39;Add Product&#39;, form=form)
+
+
+@app.route(&#34;/product/&lt;int:product_id&gt;/delete&#34;, methods=[&#39;POST&#39;])
+@login_required
+def delete_product(product_id):
+    &#34;&#34;&#34;Button on Dashboard table data that will delete product from databse.
+
+    Will delete product and any product history and therefore stop tracking history
+    in subsequent product checks.
+
+    Args:
+        product_id: Product ID that will be deleted.
+    Returns:
+        dashboard: Dashboard page.
+    &#34;&#34;&#34;
+
+    product = Product.query.get_or_404(product_id)
+    if product.user_id != current_user.id:
+        abort(403)
+    db.session.delete(product)
+    db.session.commit()
+    return redirect(url_for(&#39;dashboard&#39;))
+
+
+@app.route(&#34;/product/&lt;int:product_id&gt;/graph&#34;, methods=[&#39;GET&#39;])
+@login_required
+def graph(product_id):
+    &#34;&#34;&#34;Button on Dashboard table data that show a graph of a single products stock and price.
+
+    Data must be queried and prepared before being passed to graph page. Chart.js used for 
+    graphs. Data and labels are bare minimum to pass and each must be prepared as list with 
+    same amount of items. Also chose to prepare pointBackgroundColor to indicate in stock or
+    not by setting red or green.
+
+    Args:
+        product_id: Product ID that graph will be generated for.
+    Returns:
+        graph: Graph page for product.
+    &#34;&#34;&#34;
+
+    product_history = Product.get_history(product_id)
+    alias = product_history[0][0]
+    stock = []
+    values = []
+    for row in product_history:
+        if row[2] == 1:
+            stock.append(&#34;green&#34;)
+        elif row[2] == 0:
+            stock.append(&#34;red&#34;)
+
+        if row[3] == None:
+            values.append(&#39;null&#39;)
+        else:
+            values.append(row[3])
+
+    labels = [row[4] for row in product_history]
+    return render_template(&#39;graph.html&#39;, values=values, labels=labels, alias=alias, stock=stock)
+
+
+def send_reset_email(user):
+    &#34;&#34;&#34;Sends password reset email message to user that includes the token.
+
+    Args:
+        user: User object
+    &#34;&#34;&#34;
+
+    token = user.get_reset_token()
+    msg = Message(&#39;Password Reset Request&#39;, 
+                    sender=&#39;noreply@productchecker.com&#39;, 
+                    recipients=[user.email])
+    msg.body = f&#39;&#39;&#39;To reset your password, visit the following link:
+
+{url_for(&#39;reset_token&#39;, token=token, _external=True)}
+
+If you did not make this request then please ignore this email.
+&#39;&#39;&#39;
+    mail.send(msg)
+
+@app.route(&#34;/reset_password&#34;, methods=[&#39;GET&#39;, &#39;POST&#39;])
+def reset_request():
+    &#34;&#34;&#34;User initiated password reset.
+
+    If user is currently authenticated, they will be redirected to Dashboard.
+    If user is not authenticated,form is valid, and email exists send email.
+
+    Returns:
+        dashboard: Dashboard page.
+        login: Login page.
+        reset_request: Reset password page.
+    &#34;&#34;&#34;
+    
+    if current_user.is_authenticated:
+        return redirect(url_for(&#39;dashboard&#39;))
+    form = RequestResetForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user is not None:
+            send_reset_email(user)
+        flash(&#39;If an account with this email address exists, a password reset message will be sent shortly.&#39;, &#39;info&#39;)
+        return redirect(url_for(&#39;login&#39;))
+    return render_template(&#39;reset_request.html&#39;, title=&#39;Reset Password&#39;, form=form)
+
+
+@app.route(&#34;/reset_password/&lt;token&gt;&#34;, methods=[&#39;GET&#39;, &#39;POST&#39;])
+def reset_token(token):
+    &#34;&#34;&#34;Accepts token from password reset emails.
+
+    If token is valid and active, allow user to reset password.
+    After password update, redirect to login page.
+
+    Args:
+        token: A token object.
+    
+    Returns:
+        dashboard: Dashboard page.
+        reset_request: Reset password page.
+        login: Login page.
+    &#34;&#34;&#34;
+
+    if current_user.is_authenticated:
+        return redirect(url_for(&#39;dashboard&#39;))
+    user = User.verify_reset_token(token)
+    #If token doesn&#39;t match any user or is expired, redirect to try again
+    if user is None:
+        flash(&#39;Invalid or expired token, please try again.&#39;, &#39;warning&#39;)
+        return redirect(url_for(&#39;reset_request&#39;))
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode(&#39;utf-8&#39;)
+        user.password = hashed_password
+        db.session.commit()
+        flash(f&#39;Your password has been updated. Please log in.&#39;, &#39;success&#39;)
+        return redirect(url_for(&#39;login&#39;))
+    return render_template(&#39;reset_token.html&#39;, title=&#39;Reset Password&#39;, form=form)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="productchecker.routes.account"><code class="name flex">
+<span>def <span class="ident">account</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>The page where users can udpate account information, preferences, and notifications.</p>
+<p>Note: Currently Product Check Frequency will right to Application Attribute and effectively
+whoever updates check freq last, will dictate how frequently checks are performed.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a title="productchecker.routes.account" href="#productchecker.routes.account">account()</a></code></dt>
+<dd>Account page.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#34;/account&#34;, methods=[&#39;GET&#39;, &#39;POST&#39;])
+@login_required
+def account():
+    &#34;&#34;&#34;The page where users can udpate account information, preferences, and notifications.
+
+    Note: Currently Product Check Frequency will right to Application Attribute and effectively
+    whoever updates check freq last, will dictate how frequently checks are performed.
+
+    Returns:
+        account: Account page.
+    &#34;&#34;&#34;
+
+    form = UpdateAccountForm()
+    if form.validate_on_submit():
+
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+
+        if form.password.data != &#39;&#39;:
+            current_user.password = bcrypt.generate_password_hash(form.password.data).decode(&#39;utf-8&#39;)
+
+        current_user.discord_webhook = form.discord_webhook.data
+        current_user.discord_active = bool(form.discord_active.data)
+        # Set for user profile and application attribute so check_all thread can read value.
+        # Cannot share data between threads so this allows other threads to read from db.
+        current_user.check_freq = form.check_freq.data
+        AppAttr.update_check_freq(form.check_freq.data)
+        db.session.commit()
+        flash(&#39;Account Updated&#39;, &#39;success&#39;)
+        return redirect(url_for(&#39;account&#39;))
+
+    elif request.method == &#39;GET&#39;:
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+        form.discord_webhook.data = current_user.discord_webhook
+        form.discord_active.data = current_user.discord_active
+        form.check_freq.data = current_user.check_freq
+    return render_template(&#39;account.html&#39;, form=form)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.routes.add_product"><code class="name flex">
+<span>def <span class="ident">add_product</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns page where users add new products they wish to track. </p>
+<p>Upon success redirects to dashboard.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#34;/add_product&#34;, methods=[&#39;GET&#39;, &#39;POST&#39;])
+@login_required
+def add_product():
+    &#34;&#34;&#34;Returns page where users add new products they wish to track. 
+
+    Upon success redirects to dashboard.
+    &#34;&#34;&#34;
+
+    form = ProductForm()
+    if form.validate_on_submit():
+        new_product = Product()
+        new_product.get_attr(form)
+
+        new_product_history = ProductHistory()
+        new_product_history.check_url(new_product)
+
+        new_product.history.append(new_product_history)
+        db.session.add(new_product)
+        db.session.add(new_product_history)
+        db.session.commit()
+        return redirect(url_for(&#39;dashboard&#39;))
+
+    return render_template(&#39;add_product.html&#39;, title=&#39;Add Product&#39;, form=form)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.routes.dashboard"><code class="name flex">
+<span>def <span class="ident">dashboard</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns the dashboard for for the authenticated user.</p>
+<p>User's products are passed through to the template, flask
+will then render the appropriate html.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#34;/&#34;)
+@app.route(&#34;/dashboard&#34;)
+@login_required
+def dashboard():
+    &#34;&#34;&#34;Returns the dashboard for for the authenticated user.
+
+    User&#39;s products are passed through to the template, flask 
+    will then render the appropriate html.
+    &#34;&#34;&#34;
+    
+    products = Product.get_user_products(current_user.id)
+    return render_template(&#34;dashboard.html&#34;, products=products)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.routes.delete_product"><code class="name flex">
+<span>def <span class="ident">delete_product</span></span>(<span>product_id)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Button on Dashboard table data that will delete product from databse.</p>
+<p>Will delete product and any product history and therefore stop tracking history
+in subsequent product checks.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>product_id</code></strong></dt>
+<dd>Product ID that will be deleted.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a title="productchecker.routes.dashboard" href="#productchecker.routes.dashboard">dashboard()</a></code></dt>
+<dd>Dashboard page.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#34;/product/&lt;int:product_id&gt;/delete&#34;, methods=[&#39;POST&#39;])
+@login_required
+def delete_product(product_id):
+    &#34;&#34;&#34;Button on Dashboard table data that will delete product from databse.
+
+    Will delete product and any product history and therefore stop tracking history
+    in subsequent product checks.
+
+    Args:
+        product_id: Product ID that will be deleted.
+    Returns:
+        dashboard: Dashboard page.
+    &#34;&#34;&#34;
+
+    product = Product.query.get_or_404(product_id)
+    if product.user_id != current_user.id:
+        abort(403)
+    db.session.delete(product)
+    db.session.commit()
+    return redirect(url_for(&#39;dashboard&#39;))</code></pre>
+</details>
+</dd>
+<dt id="productchecker.routes.graph"><code class="name flex">
+<span>def <span class="ident">graph</span></span>(<span>product_id)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Button on Dashboard table data that show a graph of a single products stock and price.</p>
+<p>Data must be queried and prepared before being passed to graph page. Chart.js used for
+graphs. Data and labels are bare minimum to pass and each must be prepared as list with
+same amount of items. Also chose to prepare pointBackgroundColor to indicate in stock or
+not by setting red or green.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>product_id</code></strong></dt>
+<dd>Product ID that graph will be generated for.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a title="productchecker.routes.graph" href="#productchecker.routes.graph">graph()</a></code></dt>
+<dd>Graph page for product.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#34;/product/&lt;int:product_id&gt;/graph&#34;, methods=[&#39;GET&#39;])
+@login_required
+def graph(product_id):
+    &#34;&#34;&#34;Button on Dashboard table data that show a graph of a single products stock and price.
+
+    Data must be queried and prepared before being passed to graph page. Chart.js used for 
+    graphs. Data and labels are bare minimum to pass and each must be prepared as list with 
+    same amount of items. Also chose to prepare pointBackgroundColor to indicate in stock or
+    not by setting red or green.
+
+    Args:
+        product_id: Product ID that graph will be generated for.
+    Returns:
+        graph: Graph page for product.
+    &#34;&#34;&#34;
+
+    product_history = Product.get_history(product_id)
+    alias = product_history[0][0]
+    stock = []
+    values = []
+    for row in product_history:
+        if row[2] == 1:
+            stock.append(&#34;green&#34;)
+        elif row[2] == 0:
+            stock.append(&#34;red&#34;)
+
+        if row[3] == None:
+            values.append(&#39;null&#39;)
+        else:
+            values.append(row[3])
+
+    labels = [row[4] for row in product_history]
+    return render_template(&#39;graph.html&#39;, values=values, labels=labels, alias=alias, stock=stock)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.routes.login"><code class="name flex">
+<span>def <span class="ident">login</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>The page where users login once they have an account.</p>
+<p>User's will be required to provide a username and correct password. Optionally
+may choose "remember me" which will cache user auth status.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a title="productchecker.routes.login" href="#productchecker.routes.login">login()</a></code></dt>
+<dd>The page where users login to site.</dd>
+<dt><code><a title="productchecker.routes.dashboard" href="#productchecker.routes.dashboard">dashboard()</a></code></dt>
+<dd>If user is already authenticated, they will be redirected to their
+dashboard with any products they have added. If user was trying to visit
+a different page when their session ended, they will be redirected to
+the page they were trying to visit.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#34;/login&#34;, methods=[&#39;GET&#39;, &#39;POST&#39;])
+def login():
+    &#34;&#34;&#34;The page where users login once they have an account.
+
+    User&#39;s will be required to provide a username and correct password. Optionally 
+    may choose &#34;remember me&#34; which will cache user auth status.
+
+    Returns:
+        login: The page where users login to site.
+        dashboard: If user is already authenticated, they will be redirected to their 
+            dashboard with any products they have added. If user was trying to visit
+            a different page when their session ended, they will be redirected to 
+            the page they were trying to visit.
+    &#34;&#34;&#34;
+
+    if current_user.is_authenticated:
+        return redirect(url_for(&#39;dashboard&#39;))
+    form = LoginForm()
+
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        #If user exists and password hash matches hash stored in db, login success
+        #bcrypt.check_password_hash(hashed val, plain text val)
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            #remember keeps user logged in after browser close. Set remember=True
+            login_user(user, remember=form.remember.data)
+            #If a user was forced to auth from somewhere besides login page,
+            # next will be populated with url_for(&lt;whatever next page was supposed to be&gt;)
+            # ternary conditional
+            next_page = request.args.get(&#39;next&#39;)
+            return redirect(next_page) if next_page else redirect(url_for(&#39;dashboard&#39;))
+        else:
+            flash(&#39;Login Unsuccesful. Please check username and password&#39;, &#39;danger&#39;)
+
+    return render_template(&#39;login.html&#39;, title=&#39;Login&#39;, form=form)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.routes.logout"><code class="name flex">
+<span>def <span class="ident">logout</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Ends user session and redirects to login page.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a title="productchecker.routes.login" href="#productchecker.routes.login">login()</a></code></dt>
+<dd>The page where users login to site.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#34;/logout&#34;)
+@login_required
+def logout():
+    &#34;&#34;&#34;Ends user session and redirects to login page.
+
+    Returns:
+        login: The page where users login to site.
+    &#34;&#34;&#34;
+
+    logout_user()
+    return redirect(url_for(&#39;login&#39;))</code></pre>
+</details>
+</dd>
+<dt id="productchecker.routes.register"><code class="name flex">
+<span>def <span class="ident">register</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>The page where users register for an account.</p>
+<p>User's will be required to provide a username, email, password,
+and confirmation of password.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a title="productchecker.routes.register" href="#productchecker.routes.register">register()</a></code></dt>
+<dd>The page where registration for new users takes place.</dd>
+<dt><code><a title="productchecker.routes.dashboard" href="#productchecker.routes.dashboard">dashboard()</a></code></dt>
+<dd>If user is already authenticated, they will be redirected to their
+dashboard with any products they have added. If user is new, they will be
+shown a new dashboard with welcome message.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#34;/register&#34;, methods=[&#39;GET&#39;, &#39;POST&#39;])
+def register():
+    &#34;&#34;&#34;The page where users register for an account.
+
+    User&#39;s will be required to provide a username, email, password,
+    and confirmation of password.
+
+    Returns:
+        register: The page where registration for new users takes place.
+        dashboard: If user is already authenticated, they will be redirected to their 
+            dashboard with any products they have added. If user is new, they will be
+            shown a new dashboard with welcome message.
+    &#34;&#34;&#34;
+
+    if current_user.is_authenticated:
+        return redirect(url_for(&#39;dashboard&#39;))
+    form = RegistrationForm()
+    
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode(&#39;utf-8&#39;)
+        user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+        db.session.add(user)
+        db.session.commit()
+        login_user(user)
+        #arg1 data, arg2 category
+        flash(f&#39;Account creation success - Welcome {form.username.data}!&#39;, &#39;success&#39;)
+        flash(f&#39;Add a product to get started. Click on the &#34;?&#34; for help.&#39;, &#39;info&#39;)
+        return redirect(url_for(&#39;add_product&#39;))
+    return render_template(&#39;register.html&#39;, title=&#39;Register&#39;, form=form)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.routes.reset_request"><code class="name flex">
+<span>def <span class="ident">reset_request</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>User initiated password reset.</p>
+<p>If user is currently authenticated, they will be redirected to Dashboard.
+If user is not authenticated,form is valid, and email exists send email.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a title="productchecker.routes.dashboard" href="#productchecker.routes.dashboard">dashboard()</a></code></dt>
+<dd>Dashboard page.</dd>
+<dt><code><a title="productchecker.routes.login" href="#productchecker.routes.login">login()</a></code></dt>
+<dd>Login page.</dd>
+<dt><code><a title="productchecker.routes.reset_request" href="#productchecker.routes.reset_request">reset_request()</a></code></dt>
+<dd>Reset password page.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#34;/reset_password&#34;, methods=[&#39;GET&#39;, &#39;POST&#39;])
+def reset_request():
+    &#34;&#34;&#34;User initiated password reset.
+
+    If user is currently authenticated, they will be redirected to Dashboard.
+    If user is not authenticated,form is valid, and email exists send email.
+
+    Returns:
+        dashboard: Dashboard page.
+        login: Login page.
+        reset_request: Reset password page.
+    &#34;&#34;&#34;
+    
+    if current_user.is_authenticated:
+        return redirect(url_for(&#39;dashboard&#39;))
+    form = RequestResetForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user is not None:
+            send_reset_email(user)
+        flash(&#39;If an account with this email address exists, a password reset message will be sent shortly.&#39;, &#39;info&#39;)
+        return redirect(url_for(&#39;login&#39;))
+    return render_template(&#39;reset_request.html&#39;, title=&#39;Reset Password&#39;, form=form)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.routes.reset_token"><code class="name flex">
+<span>def <span class="ident">reset_token</span></span>(<span>token)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Accepts token from password reset emails.</p>
+<p>If token is valid and active, allow user to reset password.
+After password update, redirect to login page.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>token</code></strong></dt>
+<dd>A token object.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a title="productchecker.routes.dashboard" href="#productchecker.routes.dashboard">dashboard()</a></code></dt>
+<dd>Dashboard page.</dd>
+<dt><code><a title="productchecker.routes.reset_request" href="#productchecker.routes.reset_request">reset_request()</a></code></dt>
+<dd>Reset password page.</dd>
+<dt><code><a title="productchecker.routes.login" href="#productchecker.routes.login">login()</a></code></dt>
+<dd>Login page.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@app.route(&#34;/reset_password/&lt;token&gt;&#34;, methods=[&#39;GET&#39;, &#39;POST&#39;])
+def reset_token(token):
+    &#34;&#34;&#34;Accepts token from password reset emails.
+
+    If token is valid and active, allow user to reset password.
+    After password update, redirect to login page.
+
+    Args:
+        token: A token object.
+    
+    Returns:
+        dashboard: Dashboard page.
+        reset_request: Reset password page.
+        login: Login page.
+    &#34;&#34;&#34;
+
+    if current_user.is_authenticated:
+        return redirect(url_for(&#39;dashboard&#39;))
+    user = User.verify_reset_token(token)
+    #If token doesn&#39;t match any user or is expired, redirect to try again
+    if user is None:
+        flash(&#39;Invalid or expired token, please try again.&#39;, &#39;warning&#39;)
+        return redirect(url_for(&#39;reset_request&#39;))
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode(&#39;utf-8&#39;)
+        user.password = hashed_password
+        db.session.commit()
+        flash(f&#39;Your password has been updated. Please log in.&#39;, &#39;success&#39;)
+        return redirect(url_for(&#39;login&#39;))
+    return render_template(&#39;reset_token.html&#39;, title=&#39;Reset Password&#39;, form=form)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.routes.send_reset_email"><code class="name flex">
+<span>def <span class="ident">send_reset_email</span></span>(<span>user)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sends password reset email message to user that includes the token.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>user</code></strong></dt>
+<dd>User object</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def send_reset_email(user):
+    &#34;&#34;&#34;Sends password reset email message to user that includes the token.
+
+    Args:
+        user: User object
+    &#34;&#34;&#34;
+
+    token = user.get_reset_token()
+    msg = Message(&#39;Password Reset Request&#39;, 
+                    sender=&#39;noreply@productchecker.com&#39;, 
+                    recipients=[user.email])
+    msg.body = f&#39;&#39;&#39;To reset your password, visit the following link:
+
+{url_for(&#39;reset_token&#39;, token=token, _external=True)}
+
+If you did not make this request then please ignore this email.
+&#39;&#39;&#39;
+    mail.send(msg)</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="productchecker" href="index.html">productchecker</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="two-column">
+<li><code><a title="productchecker.routes.account" href="#productchecker.routes.account">account</a></code></li>
+<li><code><a title="productchecker.routes.add_product" href="#productchecker.routes.add_product">add_product</a></code></li>
+<li><code><a title="productchecker.routes.dashboard" href="#productchecker.routes.dashboard">dashboard</a></code></li>
+<li><code><a title="productchecker.routes.delete_product" href="#productchecker.routes.delete_product">delete_product</a></code></li>
+<li><code><a title="productchecker.routes.graph" href="#productchecker.routes.graph">graph</a></code></li>
+<li><code><a title="productchecker.routes.login" href="#productchecker.routes.login">login</a></code></li>
+<li><code><a title="productchecker.routes.logout" href="#productchecker.routes.logout">logout</a></code></li>
+<li><code><a title="productchecker.routes.register" href="#productchecker.routes.register">register</a></code></li>
+<li><code><a title="productchecker.routes.reset_request" href="#productchecker.routes.reset_request">reset_request</a></code></li>
+<li><code><a title="productchecker.routes.reset_token" href="#productchecker.routes.reset_token">reset_token</a></code></li>
+<li><code><a title="productchecker.routes.send_reset_email" href="#productchecker.routes.send_reset_email">send_reset_email</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>

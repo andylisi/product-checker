@@ -1,3 +1,13 @@
+"""Defines all classes and methods used.
+
+The models module is configured to use SQLAlchemy classes which will
+act as standard python classes but have special underlying functionality.
+SQLAlchemy will read all the objects into memory upon init and will only write
+changes to the database using db.session.commit(). State issues can arise between
+different threads if care is not used to understand current state of objects in
+memory compared to objects written to the database.
+"""
+
 import requests, re, time, logging, threading
 from datetime import datetime
 from productchecker import db, login_manager, app
@@ -9,9 +19,6 @@ from urllib.parse import urlparse
 from sqlalchemy import func, case, literal_column
 
 
-logging.basicConfig(filename='./tmp/PC.log', 
-                    level=logging.ERROR, 
-                    format='%(asctime)s %(threadName)s %(levelname)s %(name)s %(message)s')
 logger=logging.getLogger(__name__)
 
 
@@ -306,7 +313,7 @@ class Product(db.Model):
         Initiated by a daemon thread upon init, it will check all the products
         in a loop which the loop time is dictated by AppAttr.product_check_frequency.
         This time is dictated by the last user to update their Product Check Frequency
-        within Account page.
+        within ccount page.
         """
 
         while(1):
@@ -463,8 +470,7 @@ class AppAttr(db.Model, UserMixin):
 
     @classmethod
     def get_check_freq(cls):
-        """Returns the product check frequency.
-        """
+        """Returns the product check frequency."""
 
         app_attrs = cls.query.first()
         return app_attrs.product_check_freq

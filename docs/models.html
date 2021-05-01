@@ -1,0 +1,2504 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>productchecker.models API documentation</title>
+<meta name="description" content="Defines all classes and methods used …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>productchecker.models</code></h1>
+</header>
+<section id="section-intro">
+<p>Defines all classes and methods used.</p>
+<p>The models module is configured to use SQLAlchemy classes which will
+act as standard python classes but have special underlying functionality.
+SQLAlchemy will read all the objects into memory upon init and will only write
+changes to the database using db.session.commit(). State issues can arise between
+different threads if care is not used to understand current state of objects in
+memory compared to objects written to the database.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;Defines all classes and methods used.
+
+The models module is configured to use SQLAlchemy classes which will
+act as standard python classes but have special underlying functionality.
+SQLAlchemy will read all the objects into memory upon init and will only write
+changes to the database using db.session.commit(). State issues can arise between
+different threads if care is not used to understand current state of objects in
+memory compared to objects written to the database.
+&#34;&#34;&#34;
+
+import requests, re, time, logging, threading
+from datetime import datetime
+from productchecker import db, login_manager, app
+from productchecker.notifications import sendNotification
+from flask_login import UserMixin, current_user
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from bs4 import BeautifulSoup
+from urllib.parse import urlparse
+from sqlalchemy import func, case, literal_column
+
+
+logger=logging.getLogger(__name__)
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    &#34;&#34;&#34;Used by Flask login manager to store currently authenticated user information.
+
+    Fills out remainging attributes of current_user to be stored in memory so that
+    db queries are not required everytime a user attr is needed.
+    
+    Args:
+        user_id: ID of current user.
+    
+    Returns:
+        All user attributes.
+    &#34;&#34;&#34;
+
+    return User.query.get(int(user_id))
+
+
+class User(db.Model, UserMixin):
+    &#34;&#34;&#34;User class stores all User attributes and preferences.
+
+    SQLAlchemy will store class data in memory until db.session.commit() is called.
+    It will then write everything to database.
+
+    Attributes:
+        id: Unique user id set by system. *PK*
+        username: Unique username chosen by user.
+        email: Unique email address chosen by user.
+        password: Hashed and salted password chosen by user.
+        discord_webhook: URL of webhook(nullable).
+        discord_active: Discord Alerting on/off.
+        help_active: Help context - not currently in use.
+        check_freq: Product checking frequency in seconds.
+        products: Not materialzed in db. Defines table relationship.
+    &#34;&#34;&#34;
+
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(30), unique=True, nullable=False)
+    email = db.Column(db.String(100), unique=True, nullable=False)
+    password = db.Column(db.String(60), nullable=False)
+    discord_webhook = db.Column(db.String(150), nullable=True)
+    discord_active = db.Column(db.Boolean, nullable=False, default=0)
+    help_active = db.Column(db.Boolean, nullable=False, default=1)
+    check_freq = db.Column(db.Integer, nullable=False, default=60)
+    products = db.relationship(&#39;Product&#39;, backref=&#39;user&#39;, lazy=True)
+
+    def get_reset_token(self, expires_sec=1800):
+        &#34;&#34;&#34;Generates a token for user password reset.
+
+        When a user requests a password reset, this will generate
+        a token that can then be sent to their email on file.
+
+        Args:
+            expires_sec: Seconds token will expire.
+        Returns:
+            Token.
+        &#34;&#34;&#34;
+
+        s = Serializer(app.config[&#39;SECRET_KEY&#39;], expires_sec)
+        return s.dumps({&#39;user_id&#39;: self.id}).decode(&#39;utf-8&#39;)
+
+    @staticmethod
+    def verify_reset_token(token):
+        &#34;&#34;&#34;Verifies token passed in by user is valid.
+
+        Args:
+            token: A token object
+        Returns:
+            User id of the user who passed in the token if valid,
+            otherwise returns None.
+        &#34;&#34;&#34;
+
+        s = Serializer(app.config[&#39;SECRET_KEY&#39;])
+        try:
+            user_id = s.loads(token)[&#39;user_id&#39;]
+        except:
+            return None
+        return User.query.get(user_id)
+
+    def __repr__(self):
+        &#39;&#39;&#39;__repr__ is used to compute the “official” string representation of an object 
+        # and is typically used for debugging.
+        &#39;&#39;&#39;
+        return f&#34;User(&#39;{self.id}&#39;, &#39;{self.username}&#39;, &#39;{self.email}&#39;)&#34;
+
+
+class Product(db.Model):
+    &#34;&#34;&#34;Product class stores all Product attributes about a single product.
+
+    SQLAlchemy will store class data in memory until db.session.commit() is called.
+    It will then write everything to database.
+
+    Attributes:
+        id: Unique product id set by system. *PK*
+        alias: Easy to remember name set by user.
+        brand: Brand according to retailer. Pulled on initial product check by beautiful soup.
+        model: Model according to retailer. Pulled on initial product check by beautiful soup.
+        retailer: Parsed from URL.
+        url: Product URL provided by user.
+        date_added: Timestamp product was added by user.
+        user_id: User that added product. *FK*
+        history: Not materialzed in db. Defines table relationship.
+    &#34;&#34;&#34;
+
+    id = db.Column(db.Integer, primary_key=True)
+    alias = db.Column(db.String(30), unique=False, nullable=False)
+    brand = db.Column(db.String(30), nullable=False)
+    model = db.Column(db.String(30), unique=False, nullable=False)
+    retailer = db.Column(db.String(30), nullable=False)
+    url = db.Column(db.String(250), unique=False, nullable=False)
+    date_added = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    user_id = db.Column(db.Integer, db.ForeignKey(&#39;user.id&#39;), nullable=False)
+    history = db.relationship(&#39;ProductHistory&#39;, cascade=&#34;all,delete&#34;, backref=&#39;product&#39;, lazy=True)
+
+    def __repr__(self):
+        return f&#34;Product(&#39;{self.id}&#39;,&#39;{self.alias}&#39;,&#39;{self.brand}&#39;, &#39;{self.model}&#39;, &#39;{self.date_added}&#39;)&#34;
+
+    def get_page_html(self):
+        &#34;&#34;&#34;Gets product page HTML to be parsed by Beautiful Soup.
+
+        Headers are necessary to combat anti-bot measures taken by retailers.
+
+        Returns:
+            HTML content of the page.
+        &#34;&#34;&#34;
+
+        headers = {
+            &#34;User-Agent&#34;:&#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36&#34;,
+            &#39;Accept-Language&#39; : &#39;en-US,en;q=0.5&#39;,
+            &#39;Accept-Encoding&#39; : &#39;gzip&#39;, 
+            &#39;DNT&#39; : &#39;1&#39; # Do Not Track Request Header 
+            }
+        try:
+            page = requests.get(self.url, headers=headers)
+        except Exception as e:
+            page=&#39;&#39;
+            logger.error(e)
+            return page
+        return page.content
+
+    def check_url(self):
+        &#34;&#34;&#34;Checks the page of a product to update ProductHistory.
+
+        Depending on the retailer, differenct HTML elements will be checked.
+        Bestbuy seems to have standard HTML element ID&#39;s and classes while 
+        Amazon seems to have a variety. Due to this several try/excepts are
+        needed to check for different elements.
+        &#34;&#34;&#34;
+
+        page_html = self.get_page_html()
+        soup = BeautifulSoup(page_html, &#39;html.parser&#39;)
+
+        retailer_domain = urlparse(self.url).netloc.split(&#34;.&#34;)
+        self.retailer = retailer_domain[1]
+
+        if self.retailer == &#39;bestbuy&#39;:
+            self.brand = soup.find(&#34;a&#34;, {&#34;class&#34;: &#34;btn btn-link v-medium btn-brand-link&#34;}).text
+            self.model = soup.find(&#34;h1&#34;, {&#34;class&#34;: &#34;heading-5 v-fw-regular&#34;}).text
+        elif self.retailer == &#39;amazon&#39;:
+            #Amazon pages are not very standardized. Have to try several tags
+            try:
+                brand_tag = soup.find(&#34;div&#34;, {&#34;id&#34;: &#34;mbc&#34;})
+                brand_tag = brand_tag.get(&#39;data-brand&#39;)
+            except AttributeError:
+                try:
+                    brand_tag = soup.find(&#34;a&#34;, {&#34;class&#34;: &#34;a-link-normal qa-byline-url&#34;}).text
+                except AttributeError:
+                    try:
+                        brand_tag = soup.find(&#34;a&#34;, {&#34;id&#34;: &#34;bylineInfo&#34;}).text
+                    except AttributeError as e:
+                        brand_tag = &#39;Unavailable&#39;
+                        logger.error(e)
+            finally:
+                brand_text = brand_tag.strip(&#39;\n&#39;)
+                if brand_text.startswith(&#39;Brand: &#39;):
+                    brand_text = brand_text.replace(&#39;Brand: &#39;, &#39;&#39;)
+                elif brand_text.startswith(&#39;Visit the &#39;):
+                    brand_text = brand_text.replace(&#39;Visit the &#39;, &#39;&#39;)
+                self.brand = brand_text
+
+            #Try known model tags, if no tags found mark as Unavailable
+            try:
+                model_tag = soup.find(&#34;span&#34;, {&#34;id&#34;: &#34;productTitle&#34;}).text
+            except AttributeError:
+                try:
+                    model_tag = soup.find(&#34;span&#34;, {&#34;class&#34;: &#34;a-size-large product-title-word-break&#34;}).text
+                except AttributeError:
+                    try:
+                        model_tag = soup.find(&#34;span&#34;, {&#34;class&#34;: &#34;a-size-large qa-title-text&#34;}).text
+                    except AttributeError as e:
+                        model_tag = &#39;Unavailable&#39;
+                        logger.error(e)
+            finally:
+                self.model = model_tag.strip(&#39;\n&#39;)
+
+    def get_attr(self, form):
+        &#34;&#34;&#34;Assigns attributes passed by form.
+
+        When a user adds a new product, will asssign attributes according
+        to user input and then check the URL to assign remaining attributes.
+
+        Args:
+            form: wtform with data submitted by user.
+        &#34;&#34;&#34;
+
+        self.url = form.url.data
+        self.alias = form.alias.data
+        self.user = current_user
+        self.check_url()
+    
+    @classmethod
+    def check_all(cls):
+        &#34;&#34;&#34;Checks all distinct products in the product table.
+
+        Will first query for a list of all distinct products and then 
+        attempt to update all products history. If product was not previously
+        in stock but now is, it will notify user if notifications are turned on.
+        &#34;&#34;&#34;
+
+        distinct_products = cls.query.distinct(cls.id)
+        for product in distinct_products:
+            #Capture prev stock status before adding new
+            previous_stock = Product.previous_stock(product.id)
+            #Check new history and append to Product&#39;s history.
+            new_history = ProductHistory()
+            try:
+                new_history.check_url(product)
+            except Exception as e:
+                logger.error(e)
+                return
+            product.history.append(new_history)
+
+            #If user notifcations on, previously wasnt in stock and now is in stock, send notification.
+            if  product.user.discord_active and\
+                not previous_stock and\
+                new_history.stock:
+                    sendNotification(product, new_history)
+            db.session.commit()
+
+    @classmethod
+    def get_user_products(cls, user):
+        &#34;&#34;&#34;Returns a list of all products belonging to a user.
+
+        Args:
+            user: A user object.
+        &#34;&#34;&#34;
+
+        products = db.session.query(Product.id, Product.alias, Product.brand, Product.model, Product.retailer, Product.url,\
+                                case((ProductHistory.stock==1,literal_column(&#34;&#39;Yes&#39;&#34;)),(ProductHistory.stock==0,literal_column(&#34;&#39;No&#39;&#34;))).label(&#39;stock&#39;),\
+                                ProductHistory.price, func.max(ProductHistory.checked_ts).label(&#39;checked_ts&#39;))\
+        .filter(Product.user_id==user)\
+        .filter(Product.id==ProductHistory.product_id)\
+        .group_by(Product.id).all()
+        return products
+
+    @classmethod
+    def get_history(cls, product_id):
+        &#34;&#34;&#34;Returns a list of all history belonging to a product.
+
+        Args:
+            product_id: ID of a product.
+        &#34;&#34;&#34;
+
+        history = db.session.query(Product.alias, Product.id, ProductHistory.stock,func.min(ProductHistory.price).label(&#39;price&#39;),func.strftime(&#39;%m-%d-%Y&#39;, ProductHistory.checked_ts).label(&#39;date&#39;))\
+            .filter(Product.id==product_id)\
+            .filter(ProductHistory.product_id==product_id)\
+            .group_by(&#39;date&#39;)\
+            .all()
+        return history
+
+    @classmethod
+    def previous_stock(cls, product_id):
+        &#34;&#34;&#34;Returns boolean of last known stock status of a product.
+
+        Args:
+            product_id: ID of a product.
+        &#34;&#34;&#34;
+
+        previous_history = db.session.query(ProductHistory.stock, func.max(ProductHistory.checked_ts).label(&#39;checked_ts&#39;))\
+            .filter(Product.id==product_id)\
+            .filter(ProductHistory.product_id==product_id)\
+            .group_by(Product.id)\
+            .all()
+        return bool(previous_history[0].stock)
+
+    @classmethod
+    def product_check_loop(cls):
+        &#34;&#34;&#34;Runs the Product.check_all() in a controlled loop.
+
+        Initiated by a daemon thread upon init, it will check all the products
+        in a loop which the loop time is dictated by AppAttr.product_check_frequency.
+        This time is dictated by the last user to update their Product Check Frequency
+        within ccount page.
+        &#34;&#34;&#34;
+
+        while(1):
+            check_freq = AppAttr.get_check_freq()
+
+            start = datetime.now()
+            print(f&#34;--Thread {threading.get_ident()}: Begin Product Check - {start}--&#34;)
+            cls.check_all()
+            end = datetime.now()
+            print(f&#34;--Thread {threading.get_ident()}: Product Check Complete - {end}--&#34;)
+            loop_time = int((end-start).total_seconds())
+
+            #Run loop every &lt;user_seconds&gt;. If loop takes longer,
+            #ignore sleep and just run as fast as possible.
+            try:
+                print(f&#34;--Thread {threading.get_ident()}: Sleep for {check_freq-(loop_time)} seconds&#34;)
+                time.sleep(max(0,(check_freq-(loop_time))))
+            except ValueError as e: 
+                logger.error(e)
+
+
+class ProductHistory(db.Model):
+    &#34;&#34;&#34;ProductHistory class stores all product data related to stock and price.
+
+    SQLAlchemy will store class data in memory until db.session.commit() is called.
+    It will then write everything to database.
+
+    Attributes:
+        id: Unique ProductHistory id set by system. *PK*
+        product_id: ID of the product that the history belongs to. *FK*
+        stock: Stock status at the time it was checked.
+        price: Price at the time it was checked.
+        checked_ts: Timestamp when product was checked.
+    &#34;&#34;&#34;
+
+    id = db.Column(db.Integer, primary_key=True)
+    product_id = db.Column(db.Integer, db.ForeignKey(&#39;product.id&#39;), nullable=False)
+    stock = db.Column(db.Boolean, nullable=False)
+    price = db.Column(db.Float, nullable=True)
+    checked_ts = db.Column(db.DateTime, nullable=False, default=datetime.now)
+
+    def get_page_html(self, product):
+        &#34;&#34;&#34;Gets product page HTML to be parsed by Beautiful Soup.
+
+        Headers are necessary to combat anti-bot measures taken by retailers.
+
+        Args:
+            product: A product object.
+
+        Returns:
+            HTML content of the page.
+        &#34;&#34;&#34;
+
+        headers = {
+            &#34;User-Agent&#34;:&#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36&#34;,
+            &#39;Accept-Language&#39; : &#39;en-US,en;q=0.5&#39;,
+            &#39;Accept-Encoding&#39; : &#39;gzip&#39;, 
+            &#39;DNT&#39; : &#39;1&#39; # Do Not Track Request Header 
+            }
+        page = requests.get(product.url, headers=headers)
+        return page.content
+
+    def check_url(self, product):
+        &#34;&#34;&#34;Check the page of a product to update ProductHistory.
+
+        Depending on the retailer, differenct HTML elements will be checked.
+        Bestbuy seems to have standard HTML element ID&#39;s and classes while 
+        Amazon seems to have a variety. Due to this several try/excepts are
+        needed to check for different elements.
+
+        Args:
+            product: A product object.
+        &#34;&#34;&#34;
+
+        page_html = self.get_page_html(product)
+        soup = BeautifulSoup(page_html, &#39;html.parser&#39;)
+        self.product_id = product.id
+
+        if product.retailer == &#39;bestbuy&#39;:
+            #Best Buy changes the button class depending if item is in stock or not.
+            if soup.find(&#34;button&#34;, {&#34;class&#34;: &#34;btn btn-primary btn-lg btn-block btn-leading-ficon add-to-cart-button&#34;}) != None:
+                self.stock = True
+            else:
+                self.stock = False
+
+            #price
+            try: 
+                price_div = soup.find(&#39;div&#39;, {&#39;class&#39; : &#39;priceView-hero-price priceView-customer-price&#39;})
+                string_price = price_div.span.text
+                self.price = float(string_price[1:].replace(&#39;,&#39;,&#39;&#39;))#remove leading $ and any comma&#39;s
+            except AttributeError as e:
+                self.price = &#39;null&#39;
+                logger.error(e)
+        
+        elif product.retailer == &#39;amazon&#39;:
+            #stock
+            try:
+                soup.find(&#39;div&#39;, {&#39;id&#39;: &#39;addToCart_feature_div&#39;})
+                self.stock = True
+            except AttributeError as e:
+                self.stock = False
+                logger.error(e)
+
+            #price
+            try:
+                price_div = soup.find(&#39;span&#39;, {&#39;id&#39; : &#39;priceblock_ourprice&#39;}).text.strip(&#39;\n&#39;)
+                self.price = float(price_div[1:].replace(&#39;,&#39;,&#39;&#39;))#remove leading $ and any comma&#39;s
+            except AttributeError:
+                try:
+                    price_div = soup.find(&#39;span&#39;, {&#39;id&#39; : &#39;priceblock_dealprice&#39;}).text.strip(&#39;\n&#39;)
+                    self.price = float(price_div[1:].replace(&#39;,&#39;,&#39;&#39;))#remove leading $ and any comma&#39;s
+                except AttributeError:
+                    try:
+                        price_div = soup.find(&#39;span&#39;, {&#39;id&#39; : &#39;price_inside_buybox&#39;}).text.strip(&#39;\n&#39;)
+                        self.price = float(price_div[1:].replace(&#39;,&#39;,&#39;&#39;))#remove leading $ and any comma&#39;s
+                    except AttributeError as e:
+                        self.price = None
+                        logger.error(e)
+
+    def __repr__(self):
+        return f&#34;ProductHistory(&#39;{self.id}&#39;,&#39;{self.product_id}&#39;,&#39;{self.stock}&#39;,&#39;{self.price}&#39;,&#39;{self.checked_ts}&#39;)&#34;
+
+
+class AppAttr(db.Model, UserMixin):
+    &#34;&#34;&#34;AppAttr class stores all top level Application attributes.
+
+    It is currently used to help share data between threads as threads in Flask are context dependent.
+    The thread that begins in init.py which is the product checking daemon, has no access to the mainthread
+    which can store things like current_user. In order to access the current users product check frequency,
+    this classs was necessary so additional threads can read values from db. May be used further in the future.
+
+    Attributes:
+        id: 1 row to store all Application Atttributes.
+        product_check_freq: Sets the time that the product checking thread will sleep between checks.
+    &#34;&#34;&#34;
+
+    id = db.Column(db.Integer, primary_key=True)
+    product_check_freq = db.Column(db.Integer, nullable=False, default=60)
+
+    @classmethod
+    def update_check_freq(cls, check_freq):
+        &#34;&#34;&#34;Updates the product check frequency.
+
+        When a user updates their check frequency, it is also written to the 
+        AppAttr.product_check_freq attribute.
+
+        Args:
+            check_freq: product check frequency in seconds.
+        &#34;&#34;&#34;
+
+        app_attrs = cls.query.first()
+        app_attrs.product_check_freq = check_freq
+        db.session.commit()
+
+    @classmethod
+    def get_check_freq(cls):
+        &#34;&#34;&#34;Returns the product check frequency.&#34;&#34;&#34;
+
+        app_attrs = cls.query.first()
+        return app_attrs.product_check_freq
+
+    def __repr__(self):
+        return f&#34;User(&#39;{self.id}&#39;, &#39;{self.product_check_freq}&#39;)&#34;</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="productchecker.models.load_user"><code class="name flex">
+<span>def <span class="ident">load_user</span></span>(<span>user_id)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Used by Flask login manager to store currently authenticated user information.</p>
+<p>Fills out remainging attributes of current_user to be stored in memory so that
+db queries are not required everytime a user attr is needed.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>user_id</code></strong></dt>
+<dd>ID of current user.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>All user attributes.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@login_manager.user_loader
+def load_user(user_id):
+    &#34;&#34;&#34;Used by Flask login manager to store currently authenticated user information.
+
+    Fills out remainging attributes of current_user to be stored in memory so that
+    db queries are not required everytime a user attr is needed.
+    
+    Args:
+        user_id: ID of current user.
+    
+    Returns:
+        All user attributes.
+    &#34;&#34;&#34;
+
+    return User.query.get(int(user_id))</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="productchecker.models.AppAttr"><code class="flex name class">
+<span>class <span class="ident">AppAttr</span></span>
+<span>(</span><span>**kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>AppAttr class stores all top level Application attributes.</p>
+<p>It is currently used to help share data between threads as threads in Flask are context dependent.
+The thread that begins in init.py which is the product checking daemon, has no access to the mainthread
+which can store things like current_user. In order to access the current users product check frequency,
+this classs was necessary so additional threads can read values from db. May be used further in the future.</p>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>id</code></strong></dt>
+<dd>1 row to store all Application Atttributes.</dd>
+<dt><strong><code>product_check_freq</code></strong></dt>
+<dd>Sets the time that the product checking thread will sleep between checks.</dd>
+</dl>
+<p>A simple constructor that allows initialization from kwargs.</p>
+<p>Sets attributes on the constructed instance using the names and
+values in <code>kwargs</code>.</p>
+<p>Only keys that are present as
+attributes of the instance's class are allowed. These could be,
+for example, any mapped columns or relationships.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class AppAttr(db.Model, UserMixin):
+    &#34;&#34;&#34;AppAttr class stores all top level Application attributes.
+
+    It is currently used to help share data between threads as threads in Flask are context dependent.
+    The thread that begins in init.py which is the product checking daemon, has no access to the mainthread
+    which can store things like current_user. In order to access the current users product check frequency,
+    this classs was necessary so additional threads can read values from db. May be used further in the future.
+
+    Attributes:
+        id: 1 row to store all Application Atttributes.
+        product_check_freq: Sets the time that the product checking thread will sleep between checks.
+    &#34;&#34;&#34;
+
+    id = db.Column(db.Integer, primary_key=True)
+    product_check_freq = db.Column(db.Integer, nullable=False, default=60)
+
+    @classmethod
+    def update_check_freq(cls, check_freq):
+        &#34;&#34;&#34;Updates the product check frequency.
+
+        When a user updates their check frequency, it is also written to the 
+        AppAttr.product_check_freq attribute.
+
+        Args:
+            check_freq: product check frequency in seconds.
+        &#34;&#34;&#34;
+
+        app_attrs = cls.query.first()
+        app_attrs.product_check_freq = check_freq
+        db.session.commit()
+
+    @classmethod
+    def get_check_freq(cls):
+        &#34;&#34;&#34;Returns the product check frequency.&#34;&#34;&#34;
+
+        app_attrs = cls.query.first()
+        return app_attrs.product_check_freq
+
+    def __repr__(self):
+        return f&#34;User(&#39;{self.id}&#39;, &#39;{self.product_check_freq}&#39;)&#34;</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>sqlalchemy.orm.decl_api.Model</li>
+<li>flask_sqlalchemy.model.Model</li>
+<li>flask_login.mixins.UserMixin</li>
+</ul>
+<h3>Static methods</h3>
+<dl>
+<dt id="productchecker.models.AppAttr.get_check_freq"><code class="name flex">
+<span>def <span class="ident">get_check_freq</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns the product check frequency.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def get_check_freq(cls):
+    &#34;&#34;&#34;Returns the product check frequency.&#34;&#34;&#34;
+
+    app_attrs = cls.query.first()
+    return app_attrs.product_check_freq</code></pre>
+</details>
+</dd>
+<dt id="productchecker.models.AppAttr.update_check_freq"><code class="name flex">
+<span>def <span class="ident">update_check_freq</span></span>(<span>check_freq)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Updates the product check frequency.</p>
+<p>When a user updates their check frequency, it is also written to the
+AppAttr.product_check_freq attribute.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>check_freq</code></strong></dt>
+<dd>product check frequency in seconds.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def update_check_freq(cls, check_freq):
+    &#34;&#34;&#34;Updates the product check frequency.
+
+    When a user updates their check frequency, it is also written to the 
+    AppAttr.product_check_freq attribute.
+
+    Args:
+        check_freq: product check frequency in seconds.
+    &#34;&#34;&#34;
+
+    app_attrs = cls.query.first()
+    app_attrs.product_check_freq = check_freq
+    db.session.commit()</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="productchecker.models.AppAttr.id"><code class="name">var <span class="ident">id</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def __get__(self, instance, owner):
+    if instance is None:
+        return self
+
+    dict_ = instance_dict(instance)
+    if self._supports_population and self.key in dict_:
+        return dict_[self.key]
+    else:
+        try:
+            state = instance_state(instance)
+        except AttributeError as err:
+            util.raise_(
+                orm_exc.UnmappedInstanceError(instance),
+                replace_context=err,
+            )
+        return self.impl.get(state, dict_)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.models.AppAttr.product_check_freq"><code class="name">var <span class="ident">product_check_freq</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def __get__(self, instance, owner):
+    if instance is None:
+        return self
+
+    dict_ = instance_dict(instance)
+    if self._supports_population and self.key in dict_:
+        return dict_[self.key]
+    else:
+        try:
+            state = instance_state(instance)
+        except AttributeError as err:
+            util.raise_(
+                orm_exc.UnmappedInstanceError(instance),
+                replace_context=err,
+            )
+        return self.impl.get(state, dict_)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="productchecker.models.Product"><code class="flex name class">
+<span>class <span class="ident">Product</span></span>
+<span>(</span><span>**kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Product class stores all Product attributes about a single product.</p>
+<p>SQLAlchemy will store class data in memory until db.session.commit() is called.
+It will then write everything to database.</p>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>id</code></strong></dt>
+<dd>Unique product id set by system. <em>PK</em></dd>
+<dt><strong><code>alias</code></strong></dt>
+<dd>Easy to remember name set by user.</dd>
+<dt><strong><code>brand</code></strong></dt>
+<dd>Brand according to retailer. Pulled on initial product check by beautiful soup.</dd>
+<dt><strong><code>model</code></strong></dt>
+<dd>Model according to retailer. Pulled on initial product check by beautiful soup.</dd>
+<dt><strong><code>retailer</code></strong></dt>
+<dd>Parsed from URL.</dd>
+<dt><strong><code>url</code></strong></dt>
+<dd>Product URL provided by user.</dd>
+<dt><strong><code>date_added</code></strong></dt>
+<dd>Timestamp product was added by user.</dd>
+<dt><strong><code>user_id</code></strong></dt>
+<dd>User that added product. <em>FK</em></dd>
+<dt><strong><code>history</code></strong></dt>
+<dd>Not materialzed in db. Defines table relationship.</dd>
+</dl>
+<p>A simple constructor that allows initialization from kwargs.</p>
+<p>Sets attributes on the constructed instance using the names and
+values in <code>kwargs</code>.</p>
+<p>Only keys that are present as
+attributes of the instance's class are allowed. These could be,
+for example, any mapped columns or relationships.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Product(db.Model):
+    &#34;&#34;&#34;Product class stores all Product attributes about a single product.
+
+    SQLAlchemy will store class data in memory until db.session.commit() is called.
+    It will then write everything to database.
+
+    Attributes:
+        id: Unique product id set by system. *PK*
+        alias: Easy to remember name set by user.
+        brand: Brand according to retailer. Pulled on initial product check by beautiful soup.
+        model: Model according to retailer. Pulled on initial product check by beautiful soup.
+        retailer: Parsed from URL.
+        url: Product URL provided by user.
+        date_added: Timestamp product was added by user.
+        user_id: User that added product. *FK*
+        history: Not materialzed in db. Defines table relationship.
+    &#34;&#34;&#34;
+
+    id = db.Column(db.Integer, primary_key=True)
+    alias = db.Column(db.String(30), unique=False, nullable=False)
+    brand = db.Column(db.String(30), nullable=False)
+    model = db.Column(db.String(30), unique=False, nullable=False)
+    retailer = db.Column(db.String(30), nullable=False)
+    url = db.Column(db.String(250), unique=False, nullable=False)
+    date_added = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    user_id = db.Column(db.Integer, db.ForeignKey(&#39;user.id&#39;), nullable=False)
+    history = db.relationship(&#39;ProductHistory&#39;, cascade=&#34;all,delete&#34;, backref=&#39;product&#39;, lazy=True)
+
+    def __repr__(self):
+        return f&#34;Product(&#39;{self.id}&#39;,&#39;{self.alias}&#39;,&#39;{self.brand}&#39;, &#39;{self.model}&#39;, &#39;{self.date_added}&#39;)&#34;
+
+    def get_page_html(self):
+        &#34;&#34;&#34;Gets product page HTML to be parsed by Beautiful Soup.
+
+        Headers are necessary to combat anti-bot measures taken by retailers.
+
+        Returns:
+            HTML content of the page.
+        &#34;&#34;&#34;
+
+        headers = {
+            &#34;User-Agent&#34;:&#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36&#34;,
+            &#39;Accept-Language&#39; : &#39;en-US,en;q=0.5&#39;,
+            &#39;Accept-Encoding&#39; : &#39;gzip&#39;, 
+            &#39;DNT&#39; : &#39;1&#39; # Do Not Track Request Header 
+            }
+        try:
+            page = requests.get(self.url, headers=headers)
+        except Exception as e:
+            page=&#39;&#39;
+            logger.error(e)
+            return page
+        return page.content
+
+    def check_url(self):
+        &#34;&#34;&#34;Checks the page of a product to update ProductHistory.
+
+        Depending on the retailer, differenct HTML elements will be checked.
+        Bestbuy seems to have standard HTML element ID&#39;s and classes while 
+        Amazon seems to have a variety. Due to this several try/excepts are
+        needed to check for different elements.
+        &#34;&#34;&#34;
+
+        page_html = self.get_page_html()
+        soup = BeautifulSoup(page_html, &#39;html.parser&#39;)
+
+        retailer_domain = urlparse(self.url).netloc.split(&#34;.&#34;)
+        self.retailer = retailer_domain[1]
+
+        if self.retailer == &#39;bestbuy&#39;:
+            self.brand = soup.find(&#34;a&#34;, {&#34;class&#34;: &#34;btn btn-link v-medium btn-brand-link&#34;}).text
+            self.model = soup.find(&#34;h1&#34;, {&#34;class&#34;: &#34;heading-5 v-fw-regular&#34;}).text
+        elif self.retailer == &#39;amazon&#39;:
+            #Amazon pages are not very standardized. Have to try several tags
+            try:
+                brand_tag = soup.find(&#34;div&#34;, {&#34;id&#34;: &#34;mbc&#34;})
+                brand_tag = brand_tag.get(&#39;data-brand&#39;)
+            except AttributeError:
+                try:
+                    brand_tag = soup.find(&#34;a&#34;, {&#34;class&#34;: &#34;a-link-normal qa-byline-url&#34;}).text
+                except AttributeError:
+                    try:
+                        brand_tag = soup.find(&#34;a&#34;, {&#34;id&#34;: &#34;bylineInfo&#34;}).text
+                    except AttributeError as e:
+                        brand_tag = &#39;Unavailable&#39;
+                        logger.error(e)
+            finally:
+                brand_text = brand_tag.strip(&#39;\n&#39;)
+                if brand_text.startswith(&#39;Brand: &#39;):
+                    brand_text = brand_text.replace(&#39;Brand: &#39;, &#39;&#39;)
+                elif brand_text.startswith(&#39;Visit the &#39;):
+                    brand_text = brand_text.replace(&#39;Visit the &#39;, &#39;&#39;)
+                self.brand = brand_text
+
+            #Try known model tags, if no tags found mark as Unavailable
+            try:
+                model_tag = soup.find(&#34;span&#34;, {&#34;id&#34;: &#34;productTitle&#34;}).text
+            except AttributeError:
+                try:
+                    model_tag = soup.find(&#34;span&#34;, {&#34;class&#34;: &#34;a-size-large product-title-word-break&#34;}).text
+                except AttributeError:
+                    try:
+                        model_tag = soup.find(&#34;span&#34;, {&#34;class&#34;: &#34;a-size-large qa-title-text&#34;}).text
+                    except AttributeError as e:
+                        model_tag = &#39;Unavailable&#39;
+                        logger.error(e)
+            finally:
+                self.model = model_tag.strip(&#39;\n&#39;)
+
+    def get_attr(self, form):
+        &#34;&#34;&#34;Assigns attributes passed by form.
+
+        When a user adds a new product, will asssign attributes according
+        to user input and then check the URL to assign remaining attributes.
+
+        Args:
+            form: wtform with data submitted by user.
+        &#34;&#34;&#34;
+
+        self.url = form.url.data
+        self.alias = form.alias.data
+        self.user = current_user
+        self.check_url()
+    
+    @classmethod
+    def check_all(cls):
+        &#34;&#34;&#34;Checks all distinct products in the product table.
+
+        Will first query for a list of all distinct products and then 
+        attempt to update all products history. If product was not previously
+        in stock but now is, it will notify user if notifications are turned on.
+        &#34;&#34;&#34;
+
+        distinct_products = cls.query.distinct(cls.id)
+        for product in distinct_products:
+            #Capture prev stock status before adding new
+            previous_stock = Product.previous_stock(product.id)
+            #Check new history and append to Product&#39;s history.
+            new_history = ProductHistory()
+            try:
+                new_history.check_url(product)
+            except Exception as e:
+                logger.error(e)
+                return
+            product.history.append(new_history)
+
+            #If user notifcations on, previously wasnt in stock and now is in stock, send notification.
+            if  product.user.discord_active and\
+                not previous_stock and\
+                new_history.stock:
+                    sendNotification(product, new_history)
+            db.session.commit()
+
+    @classmethod
+    def get_user_products(cls, user):
+        &#34;&#34;&#34;Returns a list of all products belonging to a user.
+
+        Args:
+            user: A user object.
+        &#34;&#34;&#34;
+
+        products = db.session.query(Product.id, Product.alias, Product.brand, Product.model, Product.retailer, Product.url,\
+                                case((ProductHistory.stock==1,literal_column(&#34;&#39;Yes&#39;&#34;)),(ProductHistory.stock==0,literal_column(&#34;&#39;No&#39;&#34;))).label(&#39;stock&#39;),\
+                                ProductHistory.price, func.max(ProductHistory.checked_ts).label(&#39;checked_ts&#39;))\
+        .filter(Product.user_id==user)\
+        .filter(Product.id==ProductHistory.product_id)\
+        .group_by(Product.id).all()
+        return products
+
+    @classmethod
+    def get_history(cls, product_id):
+        &#34;&#34;&#34;Returns a list of all history belonging to a product.
+
+        Args:
+            product_id: ID of a product.
+        &#34;&#34;&#34;
+
+        history = db.session.query(Product.alias, Product.id, ProductHistory.stock,func.min(ProductHistory.price).label(&#39;price&#39;),func.strftime(&#39;%m-%d-%Y&#39;, ProductHistory.checked_ts).label(&#39;date&#39;))\
+            .filter(Product.id==product_id)\
+            .filter(ProductHistory.product_id==product_id)\
+            .group_by(&#39;date&#39;)\
+            .all()
+        return history
+
+    @classmethod
+    def previous_stock(cls, product_id):
+        &#34;&#34;&#34;Returns boolean of last known stock status of a product.
+
+        Args:
+            product_id: ID of a product.
+        &#34;&#34;&#34;
+
+        previous_history = db.session.query(ProductHistory.stock, func.max(ProductHistory.checked_ts).label(&#39;checked_ts&#39;))\
+            .filter(Product.id==product_id)\
+            .filter(ProductHistory.product_id==product_id)\
+            .group_by(Product.id)\
+            .all()
+        return bool(previous_history[0].stock)
+
+    @classmethod
+    def product_check_loop(cls):
+        &#34;&#34;&#34;Runs the Product.check_all() in a controlled loop.
+
+        Initiated by a daemon thread upon init, it will check all the products
+        in a loop which the loop time is dictated by AppAttr.product_check_frequency.
+        This time is dictated by the last user to update their Product Check Frequency
+        within ccount page.
+        &#34;&#34;&#34;
+
+        while(1):
+            check_freq = AppAttr.get_check_freq()
+
+            start = datetime.now()
+            print(f&#34;--Thread {threading.get_ident()}: Begin Product Check - {start}--&#34;)
+            cls.check_all()
+            end = datetime.now()
+            print(f&#34;--Thread {threading.get_ident()}: Product Check Complete - {end}--&#34;)
+            loop_time = int((end-start).total_seconds())
+
+            #Run loop every &lt;user_seconds&gt;. If loop takes longer,
+            #ignore sleep and just run as fast as possible.
+            try:
+                print(f&#34;--Thread {threading.get_ident()}: Sleep for {check_freq-(loop_time)} seconds&#34;)
+                time.sleep(max(0,(check_freq-(loop_time))))
+            except ValueError as e: 
+                logger.error(e)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>sqlalchemy.orm.decl_api.Model</li>
+<li>flask_sqlalchemy.model.Model</li>
+</ul>
+<h3>Static methods</h3>
+<dl>
+<dt id="productchecker.models.Product.check_all"><code class="name flex">
+<span>def <span class="ident">check_all</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Checks all distinct products in the product table.</p>
+<p>Will first query for a list of all distinct products and then
+attempt to update all products history. If product was not previously
+in stock but now is, it will notify user if notifications are turned on.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def check_all(cls):
+    &#34;&#34;&#34;Checks all distinct products in the product table.
+
+    Will first query for a list of all distinct products and then 
+    attempt to update all products history. If product was not previously
+    in stock but now is, it will notify user if notifications are turned on.
+    &#34;&#34;&#34;
+
+    distinct_products = cls.query.distinct(cls.id)
+    for product in distinct_products:
+        #Capture prev stock status before adding new
+        previous_stock = Product.previous_stock(product.id)
+        #Check new history and append to Product&#39;s history.
+        new_history = ProductHistory()
+        try:
+            new_history.check_url(product)
+        except Exception as e:
+            logger.error(e)
+            return
+        product.history.append(new_history)
+
+        #If user notifcations on, previously wasnt in stock and now is in stock, send notification.
+        if  product.user.discord_active and\
+            not previous_stock and\
+            new_history.stock:
+                sendNotification(product, new_history)
+        db.session.commit()</code></pre>
+</details>
+</dd>
+<dt id="productchecker.models.Product.get_history"><code class="name flex">
+<span>def <span class="ident">get_history</span></span>(<span>product_id)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns a list of all history belonging to a product.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>product_id</code></strong></dt>
+<dd>ID of a product.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def get_history(cls, product_id):
+    &#34;&#34;&#34;Returns a list of all history belonging to a product.
+
+    Args:
+        product_id: ID of a product.
+    &#34;&#34;&#34;
+
+    history = db.session.query(Product.alias, Product.id, ProductHistory.stock,func.min(ProductHistory.price).label(&#39;price&#39;),func.strftime(&#39;%m-%d-%Y&#39;, ProductHistory.checked_ts).label(&#39;date&#39;))\
+        .filter(Product.id==product_id)\
+        .filter(ProductHistory.product_id==product_id)\
+        .group_by(&#39;date&#39;)\
+        .all()
+    return history</code></pre>
+</details>
+</dd>
+<dt id="productchecker.models.Product.get_user_products"><code class="name flex">
+<span>def <span class="ident">get_user_products</span></span>(<span>user)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns a list of all products belonging to a user.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>user</code></strong></dt>
+<dd>A user object.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def get_user_products(cls, user):
+    &#34;&#34;&#34;Returns a list of all products belonging to a user.
+
+    Args:
+        user: A user object.
+    &#34;&#34;&#34;
+
+    products = db.session.query(Product.id, Product.alias, Product.brand, Product.model, Product.retailer, Product.url,\
+                            case((ProductHistory.stock==1,literal_column(&#34;&#39;Yes&#39;&#34;)),(ProductHistory.stock==0,literal_column(&#34;&#39;No&#39;&#34;))).label(&#39;stock&#39;),\
+                            ProductHistory.price, func.max(ProductHistory.checked_ts).label(&#39;checked_ts&#39;))\
+    .filter(Product.user_id==user)\
+    .filter(Product.id==ProductHistory.product_id)\
+    .group_by(Product.id).all()
+    return products</code></pre>
+</details>
+</dd>
+<dt id="productchecker.models.Product.previous_stock"><code class="name flex">
+<span>def <span class="ident">previous_stock</span></span>(<span>product_id)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns boolean of last known stock status of a product.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>product_id</code></strong></dt>
+<dd>ID of a product.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def previous_stock(cls, product_id):
+    &#34;&#34;&#34;Returns boolean of last known stock status of a product.
+
+    Args:
+        product_id: ID of a product.
+    &#34;&#34;&#34;
+
+    previous_history = db.session.query(ProductHistory.stock, func.max(ProductHistory.checked_ts).label(&#39;checked_ts&#39;))\
+        .filter(Product.id==product_id)\
+        .filter(ProductHistory.product_id==product_id)\
+        .group_by(Product.id)\
+        .all()
+    return bool(previous_history[0].stock)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.models.Product.product_check_loop"><code class="name flex">
+<span>def <span class="ident">product_check_loop</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Runs the Product.check_all() in a controlled loop.</p>
+<p>Initiated by a daemon thread upon init, it will check all the products
+in a loop which the loop time is dictated by AppAttr.product_check_frequency.
+This time is dictated by the last user to update their Product Check Frequency
+within ccount page.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def product_check_loop(cls):
+    &#34;&#34;&#34;Runs the Product.check_all() in a controlled loop.
+
+    Initiated by a daemon thread upon init, it will check all the products
+    in a loop which the loop time is dictated by AppAttr.product_check_frequency.
+    This time is dictated by the last user to update their Product Check Frequency
+    within ccount page.
+    &#34;&#34;&#34;
+
+    while(1):
+        check_freq = AppAttr.get_check_freq()
+
+        start = datetime.now()
+        print(f&#34;--Thread {threading.get_ident()}: Begin Product Check - {start}--&#34;)
+        cls.check_all()
+        end = datetime.now()
+        print(f&#34;--Thread {threading.get_ident()}: Product Check Complete - {end}--&#34;)
+        loop_time = int((end-start).total_seconds())
+
+        #Run loop every &lt;user_seconds&gt;. If loop takes longer,
+        #ignore sleep and just run as fast as possible.
+        try:
+            print(f&#34;--Thread {threading.get_ident()}: Sleep for {check_freq-(loop_time)} seconds&#34;)
+            time.sleep(max(0,(check_freq-(loop_time))))
+        except ValueError as e: 
+            logger.error(e)</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="productchecker.models.Product.alias"><code class="name">var <span class="ident">alias</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def __get__(self, instance, owner):
+    if instance is None:
+        return self
+
+    dict_ = instance_dict(instance)
+    if self._supports_population and self.key in dict_:
+        return dict_[self.key]
+    else:
+        try:
+            state = instance_state(instance)
+        except AttributeError as err:
+            util.raise_(
+                orm_exc.UnmappedInstanceError(instance),
+                replace_context=err,
+            )
+        return self.impl.get(state, dict_)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.models.Product.brand"><code class="name">var <span class="ident">brand</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def __get__(self, instance, owner):
+    if instance is None:
+        return self
+
+    dict_ = instance_dict(instance)
+    if self._supports_population and self.key in dict_:
+        return dict_[self.key]
+    else:
+        try:
+            state = instance_state(instance)
+        except AttributeError as err:
+            util.raise_(
+                orm_exc.UnmappedInstanceError(instance),
+                replace_context=err,
+            )
+        return self.impl.get(state, dict_)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.models.Product.date_added"><code class="name">var <span class="ident">date_added</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def __get__(self, instance, owner):
+    if instance is None:
+        return self
+
+    dict_ = instance_dict(instance)
+    if self._supports_population and self.key in dict_:
+        return dict_[self.key]
+    else:
+        try:
+            state = instance_state(instance)
+        except AttributeError as err:
+            util.raise_(
+                orm_exc.UnmappedInstanceError(instance),
+                replace_context=err,
+            )
+        return self.impl.get(state, dict_)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.models.Product.history"><code class="name">var <span class="ident">history</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def __get__(self, instance, owner):
+    if instance is None:
+        return self
+
+    dict_ = instance_dict(instance)
+    if self._supports_population and self.key in dict_:
+        return dict_[self.key]
+    else:
+        try:
+            state = instance_state(instance)
+        except AttributeError as err:
+            util.raise_(
+                orm_exc.UnmappedInstanceError(instance),
+                replace_context=err,
+            )
+        return self.impl.get(state, dict_)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.models.Product.id"><code class="name">var <span class="ident">id</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def __get__(self, instance, owner):
+    if instance is None:
+        return self
+
+    dict_ = instance_dict(instance)
+    if self._supports_population and self.key in dict_:
+        return dict_[self.key]
+    else:
+        try:
+            state = instance_state(instance)
+        except AttributeError as err:
+            util.raise_(
+                orm_exc.UnmappedInstanceError(instance),
+                replace_context=err,
+            )
+        return self.impl.get(state, dict_)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.models.Product.model"><code class="name">var <span class="ident">model</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def __get__(self, instance, owner):
+    if instance is None:
+        return self
+
+    dict_ = instance_dict(instance)
+    if self._supports_population and self.key in dict_:
+        return dict_[self.key]
+    else:
+        try:
+            state = instance_state(instance)
+        except AttributeError as err:
+            util.raise_(
+                orm_exc.UnmappedInstanceError(instance),
+                replace_context=err,
+            )
+        return self.impl.get(state, dict_)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.models.Product.retailer"><code class="name">var <span class="ident">retailer</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def __get__(self, instance, owner):
+    if instance is None:
+        return self
+
+    dict_ = instance_dict(instance)
+    if self._supports_population and self.key in dict_:
+        return dict_[self.key]
+    else:
+        try:
+            state = instance_state(instance)
+        except AttributeError as err:
+            util.raise_(
+                orm_exc.UnmappedInstanceError(instance),
+                replace_context=err,
+            )
+        return self.impl.get(state, dict_)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.models.Product.url"><code class="name">var <span class="ident">url</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def __get__(self, instance, owner):
+    if instance is None:
+        return self
+
+    dict_ = instance_dict(instance)
+    if self._supports_population and self.key in dict_:
+        return dict_[self.key]
+    else:
+        try:
+            state = instance_state(instance)
+        except AttributeError as err:
+            util.raise_(
+                orm_exc.UnmappedInstanceError(instance),
+                replace_context=err,
+            )
+        return self.impl.get(state, dict_)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.models.Product.user"><code class="name">var <span class="ident">user</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def __get__(self, instance, owner):
+    if instance is None:
+        return self
+
+    dict_ = instance_dict(instance)
+    if self._supports_population and self.key in dict_:
+        return dict_[self.key]
+    else:
+        try:
+            state = instance_state(instance)
+        except AttributeError as err:
+            util.raise_(
+                orm_exc.UnmappedInstanceError(instance),
+                replace_context=err,
+            )
+        return self.impl.get(state, dict_)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.models.Product.user_id"><code class="name">var <span class="ident">user_id</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def __get__(self, instance, owner):
+    if instance is None:
+        return self
+
+    dict_ = instance_dict(instance)
+    if self._supports_population and self.key in dict_:
+        return dict_[self.key]
+    else:
+        try:
+            state = instance_state(instance)
+        except AttributeError as err:
+            util.raise_(
+                orm_exc.UnmappedInstanceError(instance),
+                replace_context=err,
+            )
+        return self.impl.get(state, dict_)</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="productchecker.models.Product.check_url"><code class="name flex">
+<span>def <span class="ident">check_url</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Checks the page of a product to update ProductHistory.</p>
+<p>Depending on the retailer, differenct HTML elements will be checked.
+Bestbuy seems to have standard HTML element ID's and classes while
+Amazon seems to have a variety. Due to this several try/excepts are
+needed to check for different elements.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def check_url(self):
+    &#34;&#34;&#34;Checks the page of a product to update ProductHistory.
+
+    Depending on the retailer, differenct HTML elements will be checked.
+    Bestbuy seems to have standard HTML element ID&#39;s and classes while 
+    Amazon seems to have a variety. Due to this several try/excepts are
+    needed to check for different elements.
+    &#34;&#34;&#34;
+
+    page_html = self.get_page_html()
+    soup = BeautifulSoup(page_html, &#39;html.parser&#39;)
+
+    retailer_domain = urlparse(self.url).netloc.split(&#34;.&#34;)
+    self.retailer = retailer_domain[1]
+
+    if self.retailer == &#39;bestbuy&#39;:
+        self.brand = soup.find(&#34;a&#34;, {&#34;class&#34;: &#34;btn btn-link v-medium btn-brand-link&#34;}).text
+        self.model = soup.find(&#34;h1&#34;, {&#34;class&#34;: &#34;heading-5 v-fw-regular&#34;}).text
+    elif self.retailer == &#39;amazon&#39;:
+        #Amazon pages are not very standardized. Have to try several tags
+        try:
+            brand_tag = soup.find(&#34;div&#34;, {&#34;id&#34;: &#34;mbc&#34;})
+            brand_tag = brand_tag.get(&#39;data-brand&#39;)
+        except AttributeError:
+            try:
+                brand_tag = soup.find(&#34;a&#34;, {&#34;class&#34;: &#34;a-link-normal qa-byline-url&#34;}).text
+            except AttributeError:
+                try:
+                    brand_tag = soup.find(&#34;a&#34;, {&#34;id&#34;: &#34;bylineInfo&#34;}).text
+                except AttributeError as e:
+                    brand_tag = &#39;Unavailable&#39;
+                    logger.error(e)
+        finally:
+            brand_text = brand_tag.strip(&#39;\n&#39;)
+            if brand_text.startswith(&#39;Brand: &#39;):
+                brand_text = brand_text.replace(&#39;Brand: &#39;, &#39;&#39;)
+            elif brand_text.startswith(&#39;Visit the &#39;):
+                brand_text = brand_text.replace(&#39;Visit the &#39;, &#39;&#39;)
+            self.brand = brand_text
+
+        #Try known model tags, if no tags found mark as Unavailable
+        try:
+            model_tag = soup.find(&#34;span&#34;, {&#34;id&#34;: &#34;productTitle&#34;}).text
+        except AttributeError:
+            try:
+                model_tag = soup.find(&#34;span&#34;, {&#34;class&#34;: &#34;a-size-large product-title-word-break&#34;}).text
+            except AttributeError:
+                try:
+                    model_tag = soup.find(&#34;span&#34;, {&#34;class&#34;: &#34;a-size-large qa-title-text&#34;}).text
+                except AttributeError as e:
+                    model_tag = &#39;Unavailable&#39;
+                    logger.error(e)
+        finally:
+            self.model = model_tag.strip(&#39;\n&#39;)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.models.Product.get_attr"><code class="name flex">
+<span>def <span class="ident">get_attr</span></span>(<span>self, form)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Assigns attributes passed by form.</p>
+<p>When a user adds a new product, will asssign attributes according
+to user input and then check the URL to assign remaining attributes.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>form</code></strong></dt>
+<dd>wtform with data submitted by user.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_attr(self, form):
+    &#34;&#34;&#34;Assigns attributes passed by form.
+
+    When a user adds a new product, will asssign attributes according
+    to user input and then check the URL to assign remaining attributes.
+
+    Args:
+        form: wtform with data submitted by user.
+    &#34;&#34;&#34;
+
+    self.url = form.url.data
+    self.alias = form.alias.data
+    self.user = current_user
+    self.check_url()</code></pre>
+</details>
+</dd>
+<dt id="productchecker.models.Product.get_page_html"><code class="name flex">
+<span>def <span class="ident">get_page_html</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Gets product page HTML to be parsed by Beautiful Soup.</p>
+<p>Headers are necessary to combat anti-bot measures taken by retailers.</p>
+<h2 id="returns">Returns</h2>
+<p>HTML content of the page.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_page_html(self):
+    &#34;&#34;&#34;Gets product page HTML to be parsed by Beautiful Soup.
+
+    Headers are necessary to combat anti-bot measures taken by retailers.
+
+    Returns:
+        HTML content of the page.
+    &#34;&#34;&#34;
+
+    headers = {
+        &#34;User-Agent&#34;:&#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36&#34;,
+        &#39;Accept-Language&#39; : &#39;en-US,en;q=0.5&#39;,
+        &#39;Accept-Encoding&#39; : &#39;gzip&#39;, 
+        &#39;DNT&#39; : &#39;1&#39; # Do Not Track Request Header 
+        }
+    try:
+        page = requests.get(self.url, headers=headers)
+    except Exception as e:
+        page=&#39;&#39;
+        logger.error(e)
+        return page
+    return page.content</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="productchecker.models.ProductHistory"><code class="flex name class">
+<span>class <span class="ident">ProductHistory</span></span>
+<span>(</span><span>**kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>ProductHistory class stores all product data related to stock and price.</p>
+<p>SQLAlchemy will store class data in memory until db.session.commit() is called.
+It will then write everything to database.</p>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>id</code></strong></dt>
+<dd>Unique ProductHistory id set by system. <em>PK</em></dd>
+<dt><strong><code>product_id</code></strong></dt>
+<dd>ID of the product that the history belongs to. <em>FK</em></dd>
+<dt><strong><code>stock</code></strong></dt>
+<dd>Stock status at the time it was checked.</dd>
+<dt><strong><code>price</code></strong></dt>
+<dd>Price at the time it was checked.</dd>
+<dt><strong><code>checked_ts</code></strong></dt>
+<dd>Timestamp when product was checked.</dd>
+</dl>
+<p>A simple constructor that allows initialization from kwargs.</p>
+<p>Sets attributes on the constructed instance using the names and
+values in <code>kwargs</code>.</p>
+<p>Only keys that are present as
+attributes of the instance's class are allowed. These could be,
+for example, any mapped columns or relationships.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ProductHistory(db.Model):
+    &#34;&#34;&#34;ProductHistory class stores all product data related to stock and price.
+
+    SQLAlchemy will store class data in memory until db.session.commit() is called.
+    It will then write everything to database.
+
+    Attributes:
+        id: Unique ProductHistory id set by system. *PK*
+        product_id: ID of the product that the history belongs to. *FK*
+        stock: Stock status at the time it was checked.
+        price: Price at the time it was checked.
+        checked_ts: Timestamp when product was checked.
+    &#34;&#34;&#34;
+
+    id = db.Column(db.Integer, primary_key=True)
+    product_id = db.Column(db.Integer, db.ForeignKey(&#39;product.id&#39;), nullable=False)
+    stock = db.Column(db.Boolean, nullable=False)
+    price = db.Column(db.Float, nullable=True)
+    checked_ts = db.Column(db.DateTime, nullable=False, default=datetime.now)
+
+    def get_page_html(self, product):
+        &#34;&#34;&#34;Gets product page HTML to be parsed by Beautiful Soup.
+
+        Headers are necessary to combat anti-bot measures taken by retailers.
+
+        Args:
+            product: A product object.
+
+        Returns:
+            HTML content of the page.
+        &#34;&#34;&#34;
+
+        headers = {
+            &#34;User-Agent&#34;:&#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36&#34;,
+            &#39;Accept-Language&#39; : &#39;en-US,en;q=0.5&#39;,
+            &#39;Accept-Encoding&#39; : &#39;gzip&#39;, 
+            &#39;DNT&#39; : &#39;1&#39; # Do Not Track Request Header 
+            }
+        page = requests.get(product.url, headers=headers)
+        return page.content
+
+    def check_url(self, product):
+        &#34;&#34;&#34;Check the page of a product to update ProductHistory.
+
+        Depending on the retailer, differenct HTML elements will be checked.
+        Bestbuy seems to have standard HTML element ID&#39;s and classes while 
+        Amazon seems to have a variety. Due to this several try/excepts are
+        needed to check for different elements.
+
+        Args:
+            product: A product object.
+        &#34;&#34;&#34;
+
+        page_html = self.get_page_html(product)
+        soup = BeautifulSoup(page_html, &#39;html.parser&#39;)
+        self.product_id = product.id
+
+        if product.retailer == &#39;bestbuy&#39;:
+            #Best Buy changes the button class depending if item is in stock or not.
+            if soup.find(&#34;button&#34;, {&#34;class&#34;: &#34;btn btn-primary btn-lg btn-block btn-leading-ficon add-to-cart-button&#34;}) != None:
+                self.stock = True
+            else:
+                self.stock = False
+
+            #price
+            try: 
+                price_div = soup.find(&#39;div&#39;, {&#39;class&#39; : &#39;priceView-hero-price priceView-customer-price&#39;})
+                string_price = price_div.span.text
+                self.price = float(string_price[1:].replace(&#39;,&#39;,&#39;&#39;))#remove leading $ and any comma&#39;s
+            except AttributeError as e:
+                self.price = &#39;null&#39;
+                logger.error(e)
+        
+        elif product.retailer == &#39;amazon&#39;:
+            #stock
+            try:
+                soup.find(&#39;div&#39;, {&#39;id&#39;: &#39;addToCart_feature_div&#39;})
+                self.stock = True
+            except AttributeError as e:
+                self.stock = False
+                logger.error(e)
+
+            #price
+            try:
+                price_div = soup.find(&#39;span&#39;, {&#39;id&#39; : &#39;priceblock_ourprice&#39;}).text.strip(&#39;\n&#39;)
+                self.price = float(price_div[1:].replace(&#39;,&#39;,&#39;&#39;))#remove leading $ and any comma&#39;s
+            except AttributeError:
+                try:
+                    price_div = soup.find(&#39;span&#39;, {&#39;id&#39; : &#39;priceblock_dealprice&#39;}).text.strip(&#39;\n&#39;)
+                    self.price = float(price_div[1:].replace(&#39;,&#39;,&#39;&#39;))#remove leading $ and any comma&#39;s
+                except AttributeError:
+                    try:
+                        price_div = soup.find(&#39;span&#39;, {&#39;id&#39; : &#39;price_inside_buybox&#39;}).text.strip(&#39;\n&#39;)
+                        self.price = float(price_div[1:].replace(&#39;,&#39;,&#39;&#39;))#remove leading $ and any comma&#39;s
+                    except AttributeError as e:
+                        self.price = None
+                        logger.error(e)
+
+    def __repr__(self):
+        return f&#34;ProductHistory(&#39;{self.id}&#39;,&#39;{self.product_id}&#39;,&#39;{self.stock}&#39;,&#39;{self.price}&#39;,&#39;{self.checked_ts}&#39;)&#34;</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>sqlalchemy.orm.decl_api.Model</li>
+<li>flask_sqlalchemy.model.Model</li>
+</ul>
+<h3>Instance variables</h3>
+<dl>
+<dt id="productchecker.models.ProductHistory.checked_ts"><code class="name">var <span class="ident">checked_ts</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def __get__(self, instance, owner):
+    if instance is None:
+        return self
+
+    dict_ = instance_dict(instance)
+    if self._supports_population and self.key in dict_:
+        return dict_[self.key]
+    else:
+        try:
+            state = instance_state(instance)
+        except AttributeError as err:
+            util.raise_(
+                orm_exc.UnmappedInstanceError(instance),
+                replace_context=err,
+            )
+        return self.impl.get(state, dict_)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.models.ProductHistory.id"><code class="name">var <span class="ident">id</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def __get__(self, instance, owner):
+    if instance is None:
+        return self
+
+    dict_ = instance_dict(instance)
+    if self._supports_population and self.key in dict_:
+        return dict_[self.key]
+    else:
+        try:
+            state = instance_state(instance)
+        except AttributeError as err:
+            util.raise_(
+                orm_exc.UnmappedInstanceError(instance),
+                replace_context=err,
+            )
+        return self.impl.get(state, dict_)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.models.ProductHistory.price"><code class="name">var <span class="ident">price</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def __get__(self, instance, owner):
+    if instance is None:
+        return self
+
+    dict_ = instance_dict(instance)
+    if self._supports_population and self.key in dict_:
+        return dict_[self.key]
+    else:
+        try:
+            state = instance_state(instance)
+        except AttributeError as err:
+            util.raise_(
+                orm_exc.UnmappedInstanceError(instance),
+                replace_context=err,
+            )
+        return self.impl.get(state, dict_)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.models.ProductHistory.product"><code class="name">var <span class="ident">product</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def __get__(self, instance, owner):
+    if instance is None:
+        return self
+
+    dict_ = instance_dict(instance)
+    if self._supports_population and self.key in dict_:
+        return dict_[self.key]
+    else:
+        try:
+            state = instance_state(instance)
+        except AttributeError as err:
+            util.raise_(
+                orm_exc.UnmappedInstanceError(instance),
+                replace_context=err,
+            )
+        return self.impl.get(state, dict_)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.models.ProductHistory.product_id"><code class="name">var <span class="ident">product_id</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def __get__(self, instance, owner):
+    if instance is None:
+        return self
+
+    dict_ = instance_dict(instance)
+    if self._supports_population and self.key in dict_:
+        return dict_[self.key]
+    else:
+        try:
+            state = instance_state(instance)
+        except AttributeError as err:
+            util.raise_(
+                orm_exc.UnmappedInstanceError(instance),
+                replace_context=err,
+            )
+        return self.impl.get(state, dict_)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.models.ProductHistory.stock"><code class="name">var <span class="ident">stock</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def __get__(self, instance, owner):
+    if instance is None:
+        return self
+
+    dict_ = instance_dict(instance)
+    if self._supports_population and self.key in dict_:
+        return dict_[self.key]
+    else:
+        try:
+            state = instance_state(instance)
+        except AttributeError as err:
+            util.raise_(
+                orm_exc.UnmappedInstanceError(instance),
+                replace_context=err,
+            )
+        return self.impl.get(state, dict_)</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="productchecker.models.ProductHistory.check_url"><code class="name flex">
+<span>def <span class="ident">check_url</span></span>(<span>self, product)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check the page of a product to update ProductHistory.</p>
+<p>Depending on the retailer, differenct HTML elements will be checked.
+Bestbuy seems to have standard HTML element ID's and classes while
+Amazon seems to have a variety. Due to this several try/excepts are
+needed to check for different elements.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>product</code></strong></dt>
+<dd>A product object.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def check_url(self, product):
+    &#34;&#34;&#34;Check the page of a product to update ProductHistory.
+
+    Depending on the retailer, differenct HTML elements will be checked.
+    Bestbuy seems to have standard HTML element ID&#39;s and classes while 
+    Amazon seems to have a variety. Due to this several try/excepts are
+    needed to check for different elements.
+
+    Args:
+        product: A product object.
+    &#34;&#34;&#34;
+
+    page_html = self.get_page_html(product)
+    soup = BeautifulSoup(page_html, &#39;html.parser&#39;)
+    self.product_id = product.id
+
+    if product.retailer == &#39;bestbuy&#39;:
+        #Best Buy changes the button class depending if item is in stock or not.
+        if soup.find(&#34;button&#34;, {&#34;class&#34;: &#34;btn btn-primary btn-lg btn-block btn-leading-ficon add-to-cart-button&#34;}) != None:
+            self.stock = True
+        else:
+            self.stock = False
+
+        #price
+        try: 
+            price_div = soup.find(&#39;div&#39;, {&#39;class&#39; : &#39;priceView-hero-price priceView-customer-price&#39;})
+            string_price = price_div.span.text
+            self.price = float(string_price[1:].replace(&#39;,&#39;,&#39;&#39;))#remove leading $ and any comma&#39;s
+        except AttributeError as e:
+            self.price = &#39;null&#39;
+            logger.error(e)
+    
+    elif product.retailer == &#39;amazon&#39;:
+        #stock
+        try:
+            soup.find(&#39;div&#39;, {&#39;id&#39;: &#39;addToCart_feature_div&#39;})
+            self.stock = True
+        except AttributeError as e:
+            self.stock = False
+            logger.error(e)
+
+        #price
+        try:
+            price_div = soup.find(&#39;span&#39;, {&#39;id&#39; : &#39;priceblock_ourprice&#39;}).text.strip(&#39;\n&#39;)
+            self.price = float(price_div[1:].replace(&#39;,&#39;,&#39;&#39;))#remove leading $ and any comma&#39;s
+        except AttributeError:
+            try:
+                price_div = soup.find(&#39;span&#39;, {&#39;id&#39; : &#39;priceblock_dealprice&#39;}).text.strip(&#39;\n&#39;)
+                self.price = float(price_div[1:].replace(&#39;,&#39;,&#39;&#39;))#remove leading $ and any comma&#39;s
+            except AttributeError:
+                try:
+                    price_div = soup.find(&#39;span&#39;, {&#39;id&#39; : &#39;price_inside_buybox&#39;}).text.strip(&#39;\n&#39;)
+                    self.price = float(price_div[1:].replace(&#39;,&#39;,&#39;&#39;))#remove leading $ and any comma&#39;s
+                except AttributeError as e:
+                    self.price = None
+                    logger.error(e)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.models.ProductHistory.get_page_html"><code class="name flex">
+<span>def <span class="ident">get_page_html</span></span>(<span>self, product)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Gets product page HTML to be parsed by Beautiful Soup.</p>
+<p>Headers are necessary to combat anti-bot measures taken by retailers.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>product</code></strong></dt>
+<dd>A product object.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>HTML content of the page.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_page_html(self, product):
+    &#34;&#34;&#34;Gets product page HTML to be parsed by Beautiful Soup.
+
+    Headers are necessary to combat anti-bot measures taken by retailers.
+
+    Args:
+        product: A product object.
+
+    Returns:
+        HTML content of the page.
+    &#34;&#34;&#34;
+
+    headers = {
+        &#34;User-Agent&#34;:&#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36&#34;,
+        &#39;Accept-Language&#39; : &#39;en-US,en;q=0.5&#39;,
+        &#39;Accept-Encoding&#39; : &#39;gzip&#39;, 
+        &#39;DNT&#39; : &#39;1&#39; # Do Not Track Request Header 
+        }
+    page = requests.get(product.url, headers=headers)
+    return page.content</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="productchecker.models.User"><code class="flex name class">
+<span>class <span class="ident">User</span></span>
+<span>(</span><span>**kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>User class stores all User attributes and preferences.</p>
+<p>SQLAlchemy will store class data in memory until db.session.commit() is called.
+It will then write everything to database.</p>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>id</code></strong></dt>
+<dd>Unique user id set by system. <em>PK</em></dd>
+<dt><strong><code>username</code></strong></dt>
+<dd>Unique username chosen by user.</dd>
+<dt><strong><code>email</code></strong></dt>
+<dd>Unique email address chosen by user.</dd>
+<dt><strong><code>password</code></strong></dt>
+<dd>Hashed and salted password chosen by user.</dd>
+<dt><strong><code>discord_webhook</code></strong></dt>
+<dd>URL of webhook(nullable).</dd>
+<dt><strong><code>discord_active</code></strong></dt>
+<dd>Discord Alerting on/off.</dd>
+<dt><strong><code>help_active</code></strong></dt>
+<dd>Help context - not currently in use.</dd>
+<dt><strong><code>check_freq</code></strong></dt>
+<dd>Product checking frequency in seconds.</dd>
+<dt><strong><code>products</code></strong></dt>
+<dd>Not materialzed in db. Defines table relationship.</dd>
+</dl>
+<p>A simple constructor that allows initialization from kwargs.</p>
+<p>Sets attributes on the constructed instance using the names and
+values in <code>kwargs</code>.</p>
+<p>Only keys that are present as
+attributes of the instance's class are allowed. These could be,
+for example, any mapped columns or relationships.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class User(db.Model, UserMixin):
+    &#34;&#34;&#34;User class stores all User attributes and preferences.
+
+    SQLAlchemy will store class data in memory until db.session.commit() is called.
+    It will then write everything to database.
+
+    Attributes:
+        id: Unique user id set by system. *PK*
+        username: Unique username chosen by user.
+        email: Unique email address chosen by user.
+        password: Hashed and salted password chosen by user.
+        discord_webhook: URL of webhook(nullable).
+        discord_active: Discord Alerting on/off.
+        help_active: Help context - not currently in use.
+        check_freq: Product checking frequency in seconds.
+        products: Not materialzed in db. Defines table relationship.
+    &#34;&#34;&#34;
+
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(30), unique=True, nullable=False)
+    email = db.Column(db.String(100), unique=True, nullable=False)
+    password = db.Column(db.String(60), nullable=False)
+    discord_webhook = db.Column(db.String(150), nullable=True)
+    discord_active = db.Column(db.Boolean, nullable=False, default=0)
+    help_active = db.Column(db.Boolean, nullable=False, default=1)
+    check_freq = db.Column(db.Integer, nullable=False, default=60)
+    products = db.relationship(&#39;Product&#39;, backref=&#39;user&#39;, lazy=True)
+
+    def get_reset_token(self, expires_sec=1800):
+        &#34;&#34;&#34;Generates a token for user password reset.
+
+        When a user requests a password reset, this will generate
+        a token that can then be sent to their email on file.
+
+        Args:
+            expires_sec: Seconds token will expire.
+        Returns:
+            Token.
+        &#34;&#34;&#34;
+
+        s = Serializer(app.config[&#39;SECRET_KEY&#39;], expires_sec)
+        return s.dumps({&#39;user_id&#39;: self.id}).decode(&#39;utf-8&#39;)
+
+    @staticmethod
+    def verify_reset_token(token):
+        &#34;&#34;&#34;Verifies token passed in by user is valid.
+
+        Args:
+            token: A token object
+        Returns:
+            User id of the user who passed in the token if valid,
+            otherwise returns None.
+        &#34;&#34;&#34;
+
+        s = Serializer(app.config[&#39;SECRET_KEY&#39;])
+        try:
+            user_id = s.loads(token)[&#39;user_id&#39;]
+        except:
+            return None
+        return User.query.get(user_id)
+
+    def __repr__(self):
+        &#39;&#39;&#39;__repr__ is used to compute the “official” string representation of an object 
+        # and is typically used for debugging.
+        &#39;&#39;&#39;
+        return f&#34;User(&#39;{self.id}&#39;, &#39;{self.username}&#39;, &#39;{self.email}&#39;)&#34;</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>sqlalchemy.orm.decl_api.Model</li>
+<li>flask_sqlalchemy.model.Model</li>
+<li>flask_login.mixins.UserMixin</li>
+</ul>
+<h3>Static methods</h3>
+<dl>
+<dt id="productchecker.models.User.verify_reset_token"><code class="name flex">
+<span>def <span class="ident">verify_reset_token</span></span>(<span>token)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Verifies token passed in by user is valid.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>token</code></strong></dt>
+<dd>A token object</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>User id of the user who passed in the token if valid,
+otherwise returns None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def verify_reset_token(token):
+    &#34;&#34;&#34;Verifies token passed in by user is valid.
+
+    Args:
+        token: A token object
+    Returns:
+        User id of the user who passed in the token if valid,
+        otherwise returns None.
+    &#34;&#34;&#34;
+
+    s = Serializer(app.config[&#39;SECRET_KEY&#39;])
+    try:
+        user_id = s.loads(token)[&#39;user_id&#39;]
+    except:
+        return None
+    return User.query.get(user_id)</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="productchecker.models.User.check_freq"><code class="name">var <span class="ident">check_freq</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def __get__(self, instance, owner):
+    if instance is None:
+        return self
+
+    dict_ = instance_dict(instance)
+    if self._supports_population and self.key in dict_:
+        return dict_[self.key]
+    else:
+        try:
+            state = instance_state(instance)
+        except AttributeError as err:
+            util.raise_(
+                orm_exc.UnmappedInstanceError(instance),
+                replace_context=err,
+            )
+        return self.impl.get(state, dict_)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.models.User.discord_active"><code class="name">var <span class="ident">discord_active</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def __get__(self, instance, owner):
+    if instance is None:
+        return self
+
+    dict_ = instance_dict(instance)
+    if self._supports_population and self.key in dict_:
+        return dict_[self.key]
+    else:
+        try:
+            state = instance_state(instance)
+        except AttributeError as err:
+            util.raise_(
+                orm_exc.UnmappedInstanceError(instance),
+                replace_context=err,
+            )
+        return self.impl.get(state, dict_)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.models.User.discord_webhook"><code class="name">var <span class="ident">discord_webhook</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def __get__(self, instance, owner):
+    if instance is None:
+        return self
+
+    dict_ = instance_dict(instance)
+    if self._supports_population and self.key in dict_:
+        return dict_[self.key]
+    else:
+        try:
+            state = instance_state(instance)
+        except AttributeError as err:
+            util.raise_(
+                orm_exc.UnmappedInstanceError(instance),
+                replace_context=err,
+            )
+        return self.impl.get(state, dict_)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.models.User.email"><code class="name">var <span class="ident">email</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def __get__(self, instance, owner):
+    if instance is None:
+        return self
+
+    dict_ = instance_dict(instance)
+    if self._supports_population and self.key in dict_:
+        return dict_[self.key]
+    else:
+        try:
+            state = instance_state(instance)
+        except AttributeError as err:
+            util.raise_(
+                orm_exc.UnmappedInstanceError(instance),
+                replace_context=err,
+            )
+        return self.impl.get(state, dict_)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.models.User.help_active"><code class="name">var <span class="ident">help_active</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def __get__(self, instance, owner):
+    if instance is None:
+        return self
+
+    dict_ = instance_dict(instance)
+    if self._supports_population and self.key in dict_:
+        return dict_[self.key]
+    else:
+        try:
+            state = instance_state(instance)
+        except AttributeError as err:
+            util.raise_(
+                orm_exc.UnmappedInstanceError(instance),
+                replace_context=err,
+            )
+        return self.impl.get(state, dict_)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.models.User.id"><code class="name">var <span class="ident">id</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def __get__(self, instance, owner):
+    if instance is None:
+        return self
+
+    dict_ = instance_dict(instance)
+    if self._supports_population and self.key in dict_:
+        return dict_[self.key]
+    else:
+        try:
+            state = instance_state(instance)
+        except AttributeError as err:
+            util.raise_(
+                orm_exc.UnmappedInstanceError(instance),
+                replace_context=err,
+            )
+        return self.impl.get(state, dict_)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.models.User.password"><code class="name">var <span class="ident">password</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def __get__(self, instance, owner):
+    if instance is None:
+        return self
+
+    dict_ = instance_dict(instance)
+    if self._supports_population and self.key in dict_:
+        return dict_[self.key]
+    else:
+        try:
+            state = instance_state(instance)
+        except AttributeError as err:
+            util.raise_(
+                orm_exc.UnmappedInstanceError(instance),
+                replace_context=err,
+            )
+        return self.impl.get(state, dict_)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.models.User.products"><code class="name">var <span class="ident">products</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def __get__(self, instance, owner):
+    if instance is None:
+        return self
+
+    dict_ = instance_dict(instance)
+    if self._supports_population and self.key in dict_:
+        return dict_[self.key]
+    else:
+        try:
+            state = instance_state(instance)
+        except AttributeError as err:
+            util.raise_(
+                orm_exc.UnmappedInstanceError(instance),
+                replace_context=err,
+            )
+        return self.impl.get(state, dict_)</code></pre>
+</details>
+</dd>
+<dt id="productchecker.models.User.username"><code class="name">var <span class="ident">username</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def __get__(self, instance, owner):
+    if instance is None:
+        return self
+
+    dict_ = instance_dict(instance)
+    if self._supports_population and self.key in dict_:
+        return dict_[self.key]
+    else:
+        try:
+            state = instance_state(instance)
+        except AttributeError as err:
+            util.raise_(
+                orm_exc.UnmappedInstanceError(instance),
+                replace_context=err,
+            )
+        return self.impl.get(state, dict_)</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="productchecker.models.User.get_reset_token"><code class="name flex">
+<span>def <span class="ident">get_reset_token</span></span>(<span>self, expires_sec=1800)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generates a token for user password reset.</p>
+<p>When a user requests a password reset, this will generate
+a token that can then be sent to their email on file.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>expires_sec</code></strong></dt>
+<dd>Seconds token will expire.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>Token.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_reset_token(self, expires_sec=1800):
+    &#34;&#34;&#34;Generates a token for user password reset.
+
+    When a user requests a password reset, this will generate
+    a token that can then be sent to their email on file.
+
+    Args:
+        expires_sec: Seconds token will expire.
+    Returns:
+        Token.
+    &#34;&#34;&#34;
+
+    s = Serializer(app.config[&#39;SECRET_KEY&#39;], expires_sec)
+    return s.dumps({&#39;user_id&#39;: self.id}).decode(&#39;utf-8&#39;)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="productchecker" href="index.html">productchecker</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="productchecker.models.load_user" href="#productchecker.models.load_user">load_user</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="productchecker.models.AppAttr" href="#productchecker.models.AppAttr">AppAttr</a></code></h4>
+<ul class="">
+<li><code><a title="productchecker.models.AppAttr.get_check_freq" href="#productchecker.models.AppAttr.get_check_freq">get_check_freq</a></code></li>
+<li><code><a title="productchecker.models.AppAttr.id" href="#productchecker.models.AppAttr.id">id</a></code></li>
+<li><code><a title="productchecker.models.AppAttr.product_check_freq" href="#productchecker.models.AppAttr.product_check_freq">product_check_freq</a></code></li>
+<li><code><a title="productchecker.models.AppAttr.update_check_freq" href="#productchecker.models.AppAttr.update_check_freq">update_check_freq</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="productchecker.models.Product" href="#productchecker.models.Product">Product</a></code></h4>
+<ul class="two-column">
+<li><code><a title="productchecker.models.Product.alias" href="#productchecker.models.Product.alias">alias</a></code></li>
+<li><code><a title="productchecker.models.Product.brand" href="#productchecker.models.Product.brand">brand</a></code></li>
+<li><code><a title="productchecker.models.Product.check_all" href="#productchecker.models.Product.check_all">check_all</a></code></li>
+<li><code><a title="productchecker.models.Product.check_url" href="#productchecker.models.Product.check_url">check_url</a></code></li>
+<li><code><a title="productchecker.models.Product.date_added" href="#productchecker.models.Product.date_added">date_added</a></code></li>
+<li><code><a title="productchecker.models.Product.get_attr" href="#productchecker.models.Product.get_attr">get_attr</a></code></li>
+<li><code><a title="productchecker.models.Product.get_history" href="#productchecker.models.Product.get_history">get_history</a></code></li>
+<li><code><a title="productchecker.models.Product.get_page_html" href="#productchecker.models.Product.get_page_html">get_page_html</a></code></li>
+<li><code><a title="productchecker.models.Product.get_user_products" href="#productchecker.models.Product.get_user_products">get_user_products</a></code></li>
+<li><code><a title="productchecker.models.Product.history" href="#productchecker.models.Product.history">history</a></code></li>
+<li><code><a title="productchecker.models.Product.id" href="#productchecker.models.Product.id">id</a></code></li>
+<li><code><a title="productchecker.models.Product.model" href="#productchecker.models.Product.model">model</a></code></li>
+<li><code><a title="productchecker.models.Product.previous_stock" href="#productchecker.models.Product.previous_stock">previous_stock</a></code></li>
+<li><code><a title="productchecker.models.Product.product_check_loop" href="#productchecker.models.Product.product_check_loop">product_check_loop</a></code></li>
+<li><code><a title="productchecker.models.Product.retailer" href="#productchecker.models.Product.retailer">retailer</a></code></li>
+<li><code><a title="productchecker.models.Product.url" href="#productchecker.models.Product.url">url</a></code></li>
+<li><code><a title="productchecker.models.Product.user" href="#productchecker.models.Product.user">user</a></code></li>
+<li><code><a title="productchecker.models.Product.user_id" href="#productchecker.models.Product.user_id">user_id</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="productchecker.models.ProductHistory" href="#productchecker.models.ProductHistory">ProductHistory</a></code></h4>
+<ul class="two-column">
+<li><code><a title="productchecker.models.ProductHistory.check_url" href="#productchecker.models.ProductHistory.check_url">check_url</a></code></li>
+<li><code><a title="productchecker.models.ProductHistory.checked_ts" href="#productchecker.models.ProductHistory.checked_ts">checked_ts</a></code></li>
+<li><code><a title="productchecker.models.ProductHistory.get_page_html" href="#productchecker.models.ProductHistory.get_page_html">get_page_html</a></code></li>
+<li><code><a title="productchecker.models.ProductHistory.id" href="#productchecker.models.ProductHistory.id">id</a></code></li>
+<li><code><a title="productchecker.models.ProductHistory.price" href="#productchecker.models.ProductHistory.price">price</a></code></li>
+<li><code><a title="productchecker.models.ProductHistory.product" href="#productchecker.models.ProductHistory.product">product</a></code></li>
+<li><code><a title="productchecker.models.ProductHistory.product_id" href="#productchecker.models.ProductHistory.product_id">product_id</a></code></li>
+<li><code><a title="productchecker.models.ProductHistory.stock" href="#productchecker.models.ProductHistory.stock">stock</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="productchecker.models.User" href="#productchecker.models.User">User</a></code></h4>
+<ul class="two-column">
+<li><code><a title="productchecker.models.User.check_freq" href="#productchecker.models.User.check_freq">check_freq</a></code></li>
+<li><code><a title="productchecker.models.User.discord_active" href="#productchecker.models.User.discord_active">discord_active</a></code></li>
+<li><code><a title="productchecker.models.User.discord_webhook" href="#productchecker.models.User.discord_webhook">discord_webhook</a></code></li>
+<li><code><a title="productchecker.models.User.email" href="#productchecker.models.User.email">email</a></code></li>
+<li><code><a title="productchecker.models.User.get_reset_token" href="#productchecker.models.User.get_reset_token">get_reset_token</a></code></li>
+<li><code><a title="productchecker.models.User.help_active" href="#productchecker.models.User.help_active">help_active</a></code></li>
+<li><code><a title="productchecker.models.User.id" href="#productchecker.models.User.id">id</a></code></li>
+<li><code><a title="productchecker.models.User.password" href="#productchecker.models.User.password">password</a></code></li>
+<li><code><a title="productchecker.models.User.products" href="#productchecker.models.User.products">products</a></code></li>
+<li><code><a title="productchecker.models.User.username" href="#productchecker.models.User.username">username</a></code></li>
+<li><code><a title="productchecker.models.User.verify_reset_token" href="#productchecker.models.User.verify_reset_token">verify_reset_token</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>

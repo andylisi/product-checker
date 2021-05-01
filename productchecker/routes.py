@@ -1,3 +1,16 @@
+"""Defines all html routes and routing logic.
+
+The routes module is a Flask construct and is primarily responsible for routing 
+between different pages. The routes look like functions with an @app.route decorator
+specifying the path as an arg. They may also include decorators such as @login_required
+which will redirect to the login page in the instance where a user is not authetnicated.
+
+Routes that are intended to route to an html page must return the html page via the
+render_template function. render_template accepts the html page and any additional args
+that you wish to pass to the html template to utilize in Jinja 2 templates within the 
+html page.
+"""
+
 from flask import render_template, url_for, flash, redirect, request, abort
 from productchecker import app, db, bcrypt, mail
 from productchecker.forms import (RegistrationForm, LoginForm, UpdateAccountForm, ProductForm, 
@@ -10,9 +23,6 @@ from datetime import datetime
 import threading
 
 
-logging.basicConfig(filename='./tmp/PC.log', 
-                    level=logging.ERROR, 
-                    format='%(asctime)s %(threadName)s %(levelname)s %(name)s %(message)s')
 logger=logging.getLogger(__name__)
 
 

@@ -1,3 +1,16 @@
+"""All forms, fields and submissions that a user will utilize.
+
+Flask Forms use wtforms for all form handling, validation, and
+submission. Each form is represented by a class and optional validation 
+methods. Expected field types, labels and validators are all
+configured here. The Form will be generated in routes, passed to
+the html page, and upon submission, passed back to routes for 
+downstream operations. 
+
+Wtforms provide many out of the box validators but custom validators
+can also be created as class methods.
+"""
+
 from flask_wtf import FlaskForm
 from flask_login import current_user
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, RadioField, IntegerField
