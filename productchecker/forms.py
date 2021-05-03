@@ -19,7 +19,7 @@ import re
 from productchecker.models import User
 
 
-password_min = 4
+password_min = 8
 password_max = 50
 username_min = 4
 username_max = 20
