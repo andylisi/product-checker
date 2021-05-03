@@ -13,4 +13,3 @@ venv/
 .vscode/
 
 #error logs
-tmp/*
