@@ -14,4 +14,4 @@ to configure a discord account and accompanying webhook seperately.
 
 ## Documentation
 
-ProductChecker's documentation was primarily created in the form of docstrings from modules, classes, methods, and functions. Pdoc3 was used to autogenerate html pages from the docstrings and hosted on Github pages. Find the docs [HERE](https://ixisunnyixi.github.io/product-checker-fe/).
+ProductChecker's documentation was primarily created in the form of docstrings from modules, classes, methods, and functions. Pdoc3 was used to autogenerate html pages from the docstrings and hosted on Github pages. Find the docs [HERE](https://ixisunnyixi.github.io/product-checker/).
